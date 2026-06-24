@@ -1,17 +1,28 @@
 import { useState } from "react";
 import { uploadResume } from "../services/api.js";
+import { useNavigate } from "react-router-dom";
 
 function ResumeUpload() {
   const [uploadFile, setUploadFile] = useState<File | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   const handleFileChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = e.target.files?.[0];
 
     if (!file) return;
+
+    if (file.type !== "application/pdf") {
+      setError("Please upload a PDF file");
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setError("File must be under 5MB")
+      return
+    }
 
     setUploadFile(file);
     setError("");
@@ -28,9 +39,14 @@ function ResumeUpload() {
     try {
       setLoading(true);
 
-      await uploadResume(uploadFile);
+      const response = await uploadResume(uploadFile);
 
-      // Optional: navigate to next page here
+      if (response.status !== 200) {
+        setError("Upload failed")
+        return
+      }
+      navigate("/onboarding");
+
     } catch (error: any) {
       setError(
         error?.response?.data?.error || "Something went wrong"
@@ -76,7 +92,7 @@ function ResumeUpload() {
           <button
             onClick={handleUpload}
             disabled={loading}
-            className="w-full rounded-md bg-[var(--primary)] px-4 py-2 text-white disabled:opacity-50"
+            className="w-full rounded-md bg-[var(--accent)] px-4 py-2 text-white disabled:opacity-50"
           >
             {loading ? "Uploading..." : "Upload Resume"}
           </button>

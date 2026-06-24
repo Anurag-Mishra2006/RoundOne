@@ -26,7 +26,7 @@ function Login() {
       }
 
       setUser(response.data.user);
-      navigate("/onboarding");
+      navigate("/resume-upload");
 
     } catch (error: any) {
       setError(error?.response?.data?.error || "Invalid email or password");
