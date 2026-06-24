@@ -6,7 +6,7 @@ import type { EvaluateResult } from "@/types/index"
 
 function Interview() {
   const navigate = useNavigate()
-  const { hr, technical, dsa, company, setSession, addEvaluation } = useSessionStore()
+  const { hr, technical, dsa, company, addEvaluation } = useSessionStore()
 
   const [currentRound, setCurrentRound] = useState<"hr" | "technical" | "dsa">("hr")
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
