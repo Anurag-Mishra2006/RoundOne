@@ -60,12 +60,7 @@ function Interview() {
     editorRef.current = editor;
     editor.focus();
   }
-  const formatCode = () => {
-    if (editorRef.current) {
-      editorRef.current.getAction("editor.action.formatDocument").run()
-    }
-  };
-
+   
   // redirect if no session
   useEffect(() => {
     if (!hr || !technical || !dsa) {
