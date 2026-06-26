@@ -36,3 +36,8 @@ export const interviewStart = async(data: { company: string, role: string, level
 export const evaluateInterview = async(data: {round: string, company: string, question: string, answer: string})=>{
     return await api.post("/interview/evaluate", data);
 }
+
+// code run
+export const runCode = async(data: {language: string, code: string, testCases: {input: string; output: string}[]})=>{
+    return await api.post("/code/run", data);
+}

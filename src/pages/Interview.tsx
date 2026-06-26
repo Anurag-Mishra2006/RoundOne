@@ -1,22 +1,16 @@
-import { evaluateInterview } from "@/services/api"
+import { evaluateInterview, runCode } from "@/services/api"
 import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import useSessionStore from "@/store/sessionStore"
 import type { EvaluateResult } from "@/types/index"
 import CodeEditor from "@/components/CodeEditor"
 
-
 const BOILERPLATE_CODE: Record<string, string> = {
   cpp: `#include <iostream>\nusing namespace std;\n\nint main() {\n\t// your code goes here\n\treturn 0;\n}`,
-
   c: `#include <stdio.h>\n\nint main() {\n\t// your code goes here\n\treturn 0;\n}`,
-
   javascript: `function main() {\n\t// your code goes here\n}\n\nmain();`,
-
   python: `def main():\n\t# your code goes here\n\tpass\n\nif __name__ == "__main__":\n\tmain()`,
-
   html: `<!DOCTYPE html>\n<html>\n<head>\n\t<meta charset="UTF-8">\n\t<title>Document</title>\n</head>\n<body>\n\t<!-- your code goes here -->\n</body>\n</html>`,
-
   json: `{\n\t"message": "your code goes here"\n}`,
   java: `import java.util.*;\n\npublic class Main {\n\tpublic static void main(String[] args) {\n\t\t// your code goes here\n\t}\n}`,
 };
@@ -43,24 +37,26 @@ function Interview() {
   const [evaluation, setEvaluation] = useState<EvaluateResult | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
-  // const [language, setLanguage] = useState<string>('cpp');
-  const language = dsa?.language;
+  
+  const language = dsa?.language || "";
   const [code, setCode] = useState<string>("");
-
+  const [isRunning, setIsRunning] = useState<boolean>(false);
+  const [testResult, setTestResult] = useState<any[]>([]); // Typed as any[] to avoid never[] errors
 
   useEffect(() => {
     if (currentRound === "dsa" && language) {
       setCode(BOILERPLATE_CODE[getMonacoLanguage(language)] || "")
     }
   }, [language, currentRound])
-  // create a ref to hold the editor instanse
+  
+  // create a ref to hold the editor instance
   const editorRef = useRef<any>(null);
 
   const handleEditorDidMount = (editor: any) => {
     editorRef.current = editor;
     editor.focus();
   }
-   
+
   // redirect if no session
   useEffect(() => {
     if (!hr || !technical || !dsa) {
@@ -80,6 +76,40 @@ function Interview() {
     if (currentRound === "technical") return `Technical Round — Question ${currentQuestionIndex + 1}/5`
     if (currentRound === "dsa") return "DSA Round — Problem 1/1"
     return ""
+  }
+
+  const handleRunCode = async () => {
+    setError("");
+    setTestResult([]);
+    
+    if (!code) {
+      setError("Write Code before running");
+      return;
+    }
+    if (language === "") {
+      setError("Select a language in onboarding");
+      return;
+    }
+
+    try {
+      setIsRunning(true);
+      const testCases = dsa?.problem.examples || [];
+      const response = await runCode({ language, code, testCases });
+      
+      if (response.status !== 200) {
+        setError("Code Execution Failed");
+        return;
+      }
+      
+      // Save the results so the UI can display them!
+      setTestResult(response.data.results);
+      
+    } catch (error: any) {
+      console.error(error);
+      setError(error?.response?.data?.error || "Something went wrong during execution")
+    } finally {
+      setIsRunning(false);
+    }
   }
 
   const handleSubmit = async () => {
@@ -116,6 +146,7 @@ function Interview() {
     setEvaluation(null)
     setAnswer("")
     setError("")
+    setTestResult([]) // Clear test results when moving to next
 
     if (currentRound === "hr") {
       if (currentQuestionIndex < 4) {
@@ -202,41 +233,81 @@ function Interview() {
           )}
         </div>
 
-        {/* Answer input — only show if no evaluation yet */}
+        {/* Answer input & Buttons — only show if no evaluation yet */}
         {!evaluation && (
           <div className="space-y-3">
-            {/* change this textarea with monaco-editor */}
-            {currentRound === "dsa" ? <CodeEditor value={code} language={getMonacoLanguage(language || "") || ""} onChange={(newValue) => setCode(newValue || "")} onMount={handleEditorDidMount} /> :
+            {currentRound === "dsa" ? (
+              <CodeEditor 
+                value={code} 
+                language={getMonacoLanguage(language || "") || ""} 
+                onChange={(newValue) => setCode(newValue || "")} 
+                onMount={handleEditorDidMount} 
+              /> 
+            ) : (
               <textarea
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
-                placeholder={
-                  // currentRound === "dsa"
-                  //   ? "Explain your approach, algorithm, and time/space complexity..." : 
-                  "Type your answer here..."
-                }
+                placeholder="Type your answer here..."
                 rows={6}
                 className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] resize-none"
-              />}
+              />
+            )}
 
             {error && (
               <p className="text-sm text-[var(--danger)]">{error}</p>
             )}
 
-            <button
-              onClick={handleSubmit}
-              disabled={loading}
-              className="w-full rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--accent-hover)] disabled:opacity-50 transition-colors"
-            >
-              {loading ? "Evaluating your answer..." : "Submit Answer"}
-            </button>
+            {/* Action Buttons */}
+            <div className="flex gap-3 mt-4">
+              {currentRound === "dsa" && (
+                <button
+                  onClick={handleRunCode}
+                  disabled={isRunning || loading}
+                  className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 transition-colors"
+                >
+                  {isRunning ? "Running..." : "Run Code"}
+                </button>
+              )}
+              
+              <button
+                onClick={handleSubmit}
+                disabled={loading || isRunning}
+                className="w-full rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--accent-hover)] disabled:opacity-50 transition-colors"
+              >
+                {loading ? "Evaluating..." : "Submit Answer"}
+              </button>
+            </div>
+
+            {/* Test Results UI */}
+            {testResult.length > 0 && (
+              <div className="mt-4 space-y-2">
+                <h3 className="text-sm font-medium text-[var(--text)]">Test Results:</h3>
+                {testResult.map((result: any, index: number) => (
+                  <div 
+                    key={index} 
+                    className={`p-3 rounded-md border ${result.passed ? 'border-[var(--success)] bg-[var(--success)]/10' : 'border-[var(--danger)] bg-[var(--danger)]/10'}`}
+                  >
+                    <p className="text-sm font-bold text-[var(--text)]">
+                      Test Case {result.testCase}: {result.passed ? "✅ Passed" : "❌ Failed"}
+                    </p>
+                    
+                    {!result.passed && (
+                      <div className="mt-2 text-xs font-mono text-[var(--text-muted)] space-y-1">
+                        <p><span className="text-[var(--text)]">Input:</span> {result.input}</p>
+                        <p><span className="text-[var(--text)]">Expected:</span> {result.expectedOutput}</p>
+                        <p><span className="text-[var(--danger)]">Actual:</span> {result.actualOutput}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
         {/* Evaluation result */}
         {evaluation && (
           <div className="space-y-4">
-
             {/* Score */}
             <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6">
               <div className="flex items-center justify-between mb-4">
@@ -300,10 +371,8 @@ function Interview() {
             >
               {currentRound === "dsa" ? "See Final Feedback →" : "Next Question →"}
             </button>
-
           </div>
         )}
-
       </div>
     </div>
   )
