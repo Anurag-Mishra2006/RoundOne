@@ -1,8 +1,37 @@
 import { evaluateInterview } from "@/services/api"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import useSessionStore from "@/store/sessionStore"
 import type { EvaluateResult } from "@/types/index"
+import CodeEditor from "@/components/CodeEditor"
+
+
+const BOILERPLATE_CODE: Record<string, string> = {
+  cpp: `#include <iostream>\nusing namespace std;\n\nint main() {\n\t// your code goes here\n\treturn 0;\n}`,
+
+  c: `#include <stdio.h>\n\nint main() {\n\t// your code goes here\n\treturn 0;\n}`,
+
+  javascript: `function main() {\n\t// your code goes here\n}\n\nmain();`,
+
+  python: `def main():\n\t# your code goes here\n\tpass\n\nif __name__ == "__main__":\n\tmain()`,
+
+  html: `<!DOCTYPE html>\n<html>\n<head>\n\t<meta charset="UTF-8">\n\t<title>Document</title>\n</head>\n<body>\n\t<!-- your code goes here -->\n</body>\n</html>`,
+
+  json: `{\n\t"message": "your code goes here"\n}`,
+  java: `import java.util.*;\n\npublic class Main {\n\tpublic static void main(String[] args) {\n\t\t// your code goes here\n\t}\n}`,
+};
+
+const getMonacoLanguage = (lang: string) => {
+  if (!lang) return "plaintext";
+
+  const map: Record<string, string> = {
+    "C++": "cpp",
+    "Python": "python",
+    "JavaScript": "javascript",
+    "Java": "java"
+  }
+  return map[lang]
+}
 
 function Interview() {
   const navigate = useNavigate()
@@ -14,6 +43,28 @@ function Interview() {
   const [evaluation, setEvaluation] = useState<EvaluateResult | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  // const [language, setLanguage] = useState<string>('cpp');
+  const language = dsa?.language;
+  const [code, setCode] = useState<string>("");
+
+
+  useEffect(() => {
+    if (currentRound === "dsa" && language) {
+      setCode(BOILERPLATE_CODE[getMonacoLanguage(language)] || "")
+    }
+  }, [language, currentRound])
+  // create a ref to hold the editor instanse
+  const editorRef = useRef<any>(null);
+
+  const handleEditorDidMount = (editor: any) => {
+    editorRef.current = editor;
+    editor.focus();
+  }
+  const formatCode = () => {
+    if (editorRef.current) {
+      editorRef.current.getAction("editor.action.formatDocument").run()
+    }
+  };
 
   // redirect if no session
   useEffect(() => {
@@ -38,7 +89,9 @@ function Interview() {
 
   const handleSubmit = async () => {
     setError("")
-    if (!answer.trim()) {
+
+    const currentSession = currentRound === "dsa" ? code : answer
+    if (!currentSession.trim()) {
       setError("Please write an answer before submitting")
       return
     }
@@ -47,7 +100,7 @@ function Interview() {
       const response = await evaluateInterview({
         round: currentRound,
         question: getCurrentQuestion(),
-        answer,
+        answer: currentSession,
         company
       })
       if (response.status !== 200) {
@@ -110,8 +163,8 @@ function Interview() {
                 width: currentRound === "hr"
                   ? `${((currentQuestionIndex + 1) / 5) * 33}%`
                   : currentRound === "technical"
-                  ? `${33 + ((currentQuestionIndex + 1) / 5) * 33}%`
-                  : "100%"
+                    ? `${33 + ((currentQuestionIndex + 1) / 5) * 33}%`
+                    : "100%"
               }}
             />
           </div>
@@ -157,17 +210,19 @@ function Interview() {
         {/* Answer input — only show if no evaluation yet */}
         {!evaluation && (
           <div className="space-y-3">
-            <textarea
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
-              placeholder={
-                currentRound === "dsa"
-                  ? "Explain your approach, algorithm, and time/space complexity..."
-                  : "Type your answer here..."
-              }
-              rows={6}
-              className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] resize-none"
-            />
+            {/* change this textarea with monaco-editor */}
+            {currentRound === "dsa" ? <CodeEditor value={code} language={getMonacoLanguage(language || "") || ""} onChange={(newValue) => setCode(newValue || "")} onMount={handleEditorDidMount} /> :
+              <textarea
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+                placeholder={
+                  // currentRound === "dsa"
+                  //   ? "Explain your approach, algorithm, and time/space complexity..." : 
+                  "Type your answer here..."
+                }
+                rows={6}
+                className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] resize-none"
+              />}
 
             {error && (
               <p className="text-sm text-[var(--danger)]">{error}</p>
