@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { uploadResume } from "../services/api.js";
 import { useNavigate } from "react-router-dom";
+import Navbar from "@/components/Navbar.js";
 
 function ResumeUpload() {
   const [uploadFile, setUploadFile] = useState<File | null>(null);
@@ -57,6 +58,8 @@ function ResumeUpload() {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="mb-8 text-center">
@@ -99,6 +102,7 @@ function ResumeUpload() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

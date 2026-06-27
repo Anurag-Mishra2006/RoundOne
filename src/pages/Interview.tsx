@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import useSessionStore from "@/store/sessionStore"
 import type { EvaluateResult } from "@/types/index"
 import CodeEditor from "@/components/CodeEditor"
+import Navbar from "@/components/Navbar"
 
 const BOILERPLATE_CODE: Record<string, string> = {
   cpp: `#include <iostream>\nusing namespace std;\n\nint main() {\n\t// your code goes here\n\treturn 0;\n}`,
@@ -174,6 +175,8 @@ function Interview() {
   }
 
   return (
+    <>
+    <Navbar />
     <div className="min-h-screen bg-[var(--bg)] px-4 py-10">
       <div className="max-w-2xl mx-auto">
 
@@ -375,6 +378,7 @@ function Interview() {
         )}
       </div>
     </div>
+    </>
   )
 }
 

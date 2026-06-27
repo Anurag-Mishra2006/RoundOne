@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { checkAtsResume } from "../services/api.js";
+import Navbar from '@/components/Navbar.js';
 
 interface AtsResult {
     overallScore: number,
@@ -64,6 +65,8 @@ function AtsChecker() {
         }
     }
     return (
+        <>
+        <Navbar /> 
         <div>
             {!result && (
                 <div className="min-h-screen flex items-center justify-center px-4">
@@ -208,6 +211,7 @@ function AtsChecker() {
                 </div>
             )}
         </div>
+        </>
     )
 }
 

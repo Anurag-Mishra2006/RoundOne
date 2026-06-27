@@ -37,6 +37,8 @@ function Registration() {
   }
 
   return (
+      
+    <>
     <div className="min-h-screen flex items-center justify-center bg-[var(--bg)] px-4">
       <div className="w-full max-w-sm">
         <div className="mb-8 text-center">
@@ -109,6 +111,7 @@ function Registration() {
         </p>
       </div>
     </div>
+    </>
   )
 }
 

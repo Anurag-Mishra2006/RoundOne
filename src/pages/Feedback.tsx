@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import useSessionStore from "@/store/sessionStore"
 import type { EvaluateResult } from "@/types/index"
+import Navbar from "@/components/Navbar"
 
 function Feedback() {
   const navigate = useNavigate()
@@ -43,6 +44,8 @@ function Feedback() {
   }
 
   return (
+    <>
+    <Navbar />
     <div className="min-h-screen bg-[var(--bg)] px-4 py-10">
       <div className="max-w-2xl mx-auto">
 
@@ -179,6 +182,7 @@ function Feedback() {
 
       </div>
     </div>
+    </>
   )
 }
 
