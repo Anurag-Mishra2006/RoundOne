@@ -5,7 +5,11 @@ const api = axios.create({
     baseURL: import.meta.env.VITE_BACKEND_URL,
     withCredentials : true
 });
+
 // auth calls
+export const getMe = async()=>{
+    return await api.get("/user/me");
+}
 export const signup = async (data: {name: string, email : string, password: string})=>{
     return  await api.post("/user/signup", data);
 }
