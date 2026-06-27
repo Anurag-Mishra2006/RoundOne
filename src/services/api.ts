@@ -28,7 +28,19 @@ export const uploadResume = async(file : File)=>{
     formData.append("resume", file);
     return await api.post("/resume/upload", formData);
 }
+export const checkAtsResume = async(file : File, targetRole : string, experienceLevel: string)=>{
+    const formData = new FormData();
+    formData.append("resume", file);
 
+    if(targetRole)formData.append("targetRole", targetRole);
+    if(experienceLevel)formData.append("experienceLevel", experienceLevel);
+
+    return await api.post("/resume/ats-check", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        }
+    })
+}
 // interview 
 export const interviewStart = async(data: { company: string, role: string, level: string, language:string })=>{
     return await api.post("/interview/start", data);
