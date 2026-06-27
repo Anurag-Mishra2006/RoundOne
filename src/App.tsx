@@ -8,6 +8,7 @@ import Onboarding from './pages/Onboarding'
 import Interview from './pages/Interview'
 import Feedback from './pages/Feedback'
 import Navbar from "./components/Navbar"
+import AtsChecker from './pages/AtsChecker'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path='/onboarding' element={<Onboarding />} />
           <Route path='/interview' element={<Interview />} />
           <Route path='/feedback' element={<Feedback />} />
+          <Route path='/ats-check' element={<AtsChecker />} />
           <Route path='/' element={<Navigate to="/login" />} />
         </Routes>
       </BrowserRouter>
