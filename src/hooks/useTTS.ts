@@ -18,7 +18,7 @@ export default function useTTS() {
         setIsLoading(true)
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_TTS_BACKEND_UR}/speak`, {
+            const response = await fetch(`${import.meta.env.VITE_TTS_BACKEND_URL}/speak`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
