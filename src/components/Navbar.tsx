@@ -9,9 +9,9 @@ function Navbar() {
   const handleLogout = async () => {
     try {
       await logout()
-      clearUser()
-      navigate("/login")
     } catch {
+      clearUser()
+    }finally{
       clearUser()
       navigate("/login")
     }
@@ -28,16 +28,18 @@ function Navbar() {
 
       <div className="flex items-center gap-4">
         {user && (
-          <span className="text-sm text-[var(--text-muted)]">
-            {user.name}
-          </span>
+          <>
+            <span className="text-sm text-[var(--text-muted)]">
+              {user.name}
+            </span>
+            <button
+              onClick={handleLogout}
+              className="text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors"
+            >
+              Logout
+            </button>
+          </>
         )}
-        <button
-          onClick={handleLogout}
-          className="text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors"
-        >
-          Logout
-        </button>
       </div>
     </div>
   )
