@@ -1,14 +1,18 @@
 import { useState, useRef } from 'react'
+import {generateSpeech} from "@/services/api.js";
 
 export default function useTTS() {
     const [isSpeaking, setIsSpeaking] = useState<boolean>(false)
-    const [isPaused, setIsPaused] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
-
     const audioRef = useRef<HTMLAudioElement | null>(null)
+     
+    const activeRequestId = useRef<number>(0)
 
-    const speak = async (text : string) => {
+    const speak = async (text: string) => {
         if (!text.trim()) return
+
+        //  Give this specific speak request a unique ID
+        const currentRequestId = ++activeRequestId.current
 
         if (audioRef.current) {
             audioRef.current.pause()
@@ -18,64 +22,48 @@ export default function useTTS() {
         setIsLoading(true)
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_TTS_BACKEND_URL}/speak`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    text: text,
-                    voice: "en-IN-NeerjaNeural",
-                    rate: "-30%",   
-                    pitch: "-35Hz"  
-                })
-            })
+            const response = await generateSpeech({text, voice : "en-IN-NeerjaNeural", rate: "-30%", pitch: "-35Hz"})
 
-            if (!response.ok) throw new Error("Server error")
+            if (response.status !== 200) throw new Error("Server error")
 
-            const audioBlob = await response.blob()
+            const audioBlob =  response.data;
+            
+            // CRITICAL CHECK: Did the user click "Next" or leave the page while we were waiting?
+            // If the ID changed, STOP HERE and do not play the audio!
+            if (activeRequestId.current !== currentRequestId) {
+                return; 
+            }
+
             const audioUrl = URL.createObjectURL(audioBlob)
-
             const audio = new Audio(audioUrl)
             audio.volume = 1.0;  
-            audio.onplay = () => { setIsSpeaking(true); setIsPaused(false); }
-            audio.onended = () => { setIsSpeaking(false); setIsPaused(false); }
-            audio.onerror = () => { setIsSpeaking(false); setIsPaused(false); }
+            audio.onplay = () => { setIsSpeaking(true) }
+            audio.onended = () => { setIsSpeaking(false) }
+            audio.onerror = () => { setIsSpeaking(false) }
 
             audioRef.current = audio
             audio.play()
 
         } catch (error) {
             console.error("Failed to generate TTS:", error)
-            setIsSpeaking(false)
+            if (activeRequestId.current === currentRequestId) setIsSpeaking(false)
         } finally {
-            setIsLoading(false)
+            if (activeRequestId.current === currentRequestId) setIsLoading(false)
         }
     }
 
     const stop = () => {
+        // Increment the ID so any background downloads are instantly rejected
+        activeRequestId.current++
+        
         if (audioRef.current) {
             audioRef.current.pause()
             audioRef.current.currentTime = 0
+            audioRef.current = null
         }
         setIsSpeaking(false)
-        setIsPaused(false)
+        setIsLoading(false)
     }
 
-    const pause = () => {
-        if (audioRef.current) {
-            audioRef.current.pause()
-            setIsPaused(true)
-        }
-    }
-
-    const resume = () => {
-        if (audioRef.current) {
-            audioRef.current.play()
-            setIsPaused(false)
-        }
-    }
-
-    return {
-        isSpeaking, isPaused, isLoading,
-        speak, stop, pause, resume
-    }
+    return { isSpeaking, isLoading, speak, stop }
 }

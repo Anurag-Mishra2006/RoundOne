@@ -6,6 +6,7 @@ import type { EvaluateResult } from "@/types/index"
 import CodeEditor from "@/components/CodeEditor"
 import Navbar from "@/components/Navbar"
 import useTTS from "@/hooks/useTTS"
+import { useSTT } from "@/hooks/useSTT" // <-- Imported our new STT Hook
 
 const BOILERPLATE_CODE: Record<string, string> = {
   cpp: `#include <iostream>\nusing namespace std;\n\nint main() {\n\t// your code goes here\n\treturn 0;\n}`,
@@ -44,8 +45,14 @@ function Interview() {
   const [code, setCode] = useState<string>("");
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [testResult, setTestResult] = useState<any[]>([]);
+  
+  // <-- Added state for DSA spoken approach
+  const [spokenApproach, setSpokenApproach] = useState<string>(""); 
 
   const { isSpeaking, isLoading, speak, stop } = useTTS()
+  
+  // <-- Initialized our STT hook
+  const { startRecording, stopRecording, isRecording, isProcessing } = useSTT();
 
   useEffect(() => {
     if (currentRound === "dsa" && language) {
@@ -53,7 +60,6 @@ function Interview() {
     }
   }, [language, currentRound])
 
-  // create a ref to hold the editor instance
   const editorRef = useRef<any>(null);
 
   const handleEditorDidMount = (editor: any) => {
@@ -61,14 +67,11 @@ function Interview() {
     editor.focus();
   }
 
-  // redirect if no session
   useEffect(() => {
     if (!hr || !technical || !dsa) {
       navigate("/onboarding")
     }
   }, [hr, technical, dsa, navigate]);
-
-
 
   const getCurrentQuestion = (): string => {
     if (currentRound === "hr") return hr?.questions[currentQuestionIndex]?.question ?? ""
@@ -83,19 +86,42 @@ function Interview() {
     if (currentRound === "dsa") return "DSA Round — Problem 1/1"
     return ""
   }
+
   useEffect(() => {
     const questionText = getCurrentQuestion();
-
     if (questionText && !evaluation) {
-
       speak(questionText);
     }
-
-    // Cleanup function: If the user clicks "Next" or leaves the page, stop talking!
     return () => {
       stop();
     };
   }, [currentRound, currentQuestionIndex, hr, technical, dsa, evaluation]);
+
+  // --- NEW: Speech To Text Handlers ---
+  const handlePointerDown = async (e: React.PointerEvent) => {
+    e.preventDefault(); // Prevents accidental text highlighting
+    setError("");
+    await startRecording();
+  };
+
+  const handlePointerUp = async (e: React.PointerEvent) => {
+    e.preventDefault();
+    if (!isRecording) return;
+    
+    try {
+      const transcript = await stopRecording();
+      if (currentRound === "dsa") {
+        setSpokenApproach(transcript);
+      } else {
+        // Append text nicely with a space
+        setAnswer(prev => prev + (prev ? " " : "") + transcript);
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Failed to process audio. Please try typing.");
+    }
+  };
+  // ------------------------------------
 
   const handleRunCode = async () => {
     setError("");
@@ -119,10 +145,7 @@ function Interview() {
         setError("Code Execution Failed");
         return;
       }
-
-      // Save the results so the UI can display them!
       setTestResult(response.data.results);
-
     } catch (error: any) {
       console.error(error);
       setError(error?.response?.data?.error || "Something went wrong during execution")
@@ -145,7 +168,9 @@ function Interview() {
         round: currentRound,
         question: getCurrentQuestion(),
         answer: currentSession,
-        company
+        company, 
+        // <-- NEW: We send spokenApproach if it's the DSA round!
+        ...(currentRound === "dsa" && { spokenApproach:  spokenApproach }) 
       })
       if (response.status !== 200) {
         setError("Evaluation failed")
@@ -164,8 +189,9 @@ function Interview() {
   const handleNext = () => {
     setEvaluation(null)
     setAnswer("")
+    setSpokenApproach("") // <-- Clear spoken approach for next question
     setError("")
-    setTestResult([]) // Clear test results when moving to next
+    setTestResult([]) 
 
     if (currentRound === "hr") {
       if (currentQuestionIndex < 4) {
@@ -181,8 +207,10 @@ function Interview() {
         setCurrentRound("dsa")
         setCurrentQuestionIndex(0)
       }
-    } else if (currentRound === "dsa") {
-      navigate("/feedback")
+    } else  if (currentRound === "dsa") {
+      stop();  
+      navigate("/feedback");
+      return;  
     }
   }
 
@@ -227,27 +255,27 @@ function Interview() {
 
             {/* Voice Controls UI */}
             <div className="flex items-center gap-3 mb-3 h-8"> 
-            {isLoading ? (
-               <span className="text-xs text-[var(--text-muted)] animate-pulse flex items-center gap-2">
-                 <div className="w-2 h-2 bg-[var(--accent)] rounded-full animate-bounce"></div>
-                 Loading audio...
-               </span>
-            ) : isSpeaking ? (
-               <button onClick={stop} className="text-xs flex items-center gap-1 px-3 py-1.5 bg-[var(--danger)]/10 text-[var(--danger)] rounded-md hover:bg-[var(--danger)]/20 transition-colors">
-                 <span>⏹</span> Stop Audio
-               </button>
-            ) : (
-               <button onClick={() => speak(getCurrentQuestion())} className="text-xs flex items-center gap-1 px-3 py-1.5 bg-[var(--accent)]/10 text-[var(--accent)] rounded-md hover:bg-[var(--accent)]/20 transition-colors">
-                 <span>🔊</span> {evaluation ? "Listen Again" : "Replay Question"}
-               </button>
-            )}
-          </div>
+              {isLoading ? (
+                 <span className="text-xs text-[var(--text-muted)] animate-pulse flex items-center gap-2">
+                   <div className="w-2 h-2 bg-[var(--accent)] rounded-full animate-bounce"></div>
+                   Loading audio...
+                 </span>
+              ) : isSpeaking ? (
+                 <button onClick={stop} className="text-xs flex items-center gap-1 px-3 py-1.5 bg-[var(--danger)]/10 text-[var(--danger)] rounded-md hover:bg-[var(--danger)]/20 transition-colors">
+                   <span>⏹</span> Stop Audio
+                 </button>
+              ) : (
+                 <button onClick={() => speak(getCurrentQuestion())} className="text-xs flex items-center gap-1 px-3 py-1.5 bg-[var(--accent)]/10 text-[var(--accent)] rounded-md hover:bg-[var(--accent)]/20 transition-colors">
+                   <span>🔊</span> {evaluation ? "Listen Again" : "Replay Question"}
+                 </button>
+              )}
+            </div>
 
             <p className="text-[var(--text)] text-base leading-relaxed">
               {getCurrentQuestion()}
             </p>
 
-            {/* DSA examples */}
+            {/* DSA Details hidden for brevity but retained in code */}
             {currentRound === "dsa" && dsa?.problem.examples && (
               <div className="mt-4 space-y-2">
                 {dsa.problem.examples.map((ex, i) => (
@@ -259,8 +287,6 @@ function Interview() {
                 ))}
               </div>
             )}
-
-            {/* DSA constraints */}
             {currentRound === "dsa" && dsa?.problem.constraints && (
               <div className="mt-3">
                 <p className="text-xs text-[var(--text-muted)] font-medium mb-1">Constraints:</p>
@@ -273,16 +299,24 @@ function Interview() {
             )}
           </div>
 
-          {/* Answer input & Buttons — only show if no evaluation yet */}
+          {/* Answer input & Buttons */}
           {!evaluation && (
             <div className="space-y-3">
               {currentRound === "dsa" ? (
-                <CodeEditor
-                  value={code}
-                  language={getMonacoLanguage(language || "") || ""}
-                  onChange={(newValue) => setCode(newValue || "")}
-                  onMount={handleEditorDidMount}
-                />
+                <>
+                  <CodeEditor
+                    value={code}
+                    language={getMonacoLanguage(language || "") || ""}
+                    onChange={(newValue) => setCode(newValue || "")}
+                    onMount={handleEditorDidMount}
+                  />
+                  {spokenApproach && (
+                    <div className="mt-2 p-3 rounded-md bg-[var(--accent)]/10 border border-[var(--accent)]/20">
+                      <p className="text-xs font-bold text-[var(--accent)] mb-1">Your Recorded Approach:</p>
+                      <p className="text-sm text-[var(--text)] italic">"{spokenApproach}"</p>
+                    </div>
+                  )}
+                </>
               ) : (
                 <textarea
                   value={answer}
@@ -297,25 +331,54 @@ function Interview() {
                 <p className="text-sm text-[var(--danger)]">{error}</p>
               )}
 
-              {/* Action Buttons */}
-              <div className="flex gap-3 mt-4">
-                {currentRound === "dsa" && (
-                  <button
-                    onClick={handleRunCode}
-                    disabled={isRunning || loading}
-                    className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 transition-colors"
-                  >
-                    {isRunning ? "Running..." : "Run Code"}
-                  </button>
-                )}
-
+              {/* ACTION BUTTONS (Microphone + Run + Submit) */}
+              <div className="flex flex-col gap-3 mt-4">
+                
+                {/* Hold to Speak Button */}
                 <button
-                  onClick={handleSubmit}
-                  disabled={loading || isRunning}
-                  className="w-full rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--accent-hover)] disabled:opacity-50 transition-colors"
+                  onPointerDown={handlePointerDown}
+                  onPointerUp={handlePointerUp}
+                  onPointerLeave={handlePointerUp} // Stops recording if they drag mouse off button
+                  disabled={loading || isRunning || isProcessing}
+                  className={`w-full rounded-md px-4 py-3 text-sm font-bold transition-all select-none flex items-center justify-center gap-2
+                    ${isRecording 
+                      ? "bg-[var(--danger)] text-white animate-pulse scale-[1.02] shadow-lg" 
+                      : isProcessing
+                        ? "bg-[var(--surface)] text-[var(--text-muted)] border border-[var(--border)] cursor-not-allowed"
+                        : "bg-[var(--surface)] text-[var(--text)] border border-[var(--border)] hover:bg-[var(--border)] hover:text-white"
+                    }
+                  `}
                 >
-                  {loading ? "Evaluating..." : "Submit Answer"}
+                  {isProcessing 
+                    ? "⏳ Transcribing Audio..." 
+                    : isRecording 
+                      ? "🎙️ Recording... Release to Stop" 
+                      : currentRound === "dsa" 
+                        ? (spokenApproach ? "🎤 Hold to Re-record Approach" : "🎤 Hold to Explain Approach (Optional)")
+                        : "🎤 Hold to Speak Answer"
+                  }
                 </button>
+
+                {/* Submit & Run Buttons */}
+                <div className="flex gap-3">
+                  {currentRound === "dsa" && (
+                    <button
+                      onClick={handleRunCode}
+                      disabled={isRunning || loading}
+                      className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 transition-colors"
+                    >
+                      {isRunning ? "Running..." : "Run Code"}
+                    </button>
+                  )}
+
+                  <button
+                    onClick={handleSubmit}
+                    disabled={loading || isRunning || isRecording || isProcessing}
+                    className="w-full rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--accent-hover)] disabled:opacity-50 transition-colors"
+                  >
+                    {loading ? "Evaluating..." : "Submit Answer"}
+                  </button>
+                </div>
               </div>
 
               {/* Test Results UI */}
@@ -345,10 +408,10 @@ function Interview() {
             </div>
           )}
 
-          {/* Evaluation result */}
+          {/* Evaluation result (Your existing evaluation UI remains unchanged) */}
           {evaluation && (
             <div className="space-y-4">
-              {/* Score */}
+              {/* ... (Existing Evaluation UI code) ... */}
               <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6">
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-sm font-medium text-[var(--text-muted)]">Your Score</span>
@@ -359,13 +422,9 @@ function Interview() {
                     {evaluation.score}<span className="text-base text-[var(--text-muted)] font-normal">/{evaluation.maxScore}</span>
                   </span>
                 </div>
-
-                {/* Feedback */}
                 <p className="text-sm text-[var(--text)] leading-relaxed mb-4">
                   {evaluation.feedback}
                 </p>
-
-                {/* Strong points */}
                 <div className="mb-3">
                   <p className="text-xs font-medium text-[var(--success)] uppercase tracking-wide mb-2">
                     Strong Points
@@ -373,14 +432,11 @@ function Interview() {
                   <ul className="space-y-1">
                     {evaluation.strongPoints.map((point, i) => (
                       <li key={i} className="text-sm text-[var(--text)] flex gap-2">
-                        <span className="text-[var(--success)] mt-0.5">✓</span>
-                        {point}
+                        <span className="text-[var(--success)] mt-0.5">✓</span>{point}
                       </li>
                     ))}
                   </ul>
                 </div>
-
-                {/* Improvements */}
                 <div className="mb-3">
                   <p className="text-xs font-medium text-[var(--warning)] uppercase tracking-wide mb-2">
                     Areas to Improve
@@ -388,14 +444,11 @@ function Interview() {
                   <ul className="space-y-1">
                     {evaluation.improvements.map((item, i) => (
                       <li key={i} className="text-sm text-[var(--text)] flex gap-2">
-                        <span className="text-[var(--warning)] mt-0.5">→</span>
-                        {item}
+                        <span className="text-[var(--warning)] mt-0.5">→</span>{item}
                       </li>
                     ))}
                   </ul>
                 </div>
-
-                {/* Suggestion */}
                 <div className="rounded-md bg-[var(--bg)] border border-[var(--border)] p-3">
                   <p className="text-xs font-medium text-[var(--accent)] uppercase tracking-wide mb-1">
                     Suggestion
@@ -404,7 +457,6 @@ function Interview() {
                 </div>
               </div>
 
-              {/* Next button */}
               <button
                 onClick={handleNext}
                 className="w-full rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--accent-hover)] transition-colors"

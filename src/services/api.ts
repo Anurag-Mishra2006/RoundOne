@@ -49,8 +49,25 @@ export const checkAtsResume = async(file : File, targetRole : string, experience
 export const interviewStart = async(data: { company: string, role: string, level: string, language:string })=>{
     return await api.post("/interview/start", data);
 }
-export const evaluateInterview = async(data: {round: string, company: string, question: string, answer: string})=>{
+export const evaluateInterview = async(data: {round: string, company: string, question: string, answer: string, spokenApproach?: string})=>{
     return await api.post("/interview/evaluate", data);
+}
+
+export const generateSpeech = async (data: { text: string; voice: string; rate: string; pitch: string }) => {
+    return await api.post("/interview/speak", data, { 
+        responseType: "blob" // CRITICAL: Tells Axios we are downloading an audio file, not JSON!
+    });
+};
+export const transcribeAudio = async(audioBlob : Blob)=>{
+    const formData = new FormData();
+    formData.append("audio", audioBlob, "recording.webm");
+
+    return await api.post("/interview/transcribe", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    })
+
 }
 
 // code run
