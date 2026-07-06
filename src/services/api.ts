@@ -1,8 +1,11 @@
 //  Axios instance + all API call 
 import axios from "axios";
 
+const isDevelopment = import.meta.env.MODE === 'development'
+
 const api = axios.create({
-    baseURL: import.meta.env.VITE_BACKEND_URL,
+    // If local, use localhost:3000. If on Vercel, use the magic /api proxy!
+    baseURL: isDevelopment ? "http://localhost:3000" : "/api",
     withCredentials : true
 });
 
