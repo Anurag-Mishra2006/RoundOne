@@ -109,10 +109,11 @@ function Onboarding() {
                 className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
               >
                 <option value="">Select language</option>
-                <option value="C++">C++</option>
-                <option value="Python">Python</option>
-                <option value="Java">Java</option>
-                <option value="JavaScript">JavaScript</option>
+                <option value="cpp">C++</option>
+                <option value="c">C</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="javascript">JavaScript</option>
               </select>
             </div>
 

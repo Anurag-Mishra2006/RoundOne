@@ -71,6 +71,12 @@ export const transcribeAudio = async(audioBlob : Blob)=>{
 }
 
 // code run
-export const runCode = async(data: {language: string, code: string, testCases: {input: string; output: string}[]})=>{
-    return await api.post("/code/run", data);
+// export const runCode = async(data: {language: string, code: string, testCases: {input: string; output: string}[]})=>{
+//     return await api.post("/code/run", data);
+// }
+export const submitCode = async (data: { language: string, code: string, testCases: { input: string; expectedOutput: string }[] }) => {
+    return await api.post("/code/execute", data);
+}
+export const getCodeResult = async (submissionId: string) => {
+    return await api.get(`/code/result/${submissionId}`);
 }
