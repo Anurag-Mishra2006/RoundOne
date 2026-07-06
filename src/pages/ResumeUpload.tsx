@@ -49,9 +49,22 @@ function ResumeUpload() {
       navigate("/onboarding");
 
     } catch (error: any) {
-      setError(
-        error?.response?.data?.error || "Something went wrong"
-      );
+      // This will grab every piece of info about the error and print it as a giant string.
+      let debugMessage = "Something went wrong";
+      
+      if (error.response) {
+         // The request was made and the server responded with a status code
+         // that falls out of the range of 2xx
+         debugMessage = `Server Error [${error.response.status}]: ${JSON.stringify(error.response.data)}`;
+      } else if (error.request) {
+         // The request was made but no response was received
+         debugMessage = `Network Error (No Response): ${JSON.stringify(error.message)}`;
+      } else {
+         // Something happened in setting up the request that triggered an Error
+         debugMessage = `Axios Error: ${error.message}`;
+      }
+
+      setError(debugMessage);
     } finally {
       setLoading(false);
     }
