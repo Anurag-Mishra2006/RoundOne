@@ -47,7 +47,9 @@ export interface EvaluateResult{
     feedback: string,
     strongPoints: string[],
     improvements:string[],
-    suggestion: string
+    suggestion: string,
+    question? : string,
+    answer? : string
 }
 
 export interface InterviewStartResponse {
