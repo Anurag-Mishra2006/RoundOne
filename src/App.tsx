@@ -15,6 +15,8 @@ import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Review from './pages/Review'
 import PublicReport from './pages/PublicReport'
+import LearningHub from './pages/LearningHub'
+import LearningSheet from './pages/LearningSheet'
 
 
 function App() {
@@ -57,8 +59,10 @@ function App() {
           <Route path='/feedback' element={<Feedback />} />
           <Route path='/ats-check' element={<AtsChecker />} />
           <Route path='/' element={<Home />} />
-          <Route path='/review/:id' element={<Review />}/>
+          <Route path='/review/:id' element={<Review />} />
           <Route path='/report/:id' element={<PublicReport />} />
+          <Route path='/learning' element={<LearningHub />} />
+          <Route path='/learning/:categoryId' element={ <LearningSheet /> } />
         </Routes>
       </BrowserRouter>
     </>

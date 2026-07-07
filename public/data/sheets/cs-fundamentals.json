@@ -1,0 +1,55 @@
+{
+"steps": [
+    {
+      "id": "cs-step-1",
+      "title": "Database Management Systems (DBMS)",
+      "lectures": [
+        {
+          "id": "dbms-1",
+          "title": "Core Concepts & Architecture",
+          "tasks": [
+            { "id": "cs-1", "title": "ACID Properties", "difficulty": "Basic", "platform": "Article", "practiceLink": "https://www.geeksforgeeks.org/acid-properties-in-dbms/", "ytLink": "https://www.youtube.com/watch?v=R0o4bUjQkOQ" },
+            { "id": "cs-2", "title": "Database Normalization (1NF to BCNF)", "difficulty": "Medium", "platform": "Article", "practiceLink": "https://www.geeksforgeeks.org/introduction-of-database-normalization/", "ytLink": "https://www.youtube.com/watch?v=GFQaEYEc8_8" },
+            { "id": "cs-3", "title": "Indexing (B-Trees and Hash)", "difficulty": "Hard", "platform": "Article", "practiceLink": "https://useTheIndexLuke.com", "ytLink": "https://www.youtube.com/watch?v=fsG1XaZEa78" }
+          ]
+        },
+        {
+          "id": "dbms-2",
+          "title": "SQL Mastery",
+          "tasks": [
+            { "id": "cs-4", "title": "Inner, Left, Right, and Outer Joins", "difficulty": "Easy", "platform": "Article", "practiceLink": "https://www.w3schools.com/sql/sql_join.asp", "ytLink": "" },
+            { "id": "cs-5", "title": "Window Functions (Rank, Dense_Rank)", "difficulty": "Medium", "platform": "Article", "practiceLink": "https://www.geeksforgeeks.org/window-functions-in-sql/", "ytLink": "https://www.youtube.com/watch?v=Ww71knvhQ-s" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cs-step-2",
+      "title": "Object Oriented Programming (OOPS)",
+      "lectures": [
+        {
+          "id": "oops-1",
+          "title": "The 4 Pillars",
+          "tasks": [
+            { "id": "cs-6", "title": "Inheritance, Polymorphism, Encapsulation, Abstraction", "difficulty": "Basic", "platform": "Article", "practiceLink": "https://www.geeksforgeeks.org/object-oriented-programming-in-cpp/", "ytLink": "https://www.youtube.com/watch?v=a199KZGMNxk" },
+            { "id": "cs-7", "title": "Virtual Functions & VTables", "difficulty": "Medium", "platform": "Article", "practiceLink": "https://www.geeksforgeeks.org/virtual-function-cpp/", "ytLink": "" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cs-step-3",
+      "title": "Operating Systems (OS)",
+      "lectures": [
+        {
+          "id": "os-1",
+          "title": "Processes & Threads",
+          "tasks": [
+            { "id": "cs-8", "title": "Process vs Thread", "difficulty": "Basic", "platform": "Article", "practiceLink": "https://www.geeksforgeeks.org/difference-between-process-and-thread/", "ytLink": "" },
+            { "id": "cs-9", "title": "Mutex, Semaphores, and Deadlocks", "difficulty": "Hard", "platform": "Article", "practiceLink": "https://www.geeksforgeeks.org/introduction-of-deadlock-in-operating-system/", "ytLink": "https://www.youtube.com/watch?v=kCEnGtIfX8I" }
+          ]
+        }
+      ]
+    }
+  ]
+}

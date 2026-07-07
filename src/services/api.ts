@@ -86,3 +86,11 @@ export const getPublicReport = async (id: string) => {
 export const runCode = async(data: {language: string, code: string, testCases: {input: string; output: string}[]})=>{
     return await api.post("/code/run", data);
 }
+
+// progress
+export const getProgress = async (sheetId: string) => {
+    return await api.get(`/progress/${sheetId}`);
+};
+export const toggleProgress = async(data: {sheetId: string, taskId: string})=>{
+    return await api.post("/progress/toggle", data)
+}

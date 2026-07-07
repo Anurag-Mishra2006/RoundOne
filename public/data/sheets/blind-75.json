@@ -1,0 +1,732 @@
+{
+  "steps": [
+    {
+      "id": "b75-step-1",
+      "title": "Array",
+      "lectures": [
+        {
+          "id": "b75-lec-1-1",
+          "title": "Core Array Problems",
+          "tasks": [
+            {
+              "id": "b75-1",
+              "title": "Two Sum",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/two-sum/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-121",
+              "title": "Best Time to Buy and Sell Stock",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-217",
+              "title": "Contains Duplicate",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/contains-duplicate/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-238",
+              "title": "Product of Array Except Self",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/product-of-array-except-self/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-53",
+              "title": "Maximum Subarray",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/maximum-subarray/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-152",
+              "title": "Maximum Product Subarray",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/maximum-product-subarray/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-153",
+              "title": "Find Minimum in Rotated Sorted Array",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-33",
+              "title": "Search in Rotated Sorted Array",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-15",
+              "title": "3Sum",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/3sum/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-11",
+              "title": "Container With Most Water",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/container-with-most-water/",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b75-step-2",
+      "title": "Binary",
+      "lectures": [
+        {
+          "id": "b75-lec-2-1",
+          "title": "Core Binary Problems",
+          "tasks": [
+            {
+              "id": "b75-371",
+              "title": "Sum of Two Integers",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/sum-of-two-integers/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-191",
+              "title": "Number of 1 Bits",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/number-of-1-bits/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-338",
+              "title": "Counting Bits",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/counting-bits/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-268",
+              "title": "Missing Number",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/missing-number/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-190",
+              "title": "Reverse Bits",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/reverse-bits/",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b75-step-3",
+      "title": "Dynamic Programming",
+      "lectures": [
+        {
+          "id": "b75-lec-3-1",
+          "title": "Core DP Problems",
+          "tasks": [
+            {
+              "id": "b75-70",
+              "title": "Climbing Stairs",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/climbing-stairs/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-322",
+              "title": "Coin Change",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/coin-change/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-300",
+              "title": "Longest Increasing Subsequence",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/longest-increasing-subsequence/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-1143",
+              "title": "Longest Common Subsequence",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/longest-common-subsequence/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-139",
+              "title": "Word Break Problem",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/word-break/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-377",
+              "title": "Combination Sum",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/combination-sum-iv/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-198",
+              "title": "House Robber",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/house-robber/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-213",
+              "title": "House Robber II",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/house-robber-ii/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-91",
+              "title": "Decode Ways",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/decode-ways/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-62",
+              "title": "Unique Paths",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/unique-paths/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-55",
+              "title": "Jump Game",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/jump-game/",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b75-step-4",
+      "title": "Graph",
+      "lectures": [
+        {
+          "id": "b75-lec-4-1",
+          "title": "Core Graph Problems",
+          "tasks": [
+            {
+              "id": "b75-133",
+              "title": "Clone Graph",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/clone-graph/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-207",
+              "title": "Course Schedule",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/course-schedule/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-417",
+              "title": "Pacific Atlantic Water Flow",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/pacific-atlantic-water-flow/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-200",
+              "title": "Number of Islands",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/number-of-islands/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-128",
+              "title": "Longest Consecutive Sequence",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/longest-consecutive-sequence/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-269",
+              "title": "Alien Dictionary",
+              "difficulty": "Hard",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/alien-dictionary/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-261",
+              "title": "Graph Valid Tree",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/graph-valid-tree/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-323",
+              "title": "Number of Connected Components in an Undirected Graph",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b75-step-5",
+      "title": "Interval",
+      "lectures": [
+        {
+          "id": "b75-lec-5-1",
+          "title": "Core Interval Problems",
+          "tasks": [
+            {
+              "id": "b75-57",
+              "title": "Insert Interval",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/insert-interval/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-56",
+              "title": "Merge Intervals",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/merge-intervals/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-435",
+              "title": "Non-overlapping Intervals",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/non-overlapping-intervals/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-252",
+              "title": "Meeting Rooms",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/meeting-rooms/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-253",
+              "title": "Meeting Rooms II",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/meeting-rooms-ii/",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b75-step-6",
+      "title": "Linked List",
+      "lectures": [
+        {
+          "id": "b75-lec-6-1",
+          "title": "Core Linked List Problems",
+          "tasks": [
+            {
+              "id": "b75-206",
+              "title": "Reverse a Linked List",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/reverse-linked-list/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-141",
+              "title": "Detect Cycle in a Linked List",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/linked-list-cycle/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-21",
+              "title": "Merge Two Sorted Lists",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/merge-two-sorted-lists/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-23",
+              "title": "Merge K Sorted Lists",
+              "difficulty": "Hard",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/merge-k-sorted-lists/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-19",
+              "title": "Remove Nth Node From End Of List",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-143",
+              "title": "Reorder List",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/reorder-list/",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b75-step-7",
+      "title": "Matrix",
+      "lectures": [
+        {
+          "id": "b75-lec-7-1",
+          "title": "Core Matrix Problems",
+          "tasks": [
+            {
+              "id": "b75-73",
+              "title": "Set Matrix Zeroes",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/set-matrix-zeroes/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-54",
+              "title": "Spiral Matrix",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/spiral-matrix/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-48",
+              "title": "Rotate Image",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/rotate-image/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-79",
+              "title": "Word Search",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/word-search/",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b75-step-8",
+      "title": "String",
+      "lectures": [
+        {
+          "id": "b75-lec-8-1",
+          "title": "Core String Problems",
+          "tasks": [
+            {
+              "id": "b75-3",
+              "title": "Longest Substring Without Repeating Characters",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-424",
+              "title": "Longest Repeating Character Replacement",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/longest-repeating-character-replacement/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-76",
+              "title": "Minimum Window Substring",
+              "difficulty": "Hard",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/minimum-window-substring/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-242",
+              "title": "Valid Anagram",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/valid-anagram/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-49",
+              "title": "Group Anagrams",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/group-anagrams/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-20",
+              "title": "Valid Parentheses",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/valid-parentheses/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-125",
+              "title": "Valid Palindrome",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/valid-palindrome/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-5",
+              "title": "Longest Palindromic Substring",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/longest-palindromic-substring/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-647",
+              "title": "Palindromic Substrings",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/palindromic-substrings/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-271",
+              "title": "Encode and Decode Strings",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/encode-and-decode-strings/",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b75-step-9",
+      "title": "Tree",
+      "lectures": [
+        {
+          "id": "b75-lec-9-1",
+          "title": "Core Tree Problems",
+          "tasks": [
+            {
+              "id": "b75-104",
+              "title": "Maximum Depth of Binary Tree",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-100",
+              "title": "Same Tree",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/same-tree/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-226",
+              "title": "Invert/Flip Binary Tree",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/invert-binary-tree/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-124",
+              "title": "Binary Tree Maximum Path Sum",
+              "difficulty": "Hard",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-102",
+              "title": "Binary Tree Level Order Traversal",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-297",
+              "title": "Serialize and Deserialize Binary Tree",
+              "difficulty": "Hard",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-572",
+              "title": "Subtree of Another Tree",
+              "difficulty": "Easy",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/subtree-of-another-tree/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-105",
+              "title": "Construct Binary Tree from Preorder and Inorder Traversal",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-98",
+              "title": "Validate Binary Search Tree",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/validate-binary-search-tree/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-230",
+              "title": "Kth Smallest Element in a BST",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-235",
+              "title": "Lowest Common Ancestor of BST",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-208",
+              "title": "Implement Trie (Prefix Tree)",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/implement-trie-prefix-tree/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-211",
+              "title": "Add and Search Word",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/add-and-search-word-data-structure-design/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-212",
+              "title": "Word Search II",
+              "difficulty": "Hard",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/word-search-ii/",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b75-step-10",
+      "title": "Heap",
+      "lectures": [
+        {
+          "id": "b75-lec-10-1",
+          "title": "Core Heap Problems",
+          "tasks": [
+            {
+              "id": "b75-23-2",
+              "title": "Merge K Sorted Lists",
+              "difficulty": "Hard",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/merge-k-sorted-lists/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-347",
+              "title": "Top K Frequent Elements",
+              "difficulty": "Medium",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/top-k-frequent-elements/",
+              "ytLink": ""
+            },
+            {
+              "id": "b75-295",
+              "title": "Find Median from Data Stream",
+              "difficulty": "Hard",
+              "platform": "LeetCode",
+              "practiceLink": "https://leetcode.com/problems/find-median-from-data-stream/",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
