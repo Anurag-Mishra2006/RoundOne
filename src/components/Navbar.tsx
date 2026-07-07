@@ -1,69 +1,98 @@
-import { useNavigate, Link, useLocation } from "react-router-dom"
-import useUserStore from "@/store/authStore"
-import { logout } from "@/services/api"
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useUserStore from "@/store/authStore";
+import { logout } from "@/services/api";
 
 function Navbar() {
-  const navigate = useNavigate()
-  const location = useLocation() // To highlight the active tab
-  const { user, clearUser } = useUserStore()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { user, clearUser } = useUserStore();
 
   const handleLogout = async () => {
     try {
-      await logout()
-    } catch {
-      console.error("Backend logout failed")
+      await logout();
+    } catch (error) {
+      console.error("Backend logout failed:", error);
     } finally {
-      clearUser()
-      navigate("/login")
+      clearUser();
+      navigate("/login");
     }
-  }
+  };
 
-  // Helper to highlight the active tab
-  const isActive = (path: string) => location.pathname === path ? "text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-[var(--text)]";
+  // Returns true if the current route matches the given path
+  const isActive = (path: string) => location.pathname === path;
+
+  // Routes that belong to the Mock Interview flow
+  const interviewRoutes = [
+    "/resume-upload",
+    "/onboarding",
+    "/interview",
+  ];
+
+  const isInterviewPage = interviewRoutes.includes(location.pathname);
+
+  const navLinkClasses = (active: boolean) =>
+    `transition-colors ${
+      active
+        ? "text-[var(--accent)]"
+        : "text-[var(--text-muted)] hover:text-[var(--text)]"
+    }`;
 
   return (
-    <div className="w-full border-b border-[var(--border)] bg-[var(--surface)] px-6 py-3 flex items-center justify-between">
-      
-      {/* Left: Logo */}
+    <nav className="w-full border-b border-[var(--border)] bg-[var(--surface)] px-6 py-3 flex items-center justify-between">
+      {/* Left */}
       <div className="flex items-center gap-8">
-        <span
-          className="text-lg font-bold text-[var(--accent)] cursor-pointer"
-          onClick={() => navigate("/resume-upload")}
+        <Link
+          to="/dashboard"
+          className="text-lg font-bold text-[var(--accent)]"
         >
           RoundOne
-        </span>
+        </Link>
 
-        {/* Center: Navigation Links (Only show if logged in) */}
         {user && (
           <div className="hidden md:flex items-center gap-6 text-sm font-medium">
-            <Link to="/resume-upload" className={`transition-colors ${isActive('/resume-upload') || isActive('/onboarding') || isActive('/interview') ? 'text-[var(--accent)]' : 'text-[var(--text-muted)] hover:text-[var(--text)]'}`}>
+            <Link
+              to="/dashboard"
+              className={navLinkClasses(isActive("/dashboard"))}
+            >
+              Dashboard
+            </Link>
+
+            <Link
+              to="/resume-upload"
+              className={navLinkClasses(isInterviewPage)}
+            >
               Mock Interview
             </Link>
-            <Link to="/ats-check" className={`transition-colors ${isActive('/ats-check')}`}>
+
+            <Link
+              to="/ats-check"
+              className={navLinkClasses(isActive("/ats-check"))}
+            >
               ATS Checker
             </Link>
           </div>
         )}
       </div>
 
-      {/* Right: User Info & Logout */}
+      {/* Right */}
       <div className="flex items-center gap-4">
         {user && (
           <>
-            <span className="text-sm font-medium text-[var(--text)] bg-[var(--bg)] px-3 py-1 rounded-full border border-[var(--border)]">
-              {user.name.trim().split(" ")[0]}
+            <span className="rounded-full border border-[var(--border)] bg-[var(--bg)] px-3 py-1 text-sm font-medium text-[var(--text)]">
+              {user.name?.trim().split(" ")[0] ?? "User"}
             </span>
+
             <button
               onClick={handleLogout}
-              className="text-sm font-medium text-[var(--danger)] hover:text-[var(--danger)]/80 transition-colors"
+              className="text-sm font-medium text-[var(--danger)] transition-colors hover:text-[var(--danger)]/80"
             >
               Logout
             </button>
           </>
         )}
       </div>
-    </div>
-  )
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;

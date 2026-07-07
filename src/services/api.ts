@@ -72,6 +72,12 @@ export const transcribeAudio = async(audioBlob : Blob)=>{
     })
 
 }
+export const saveSessionToDb = async (data: any) => {
+    return await api.post("/interview/save", data);
+};
+export const getInterviewHistory = async () => {
+    return await api.get("/interview/history");
+};
 
 // code run
 export const runCode = async(data: {language: string, code: string, testCases: {input: string; output: string}[]})=>{

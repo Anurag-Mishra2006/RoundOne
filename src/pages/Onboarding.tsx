@@ -29,6 +29,8 @@ function Onboarding() {
       }
       setSession({
         company,
+        role,
+        level,
         hr: response.data.hr,
         technical: response.data.technical,
         dsa: response.data.dsa

@@ -12,6 +12,8 @@ import { getMe } from './services/api'
 import useUserStore from './store/authStore'
 import { useEffect, useState } from 'react'
 import Home from './pages/Home'
+import Dashboard from './pages/Dashboard'
+
 
 function App() {
   const { isAuthenticate, setUser, clearUser } = useUserStore();
@@ -41,15 +43,18 @@ function App() {
         <Routes>
           <Route path='/register' element={<Registration />} />
           <Route path='/verify-otp' element={<VerifyOtp />} />
+          <Route path='/dashboard' element={
+            <Dashboard />
+          } />
           {/* <Route path='/login' element={<Login />} /> */}
-          <Route path='/login' element={isAuthenticate ? <Navigate to="/resume-upload" /> : <Login />} />
+          <Route path='/login' element={isAuthenticate ? <Navigate to="/dashboard" /> : <Login />} />
 
           <Route path='/resume-upload' element={<ResumeUpload />} />
           <Route path='/onboarding' element={<Onboarding />} />
           <Route path='/interview' element={<Interview />} />
           <Route path='/feedback' element={<Feedback />} />
           <Route path='/ats-check' element={<AtsChecker />} />
-          <Route path='/' element={<Home/>} />
+          <Route path='/' element={<Home />} />
         </Routes>
       </BrowserRouter>
     </>
