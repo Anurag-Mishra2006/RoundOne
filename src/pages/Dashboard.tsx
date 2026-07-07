@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import useUserStore from "@/store/authStore";
 import { getInterviewHistory } from "@/services/api";
+import ActivityHeatmap from "@/components/ActivityHeatmap"
 
 interface Session {
   id: string;
@@ -95,7 +96,8 @@ function Dashboard() {
               </button>
             </div>
           </div>
-
+          {/* Activity Heat  Map */}
+            <ActivityHeatmap sessions={sessions} />
           {/* Interview History List */}
           <div>
             <h2 className="text-xl font-bold text-[var(--text)] mb-4">Recent Interviews</h2>
