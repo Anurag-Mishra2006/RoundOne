@@ -1,0 +1,2337 @@
+{
+  "steps": [
+    {
+      "id": "level-800",
+      "title": "Rating 800",
+      "lectures": [
+        {
+          "id": "lec-800",
+          "title": "Curated Top 12",
+          "tasks": [
+            {
+              "id": "cf-4A",
+              "title": "Watermelon",
+              "difficulty": 800,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "math"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/4/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-71A",
+              "title": "Way Too Long Words",
+              "difficulty": 800,
+              "platform": "Codeforces",
+              "tags": [
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/71/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-231A",
+              "title": "Team",
+              "difficulty": 800,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "greedy"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/231/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-282A",
+              "title": "Bit++",
+              "difficulty": 800,
+              "platform": "Codeforces",
+              "tags": [
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/282/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-50A",
+              "title": "Domino piling",
+              "difficulty": 800,
+              "platform": "Codeforces",
+              "tags": [
+                "greedy",
+                "math"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/50/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-263A",
+              "title": "Beautiful Matrix",
+              "difficulty": 800,
+              "platform": "Codeforces",
+              "tags": [
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/263/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-112A",
+              "title": "Petya and Strings",
+              "difficulty": 800,
+              "platform": "Codeforces",
+              "tags": [
+                "implementation",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/112/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-339A",
+              "title": "Helpful Maths",
+              "difficulty": 800,
+              "platform": "Codeforces",
+              "tags": [
+                "greedy",
+                "implementation",
+                "sortings",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/339/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-266B",
+              "title": "Queue at the School",
+              "difficulty": 800,
+              "platform": "Codeforces",
+              "tags": [
+                "constructive algorithms",
+                "graph matchings",
+                "implementation",
+                "shortest paths"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/266/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1843C",
+              "title": "Sum in Binary Tree",
+              "difficulty": 800,
+              "platform": "Codeforces",
+              "tags": [
+                "bitmasks",
+                "combinatorics",
+                "math",
+                "trees"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1843/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1549B",
+              "title": "Gregor and the Pawn Game",
+              "difficulty": 800,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "dp",
+                "flows",
+                "graph matchings",
+                "graphs",
+                "greedy",
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1549/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1956A",
+              "title": "Nene's Game",
+              "difficulty": 800,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "brute force",
+                "data structures",
+                "games",
+                "greedy"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1956/A",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level-900",
+      "title": "Rating 900",
+      "lectures": [
+        {
+          "id": "lec-900",
+          "title": "Curated Top 12",
+          "tasks": [
+            {
+              "id": "cf-96A",
+              "title": "Football",
+              "difficulty": 900,
+              "platform": "Codeforces",
+              "tags": [
+                "implementation",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/96/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-160A",
+              "title": "Twins",
+              "difficulty": 900,
+              "platform": "Codeforces",
+              "tags": [
+                "greedy",
+                "sortings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/160/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-318A",
+              "title": "Even Odds",
+              "difficulty": 900,
+              "platform": "Codeforces",
+              "tags": [
+                "math"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/318/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-405A",
+              "title": "Gravity Flip",
+              "difficulty": 900,
+              "platform": "Codeforces",
+              "tags": [
+                "greedy",
+                "implementation",
+                "sortings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/405/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-133A",
+              "title": "HQ9+",
+              "difficulty": 900,
+              "platform": "Codeforces",
+              "tags": [
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/133/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-580A",
+              "title": "Kefa and First Steps",
+              "difficulty": 900,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "dp",
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/580/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1855B",
+              "title": "Longest Divisors Interval",
+              "difficulty": 900,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "combinatorics",
+                "greedy",
+                "math",
+                "number theory"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1855/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-115A",
+              "title": "Party",
+              "difficulty": 900,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "graphs",
+                "trees"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/115/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2060C",
+              "title": "Game of Mathletes",
+              "difficulty": 900,
+              "platform": "Codeforces",
+              "tags": [
+                "games",
+                "greedy",
+                "sortings",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2060/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1918B",
+              "title": "Minimize Inversions",
+              "difficulty": 900,
+              "platform": "Codeforces",
+              "tags": [
+                "constructive algorithms",
+                "data structures",
+                "greedy",
+                "implementation",
+                "sortings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1918/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-6A",
+              "title": "Triangle",
+              "difficulty": 900,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "geometry"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/6/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1699B",
+              "title": "Almost Ternary Matrix",
+              "difficulty": 900,
+              "platform": "Codeforces",
+              "tags": [
+                "bitmasks",
+                "constructive algorithms",
+                "matrices"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1699/B",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level-1000",
+      "title": "Rating 1000",
+      "lectures": [
+        {
+          "id": "lec-1000",
+          "title": "Curated Top 12",
+          "tasks": [
+            {
+              "id": "cf-1A",
+              "title": "Theatre Square",
+              "difficulty": 1000,
+              "platform": "Codeforces",
+              "tags": [
+                "math"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-118A",
+              "title": "String Task",
+              "difficulty": 1000,
+              "platform": "Codeforces",
+              "tags": [
+                "implementation",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/118/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-69A",
+              "title": "Young Physicist",
+              "difficulty": 1000,
+              "platform": "Codeforces",
+              "tags": [
+                "implementation",
+                "math"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/69/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-58A",
+              "title": "Chat room",
+              "difficulty": 1000,
+              "platform": "Codeforces",
+              "tags": [
+                "greedy",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/58/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-122A",
+              "title": "Lucky Division",
+              "difficulty": 1000,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "number theory"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/122/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-500A",
+              "title": "New Year Transportation",
+              "difficulty": 1000,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "graphs",
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/500/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1840C",
+              "title": "Ski Resort",
+              "difficulty": 1000,
+              "platform": "Codeforces",
+              "tags": [
+                "combinatorics",
+                "math",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1840/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1744C",
+              "title": "Traffic Light",
+              "difficulty": 1000,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "implementation",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1744/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-766B",
+              "title": "Mahmoud and a Triangle",
+              "difficulty": 1000,
+              "platform": "Codeforces",
+              "tags": [
+                "constructive algorithms",
+                "geometry",
+                "greedy",
+                "math",
+                "number theory",
+                "sortings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/766/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1829D",
+              "title": "Gold Rush",
+              "difficulty": 1000,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "dfs and similar",
+                "dp",
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1829/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2000C",
+              "title": "Numeric String Template",
+              "difficulty": 1000,
+              "platform": "Codeforces",
+              "tags": [
+                "data structures",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2000/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2203B",
+              "title": "Beautiful Numbers",
+              "difficulty": 1000,
+              "platform": "Codeforces",
+              "tags": [
+                "bitmasks",
+                "dp",
+                "fft",
+                "greedy",
+                "math"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2203/B",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level-1100",
+      "title": "Rating 1100",
+      "lectures": [
+        {
+          "id": "lec-1100",
+          "title": "Curated Top 12",
+          "tasks": [
+            {
+              "id": "cf-1511C",
+              "title": "Yet Another Card Deck",
+              "difficulty": 1100,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "data structures",
+                "implementation",
+                "trees"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1511/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1829E",
+              "title": "The Lakes",
+              "difficulty": 1100,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "dsu",
+                "graphs",
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1829/E",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1869B",
+              "title": "2D Traveling",
+              "difficulty": 1100,
+              "platform": "Codeforces",
+              "tags": [
+                "geometry",
+                "math",
+                "shortest paths",
+                "sortings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1869/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1624C",
+              "title": "Division by Two and Permutation",
+              "difficulty": 1100,
+              "platform": "Codeforces",
+              "tags": [
+                "constructive algorithms",
+                "flows",
+                "graph matchings",
+                "greedy",
+                "math"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1624/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2125C",
+              "title": "Count Good Numbers",
+              "difficulty": 1100,
+              "platform": "Codeforces",
+              "tags": [
+                "bitmasks",
+                "combinatorics",
+                "math",
+                "number theory"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2125/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1807G1",
+              "title": "Subsequence Addition (Easy Version)",
+              "difficulty": 1100,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "data structures",
+                "dp",
+                "greedy",
+                "implementation",
+                "sortings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1807/G1",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1788B",
+              "title": "Sum of Two Numbers",
+              "difficulty": 1100,
+              "platform": "Codeforces",
+              "tags": [
+                "constructive algorithms",
+                "greedy",
+                "implementation",
+                "math",
+                "probabilities"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1788/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1288A",
+              "title": "Deadline",
+              "difficulty": 1100,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "brute force",
+                "math",
+                "ternary search"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1288/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2197B",
+              "title": "Array and Permutation",
+              "difficulty": 1100,
+              "platform": "Codeforces",
+              "tags": [
+                "implementation",
+                "schedules",
+                "sortings",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2197/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-525A",
+              "title": "Vitaliy and Pie",
+              "difficulty": 1100,
+              "platform": "Codeforces",
+              "tags": [
+                "greedy",
+                "hashing",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/525/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-755B",
+              "title": "PolandBall and Game",
+              "difficulty": 1100,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "data structures",
+                "games",
+                "greedy",
+                "sortings",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/755/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-723B",
+              "title": "Text Document Analysis",
+              "difficulty": 1100,
+              "platform": "Codeforces",
+              "tags": [
+                "expression parsing",
+                "implementation",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/723/B",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level-1200",
+      "title": "Rating 1200",
+      "lectures": [
+        {
+          "id": "lec-1200",
+          "title": "Curated Top 12",
+          "tasks": [
+            {
+              "id": "cf-489B",
+              "title": "BerSU Ball",
+              "difficulty": 1200,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "dp",
+                "graph matchings",
+                "greedy",
+                "sortings",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/489/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1527B1",
+              "title": "Palindrome Game (easy version)",
+              "difficulty": 1200,
+              "platform": "Codeforces",
+              "tags": [
+                "constructive algorithms",
+                "games"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1527/B1",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1909B",
+              "title": "Make Almost Equal With Mod",
+              "difficulty": 1200,
+              "platform": "Codeforces",
+              "tags": [
+                "bitmasks",
+                "constructive algorithms",
+                "math",
+                "number theory"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1909/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1800D",
+              "title": "Remove Two Letters",
+              "difficulty": 1200,
+              "platform": "Codeforces",
+              "tags": [
+                "data structures",
+                "greedy",
+                "hashing",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1800/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-217A",
+              "title": "Ice Skating",
+              "difficulty": 1200,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "dfs and similar",
+                "dsu",
+                "graphs"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/217/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1846D",
+              "title": "Rudolph and Christmas Tree",
+              "difficulty": 1200,
+              "platform": "Codeforces",
+              "tags": [
+                "constructive algorithms",
+                "geometry",
+                "math"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1846/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1843D",
+              "title": "Apple Tree",
+              "difficulty": 1200,
+              "platform": "Codeforces",
+              "tags": [
+                "combinatorics",
+                "dfs and similar",
+                "dp",
+                "math",
+                "trees"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1843/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1490D",
+              "title": "Permutation Transformation",
+              "difficulty": 1200,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "divide and conquer",
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1490/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2069B",
+              "title": "Set of Strangers",
+              "difficulty": 1200,
+              "platform": "Codeforces",
+              "tags": [
+                "greedy",
+                "matrices"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2069/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1546B",
+              "title": "AquaMoon and Stolen String",
+              "difficulty": 1200,
+              "platform": "Codeforces",
+              "tags": [
+                "interactive",
+                "math"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1546/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2227D",
+              "title": "Palindromex",
+              "difficulty": 1200,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "brute force",
+                "constructive algorithms",
+                "data structures",
+                "greedy",
+                "implementation",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2227/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-400B",
+              "title": "Inna and New Matrix of Candies",
+              "difficulty": 1200,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "implementation",
+                "schedules"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/400/B",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level-1300",
+      "title": "Rating 1300",
+      "lectures": [
+        {
+          "id": "lec-1300",
+          "title": "Curated Top 12",
+          "tasks": [
+            {
+              "id": "cf-476B",
+              "title": "Dreamoon and WiFi",
+              "difficulty": 1300,
+              "platform": "Codeforces",
+              "tags": [
+                "bitmasks",
+                "brute force",
+                "combinatorics",
+                "dp",
+                "math",
+                "probabilities"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/476/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1927D",
+              "title": "Find the Different Ones!",
+              "difficulty": 1300,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "brute force",
+                "data structures",
+                "dp",
+                "dsu",
+                "greedy",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1927/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1360E",
+              "title": "Polygon",
+              "difficulty": 1300,
+              "platform": "Codeforces",
+              "tags": [
+                "dp",
+                "graphs",
+                "implementation",
+                "shortest paths"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1360/E",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2049B",
+              "title": "pspspsps",
+              "difficulty": 1300,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "constructive algorithms",
+                "graph matchings",
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2049/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1574C",
+              "title": "Slay the Dragon",
+              "difficulty": 1300,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "greedy",
+                "sortings",
+                "ternary search"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1574/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1741D",
+              "title": "Masha and a Beautiful Tree",
+              "difficulty": 1300,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "divide and conquer",
+                "graphs",
+                "sortings",
+                "trees"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1741/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1119B",
+              "title": "Alyona and a Narrow Fridge",
+              "difficulty": 1300,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "flows",
+                "greedy",
+                "sortings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1119/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1807E",
+              "title": "Interview",
+              "difficulty": 1300,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "implementation",
+                "interactive"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1807/E",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1736C1",
+              "title": "Good Subarrays (Easy Version)",
+              "difficulty": 1300,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "data structures",
+                "schedules",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1736/C1",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2036D",
+              "title": "I Love 1543",
+              "difficulty": 1300,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "implementation",
+                "matrices"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2036/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1899D",
+              "title": "Yarik and Musical Notes",
+              "difficulty": 1300,
+              "platform": "Codeforces",
+              "tags": [
+                "hashing",
+                "math",
+                "number theory"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1899/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1220C",
+              "title": "Substring Game in the Lesson",
+              "difficulty": 1300,
+              "platform": "Codeforces",
+              "tags": [
+                "games",
+                "greedy",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1220/C",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level-1400",
+      "title": "Rating 1400",
+      "lectures": [
+        {
+          "id": "lec-1400",
+          "title": "Curated Top 12",
+          "tasks": [
+            {
+              "id": "cf-520B",
+              "title": "Two Buttons",
+              "difficulty": 1400,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "graphs",
+                "greedy",
+                "implementation",
+                "math",
+                "shortest paths"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/520/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1370C",
+              "title": "Number Game",
+              "difficulty": 1400,
+              "platform": "Codeforces",
+              "tags": [
+                "games",
+                "math",
+                "number theory"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1370/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1167C",
+              "title": "News Distribution",
+              "difficulty": 1400,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "dsu",
+                "graphs"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1167/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1830A",
+              "title": "Copil Copac Draws Trees",
+              "difficulty": 1400,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "dp",
+                "graphs",
+                "trees"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1830/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1648A",
+              "title": "Weird Sum",
+              "difficulty": 1400,
+              "platform": "Codeforces",
+              "tags": [
+                "combinatorics",
+                "data structures",
+                "geometry",
+                "math",
+                "matrices",
+                "sortings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1648/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2020C",
+              "title": "Bitwise Balancing",
+              "difficulty": 1400,
+              "platform": "Codeforces",
+              "tags": [
+                "bitmasks",
+                "hashing",
+                "implementation",
+                "math",
+                "schedules",
+                "ternary search"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2020/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1167B",
+              "title": "Lost Numbers",
+              "difficulty": 1400,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "divide and conquer",
+                "interactive",
+                "math"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1167/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1706C",
+              "title": "Qpwoeirut And The City",
+              "difficulty": 1400,
+              "platform": "Codeforces",
+              "tags": [
+                "dp",
+                "flows",
+                "greedy",
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1706/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1697C",
+              "title": "awoo's Favorite Problem",
+              "difficulty": 1400,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "constructive algorithms",
+                "data structures",
+                "greedy",
+                "implementation",
+                "strings",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1697/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1263C",
+              "title": "Everyone is a Winner!",
+              "difficulty": 1400,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "math",
+                "meet-in-the-middle",
+                "number theory"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1263/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-612C",
+              "title": "Replace To Make Regular Bracket Sequence",
+              "difficulty": 1400,
+              "platform": "Codeforces",
+              "tags": [
+                "data structures",
+                "expression parsing",
+                "math"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/612/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2204D",
+              "title": "Alternating Path",
+              "difficulty": 1400,
+              "platform": "Codeforces",
+              "tags": [
+                "constructive algorithms",
+                "dfs and similar",
+                "graph matchings",
+                "graphs"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2204/D",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level-1500",
+      "title": "Rating 1500",
+      "lectures": [
+        {
+          "id": "lec-1500",
+          "title": "Curated Top 12",
+          "tasks": [
+            {
+              "id": "cf-166E",
+              "title": "Tetrahedron",
+              "difficulty": 1500,
+              "platform": "Codeforces",
+              "tags": [
+                "dp",
+                "math",
+                "matrices"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/166/E",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1915F",
+              "title": "Greetings",
+              "difficulty": 1500,
+              "platform": "Codeforces",
+              "tags": [
+                "data structures",
+                "divide and conquer",
+                "sortings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1915/F",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1486B",
+              "title": "Eastern Exhibition",
+              "difficulty": 1500,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "geometry",
+                "shortest paths",
+                "sortings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1486/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-839C",
+              "title": "Journey",
+              "difficulty": 1500,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "dp",
+                "graphs",
+                "probabilities",
+                "trees"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/839/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1400C",
+              "title": "Binary String Reconstruction",
+              "difficulty": 1500,
+              "platform": "Codeforces",
+              "tags": [
+                "2-sat",
+                "brute force",
+                "constructive algorithms",
+                "greedy"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1400/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2069C",
+              "title": "Beautiful Sequence",
+              "difficulty": 1500,
+              "platform": "Codeforces",
+              "tags": [
+                "combinatorics",
+                "dp",
+                "greedy",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2069/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1301B",
+              "title": "Motarack's Birthday",
+              "difficulty": 1500,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "greedy",
+                "ternary search"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1301/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2108C",
+              "title": "Neo's Escape",
+              "difficulty": 1500,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "brute force",
+                "data structures",
+                "dp",
+                "dsu",
+                "graphs",
+                "greedy",
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2108/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1249C2",
+              "title": "Good Numbers (hard version)",
+              "difficulty": 1500,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "greedy",
+                "math",
+                "meet-in-the-middle"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1249/C2",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1326D1",
+              "title": "Prefix-Suffix Palindrome (Easy version)",
+              "difficulty": 1500,
+              "platform": "Codeforces",
+              "tags": [
+                "hashing",
+                "string suffix structures",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1326/D1",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2140C",
+              "title": "Ultimate Value",
+              "difficulty": 1500,
+              "platform": "Codeforces",
+              "tags": [
+                "data structures",
+                "games",
+                "greedy"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2140/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2109C1",
+              "title": "Hacking Numbers (Easy Version)",
+              "difficulty": 1500,
+              "platform": "Codeforces",
+              "tags": [
+                "bitmasks",
+                "constructive algorithms",
+                "interactive",
+                "math",
+                "number theory"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2109/C1",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level-1600",
+      "title": "Rating 1600",
+      "lectures": [
+        {
+          "id": "lec-1600",
+          "title": "Curated Top 12",
+          "tasks": [
+            {
+              "id": "cf-1833E",
+              "title": "Round Dance",
+              "difficulty": 1600,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "dsu",
+                "graphs",
+                "shortest paths"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1833/E",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1373D",
+              "title": "Maximum Sum on Even Positions",
+              "difficulty": 1600,
+              "platform": "Codeforces",
+              "tags": [
+                "divide and conquer",
+                "dp",
+                "greedy",
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1373/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1730B",
+              "title": "Meeting on the Line",
+              "difficulty": 1600,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "geometry",
+                "greedy",
+                "implementation",
+                "math",
+                "ternary search"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1730/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1537E1",
+              "title": "Erase and Extend (Easy Version)",
+              "difficulty": 1600,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "brute force",
+                "dp",
+                "greedy",
+                "hashing",
+                "implementation",
+                "string suffix structures",
+                "strings",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1537/E1",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1513C",
+              "title": "Add One",
+              "difficulty": 1600,
+              "platform": "Codeforces",
+              "tags": [
+                "dp",
+                "matrices"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1513/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2063C",
+              "title": "Remove Exactly Two",
+              "difficulty": 1600,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "data structures",
+                "dfs and similar",
+                "dp",
+                "graphs",
+                "greedy",
+                "sortings",
+                "trees"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2063/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1175B",
+              "title": "Catch Overflow!",
+              "difficulty": 1600,
+              "platform": "Codeforces",
+              "tags": [
+                "data structures",
+                "expression parsing",
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1175/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2040C",
+              "title": "Ordered Permutations",
+              "difficulty": 1600,
+              "platform": "Codeforces",
+              "tags": [
+                "bitmasks",
+                "combinatorics",
+                "constructive algorithms",
+                "greedy",
+                "math",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2040/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2061C",
+              "title": "Kevin and Puzzle",
+              "difficulty": 1600,
+              "platform": "Codeforces",
+              "tags": [
+                "2-sat",
+                "combinatorics",
+                "dp"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2061/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2162E",
+              "title": "Beautiful Palindromes",
+              "difficulty": 1600,
+              "platform": "Codeforces",
+              "tags": [
+                "constructive algorithms",
+                "greedy",
+                "schedules"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2162/E",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-346A",
+              "title": "Alice and Bob",
+              "difficulty": 1600,
+              "platform": "Codeforces",
+              "tags": [
+                "games",
+                "math",
+                "number theory"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/346/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2074E",
+              "title": "Empty Triangle",
+              "difficulty": 1600,
+              "platform": "Codeforces",
+              "tags": [
+                "geometry",
+                "interactive",
+                "probabilities"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2074/E",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level-1700",
+      "title": "Rating 1700",
+      "lectures": [
+        {
+          "id": "lec-1700",
+          "title": "Curated Top 12",
+          "tasks": [
+            {
+              "id": "cf-126B",
+              "title": "Password",
+              "difficulty": 1700,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "dp",
+                "hashing",
+                "string suffix structures",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/126/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1479A",
+              "title": "Searching Local Minimum",
+              "difficulty": 1700,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "interactive",
+                "ternary search"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1479/A",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-559B",
+              "title": "Equivalent Strings",
+              "difficulty": 1700,
+              "platform": "Codeforces",
+              "tags": [
+                "divide and conquer",
+                "hashing",
+                "sortings",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/559/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1550C",
+              "title": "Manhattan Subarrays",
+              "difficulty": 1700,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "geometry",
+                "greedy",
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1550/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-225C",
+              "title": "Barcode",
+              "difficulty": 1700,
+              "platform": "Codeforces",
+              "tags": [
+                "dp",
+                "matrices"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/225/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2031D",
+              "title": "Penchick and Desert Rabbit",
+              "difficulty": 1700,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "data structures",
+                "dfs and similar",
+                "dp",
+                "dsu",
+                "greedy",
+                "implementation",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2031/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1770C",
+              "title": "Koxia and Number Theory",
+              "difficulty": 1700,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "chinese remainder theorem",
+                "math",
+                "number theory"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1770/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1873H",
+              "title": "Mad City",
+              "difficulty": 1700,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "dsu",
+                "games",
+                "graphs",
+                "shortest paths",
+                "trees"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1873/H",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2072F",
+              "title": "Goodbye, Banker Life",
+              "difficulty": 1700,
+              "platform": "Codeforces",
+              "tags": [
+                "2-sat",
+                "bitmasks",
+                "combinatorics",
+                "constructive algorithms",
+                "fft",
+                "math",
+                "number theory"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2072/F",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2009F",
+              "title": "Firefly's Queries",
+              "difficulty": 1700,
+              "platform": "Codeforces",
+              "tags": [
+                "bitmasks",
+                "data structures",
+                "flows",
+                "math"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2009/F",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2044G1",
+              "title": "Medium Demon Problem (easy version)",
+              "difficulty": 1700,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "graph matchings",
+                "graphs",
+                "implementation",
+                "trees"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2044/G1",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1279D",
+              "title": "Santa's Bot",
+              "difficulty": 1700,
+              "platform": "Codeforces",
+              "tags": [
+                "combinatorics",
+                "math",
+                "probabilities"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1279/D",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level-1800",
+      "title": "Rating 1800",
+      "lectures": [
+        {
+          "id": "lec-1800",
+          "title": "Curated Top 12",
+          "tasks": [
+            {
+              "id": "cf-242C",
+              "title": "King's Path",
+              "difficulty": 1800,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "graphs",
+                "hashing",
+                "shortest paths"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/242/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1525D",
+              "title": "Armchairs",
+              "difficulty": 1800,
+              "platform": "Codeforces",
+              "tags": [
+                "dp",
+                "flows",
+                "graph matchings",
+                "greedy"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1525/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-471D",
+              "title": "MUH and Cube Walls",
+              "difficulty": 1800,
+              "platform": "Codeforces",
+              "tags": [
+                "string suffix structures",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/471/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1401D",
+              "title": "Maximum Distributed Tree",
+              "difficulty": 1800,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "dp",
+                "greedy",
+                "implementation",
+                "math",
+                "number theory",
+                "sortings",
+                "trees"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1401/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-888E",
+              "title": "Maximum Subsequence",
+              "difficulty": 1800,
+              "platform": "Codeforces",
+              "tags": [
+                "bitmasks",
+                "divide and conquer",
+                "meet-in-the-middle"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/888/E",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-148D",
+              "title": "Bag of mice",
+              "difficulty": 1800,
+              "platform": "Codeforces",
+              "tags": [
+                "dp",
+                "games",
+                "math",
+                "probabilities"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/148/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1316C",
+              "title": "Primitive Primes",
+              "difficulty": 1800,
+              "platform": "Codeforces",
+              "tags": [
+                "constructive algorithms",
+                "math",
+                "ternary search"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1316/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1290B",
+              "title": "Irreducible Anagrams",
+              "difficulty": 1800,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "constructive algorithms",
+                "data structures",
+                "strings",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1290/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-687B",
+              "title": "Remainders Game",
+              "difficulty": 1800,
+              "platform": "Codeforces",
+              "tags": [
+                "chinese remainder theorem",
+                "math",
+                "number theory"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/687/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2155D",
+              "title": "Batteries",
+              "difficulty": 1800,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "constructive algorithms",
+                "graph matchings",
+                "graphs",
+                "interactive",
+                "math"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2155/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2184E",
+              "title": "Exquisite Array",
+              "difficulty": 1800,
+              "platform": "Codeforces",
+              "tags": [
+                "combinatorics",
+                "data structures",
+                "dsu",
+                "sortings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2184/E",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1299B",
+              "title": "Aerodynamic",
+              "difficulty": 1800,
+              "platform": "Codeforces",
+              "tags": [
+                "geometry"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1299/B",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level-1900",
+      "title": "Rating 1900",
+      "lectures": [
+        {
+          "id": "lec-1900",
+          "title": "Curated Top 12",
+          "tasks": [
+            {
+              "id": "cf-20C",
+              "title": "Dijkstra?",
+              "difficulty": 1900,
+              "platform": "Codeforces",
+              "tags": [
+                "graphs",
+                "shortest paths"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/20/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1036C",
+              "title": "Classy Numbers",
+              "difficulty": 1900,
+              "platform": "Codeforces",
+              "tags": [
+                "combinatorics",
+                "dp"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1036/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1620E",
+              "title": "Replace the Numbers",
+              "difficulty": 1900,
+              "platform": "Codeforces",
+              "tags": [
+                "constructive algorithms",
+                "data structures",
+                "dsu",
+                "implementation"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1620/E",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1285D",
+              "title": "Dr. Evil Underscores",
+              "difficulty": 1900,
+              "platform": "Codeforces",
+              "tags": [
+                "bitmasks",
+                "brute force",
+                "dfs and similar",
+                "divide and conquer",
+                "dp",
+                "greedy",
+                "strings",
+                "trees"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1285/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1895D",
+              "title": "XOR Construction",
+              "difficulty": 1900,
+              "platform": "Codeforces",
+              "tags": [
+                "bitmasks",
+                "constructive algorithms",
+                "data structures",
+                "math",
+                "string suffix structures",
+                "trees"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1895/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1214D",
+              "title": "Treasure Island",
+              "difficulty": 1900,
+              "platform": "Codeforces",
+              "tags": [
+                "dfs and similar",
+                "dp",
+                "flows",
+                "hashing"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1214/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1470B",
+              "title": "Strange Definition",
+              "difficulty": 1900,
+              "platform": "Codeforces",
+              "tags": [
+                "bitmasks",
+                "graphs",
+                "hashing",
+                "math",
+                "number theory"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1470/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-540D",
+              "title": "Bad Luck Island",
+              "difficulty": 1900,
+              "platform": "Codeforces",
+              "tags": [
+                "dp",
+                "probabilities"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/540/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1342D",
+              "title": "Multiple Testcases",
+              "difficulty": 1900,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "constructive algorithms",
+                "data structures",
+                "greedy",
+                "sortings",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1342/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1475F",
+              "title": "Unusual Matrix",
+              "difficulty": 1900,
+              "platform": "Codeforces",
+              "tags": [
+                "2-sat",
+                "brute force",
+                "constructive algorithms"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1475/F",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1119E",
+              "title": "Pavel and Triangles",
+              "difficulty": 1900,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "dp",
+                "fft",
+                "greedy",
+                "ternary search"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1119/E",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1991E",
+              "title": "Coloring Game",
+              "difficulty": 1900,
+              "platform": "Codeforces",
+              "tags": [
+                "constructive algorithms",
+                "dfs and similar",
+                "games",
+                "graphs",
+                "greedy",
+                "interactive"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1991/E",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level-2000",
+      "title": "Rating 2000",
+      "lectures": [
+        {
+          "id": "lec-2000",
+          "title": "Curated Top 12",
+          "tasks": [
+            {
+              "id": "cf-380C",
+              "title": "Sereja and Brackets",
+              "difficulty": 2000,
+              "platform": "Codeforces",
+              "tags": [
+                "data structures",
+                "schedules"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/380/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2B",
+              "title": "The least round way",
+              "difficulty": 2000,
+              "platform": "Codeforces",
+              "tags": [
+                "dp",
+                "math"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1438C",
+              "title": "Engineer Artem",
+              "difficulty": 2000,
+              "platform": "Codeforces",
+              "tags": [
+                "2-sat",
+                "chinese remainder theorem",
+                "constructive algorithms",
+                "fft",
+                "flows"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1438/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-449B",
+              "title": "Jzzhu and Cities",
+              "difficulty": 2000,
+              "platform": "Codeforces",
+              "tags": [
+                "graphs",
+                "greedy",
+                "shortest paths"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/449/B",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1200E",
+              "title": "Compress Words",
+              "difficulty": 2000,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "hashing",
+                "implementation",
+                "string suffix structures",
+                "strings"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1200/E",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-920F",
+              "title": "SUM and REPLACE",
+              "difficulty": 2000,
+              "platform": "Codeforces",
+              "tags": [
+                "brute force",
+                "data structures",
+                "dsu",
+                "number theory"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/920/F",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1454E",
+              "title": "Number of Simple Paths",
+              "difficulty": 2000,
+              "platform": "Codeforces",
+              "tags": [
+                "combinatorics",
+                "dfs and similar",
+                "graphs",
+                "trees"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1454/E",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2057D",
+              "title": "Gifts Order",
+              "difficulty": 2000,
+              "platform": "Codeforces",
+              "tags": [
+                "data structures",
+                "greedy",
+                "implementation",
+                "math",
+                "matrices"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2057/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2085D",
+              "title": "Serval and Kaitenzushi Buffet",
+              "difficulty": 2000,
+              "platform": "Codeforces",
+              "tags": [
+                "data structures",
+                "graph matchings",
+                "greedy"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2085/D",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1753C",
+              "title": "Wish I Knew How to Sort",
+              "difficulty": 2000,
+              "platform": "Codeforces",
+              "tags": [
+                "dp",
+                "math",
+                "probabilities"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1753/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-1416C",
+              "title": "XOR Inverse",
+              "difficulty": 2000,
+              "platform": "Codeforces",
+              "tags": [
+                "bitmasks",
+                "data structures",
+                "divide and conquer",
+                "dp",
+                "greedy",
+                "math",
+                "sortings",
+                "strings",
+                "trees"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/1416/C",
+              "ytLink": ""
+            },
+            {
+              "id": "cf-2063D",
+              "title": "Game With Triangles",
+              "difficulty": 2000,
+              "platform": "Codeforces",
+              "tags": [
+                "binary search",
+                "brute force",
+                "data structures",
+                "geometry",
+                "greedy",
+                "implementation",
+                "math",
+                "ternary search",
+                "two pointers"
+              ],
+              "practiceLink": "https://codeforces.com/problemset/problem/2063/D",
+              "ytLink": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

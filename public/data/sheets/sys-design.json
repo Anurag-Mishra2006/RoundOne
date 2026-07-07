@@ -1,0 +1,35 @@
+{
+  "steps": [
+    {
+      "id": "sys-step-1",
+      "title": "System Design Fundamentals",
+      "lectures": [
+        {
+          "id": "sys-1",
+          "title": "Core Building Blocks",
+          "tasks": [
+            { "id": "sd-1", "title": "Load Balancing", "difficulty": "Medium", "platform": "YouTube", "practiceLink": "https://www.youtube.com/watch?v=K0Ta65OqQkY", "ytLink": "https://www.youtube.com/watch?v=K0Ta65OqQkY" },
+            { "id": "sd-2", "title": "Caching Strategies (Redis/Memcached)", "difficulty": "Medium", "platform": "YouTube", "practiceLink": "https://www.youtube.com/watch?v=dGAgxozNWFE", "ytLink": "https://www.youtube.com/watch?v=dGAgxozNWFE" },
+            { "id": "sd-3", "title": "Database Sharding & Partitioning", "difficulty": "Hard", "platform": "YouTube", "practiceLink": "https://www.youtube.com/watch?v=5faMjKuB9bc", "ytLink": "https://www.youtube.com/watch?v=5faMjKuB9bc" },
+            { "id": "sd-4", "title": "CAP Theorem", "difficulty": "Hard", "platform": "Article", "practiceLink": "https://en.wikipedia.org/wiki/CAP_theorem", "ytLink": "https://www.youtube.com/watch?v=k-YAQ8AFkAw" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sys-step-2",
+      "title": "Real World Case Studies",
+      "lectures": [
+        {
+          "id": "sys-2",
+          "title": "Architecting FAANG Apps",
+          "tasks": [
+            { "id": "sd-5", "title": "Design a URL Shortener (TinyURL)", "difficulty": "Medium", "platform": "YouTube", "practiceLink": "https://www.youtube.com/watch?v=fMZB5mtDPOc", "ytLink": "https://www.youtube.com/watch?v=fMZB5mtDPOc" },
+            { "id": "sd-6", "title": "Design Netflix (Video Streaming)", "difficulty": "Hard", "platform": "YouTube", "practiceLink": "https://www.youtube.com/watch?v=psQzyFfsUGU", "ytLink": "https://www.youtube.com/watch?v=psQzyFfsUGU" },
+            { "id": "sd-7", "title": "Design WhatsApp (Real-time Chat)", "difficulty": "Hard", "platform": "YouTube", "practiceLink": "https://www.youtube.com/watch?v=vvhC64hQZMk", "ytLink": "https://www.youtube.com/watch?v=vvhC64hQZMk" }
+          ]
+        }
+      ]
+    }
+  ]
+}
