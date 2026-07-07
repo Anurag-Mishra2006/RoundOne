@@ -13,6 +13,7 @@ import useUserStore from './store/authStore'
 import { useEffect, useState } from 'react'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
+import Review from './pages/Review'
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
           <Route path='/feedback' element={<Feedback />} />
           <Route path='/ats-check' element={<AtsChecker />} />
           <Route path='/' element={<Home />} />
+          <Route path='/review/:id' element={<Review />}/>
         </Routes>
       </BrowserRouter>
     </>

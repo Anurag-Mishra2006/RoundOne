@@ -130,9 +130,12 @@ function Dashboard() {
                         </p>
                       </div>
                       {/* In the future, we can make this button open the specific feedback page! */}
-                      <button disabled className="px-4 py-2 bg-[var(--bg)] border border-[var(--border)] text-sm text-[var(--text-muted)] rounded-md cursor-not-allowed">
+                      <button 
+                        onClick={() => navigate(`/review/${session.id}`, { state: { session } })} 
+                        className="px-4 py-2 bg-[var(--accent)] text-white text-sm rounded-md hover:bg-[var(--accent-hover)] transition-colors"
+                    >
                         Review
-                      </button>
+                    </button>
                     </div>
                   </div>
                 ))}
