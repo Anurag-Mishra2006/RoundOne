@@ -78,18 +78,8 @@ function LearningSheet() {
     }
   };
 
-  const renderPlatform = (platform: string) => {
-    if (platform === "LeetCode") return <span className="text-yellow-500 font-bold text-xs">LC</span>;
-    if (platform === "GFG") return <span className="text-green-500 font-bold text-xs">GFG</span>;
-    if (platform === "Codeforces") return <span className="text-blue-500 font-bold text-xs">CF</span>;
-    if (platform === "YouTube") return <span className="text-red-500 font-bold text-xs">YT</span>;
-    if (platform === "Article") return <span className="text-gray-400 font-bold text-xs">DOC</span>;
-    return <span className="text-gray-400 font-bold text-xs">{platform}</span>;
-  };
-
   if (!data) return null;
 
-  const activeSheetMeta = data.sheets.find((s: any) => s.id === activeSheetId) || data.sheets[0];
   const safeCompletedTasks = completedTasks ?? [];
 
   return (
