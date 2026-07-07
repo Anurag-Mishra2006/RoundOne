@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import useUserStore from "@/store/authStore";
 import { getInterviewHistory } from "@/services/api";
-import ActivityHeatmap from "@/components/ActivityHeatmap"
+import ActivityHeatmap from "@/components/ActivityHeatmap";
 
 interface Session {
     id: string;
@@ -22,6 +22,7 @@ function Dashboard() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [copiedId, setCopiedId] = useState<string | null>(null);
+
     useEffect(() => {
         const fetchHistory = async () => {
             try {
@@ -49,14 +50,16 @@ function Dashboard() {
             month: "short", day: "numeric", year: "numeric"
         });
     };
+
     const handleShare = (sessionId: string) => {
-        // Generate the full URL (  https://round-one-frontend.vercel.app/report/12345)
+        // Generate the full URL (e.g., https://round-one-frontend.vercel.app/report/12345)
         const shareUrl = `${window.location.origin}/report/${sessionId}`;
         navigator.clipboard.writeText(shareUrl);
 
         setCopiedId(sessionId);
         setTimeout(() => setCopiedId(null), 2000);
     };
+
     return (
         <>
             <Navbar />
@@ -103,8 +106,10 @@ function Dashboard() {
                             </button>
                         </div>
                     </div>
-                    {/* Activity Heat  Map */}
+
+                    {/* Activity Heat Map */}
                     <ActivityHeatmap sessions={sessions} />
+
                     {/* Interview History List */}
                     <div>
                         <h2 className="text-xl font-bold text-[var(--text)] mb-4">Recent Interviews</h2>
@@ -124,6 +129,8 @@ function Dashboard() {
                             <div className="space-y-3">
                                 {sessions.map((session) => (
                                     <div key={session.id} className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-lg flex flex-col md:flex-row md:items-center justify-between hover:border-[var(--accent)]/50 transition-colors">
+                                        
+                                        {/* Left Side: Info */}
                                         <div>
                                             <h3 className="text-lg font-bold text-[var(--text)]">{session.company} <span className="text-[var(--text-muted)] text-sm font-normal ml-2">• {session.role}</span></h3>
                                             <p className="text-sm text-[var(--text-muted)] mt-1">
@@ -131,39 +138,33 @@ function Dashboard() {
                                             </p>
                                         </div>
 
-                                        <div className="mt-4 md:mt-0 flex items-center gap-6">
-                                            <div className="text-right">
+                                        {/* Right Side: Score & Buttons */}
+                                        <div className="mt-4 md:mt-0 flex flex-col md:flex-row items-center gap-4">
+                                            <div className="text-center md:text-right">
                                                 <p className="text-xs text-[var(--text-muted)] uppercase tracking-wider mb-1">Score</p>
-                                                <p className={`font-bold ${session.totalScore >= 80 ? 'text-[var(--success)]' : session.totalScore >= 50 ? 'text-[var(--warning)]' : 'text-[var(--danger)]'}`}>
+                                                <p className={`font-bold text-lg ${session.totalScore >= 80 ? 'text-[var(--success)]' : session.totalScore >= 50 ? 'text-[var(--warning)]' : 'text-[var(--danger)]'}`}>
                                                     {session.totalScore} / 110
                                                 </p>
                                             </div>
-                                            {/* In the future, we can make this button open the specific feedback page! */}
-                                            <div className="mt-4 md:mt-0 flex flex-col md:flex-row items-center gap-4">
-                                                <div className="text-center md:text-right">
-                                                    <p className="text-xs text-[var(--text-muted)] uppercase tracking-wider mb-1">Score</p>
-                                                    <p className={`font-bold text-lg ${session.totalScore >= 80 ? 'text-[var(--success)]' : session.totalScore >= 50 ? 'text-[var(--warning)]' : 'text-[var(--danger)]'}`}>
-                                                        {session.totalScore} / 110
-                                                    </p>
-                                                </div>
-                                                <div className="flex gap-2 w-full md:w-auto">
-                                                    {/* THE NEW SHARE BUTTON */}
-                                                    <button
-                                                        onClick={() => handleShare(session.id)}
-                                                        className="flex-1 md:flex-none px-4 py-2 bg-[var(--surface)] border border-[var(--border)] text-sm text-[var(--text)] rounded-md hover:bg-[var(--bg)] transition-colors flex items-center justify-center gap-2"
-                                                    >
-                                                        {copiedId === session.id ? "✓ Copied" : "🔗 Share"}
-                                                    </button>
+                                            <div className="flex gap-2 w-full md:w-auto">
+                                                {/* Share Button */}
+                                                <button
+                                                    onClick={() => handleShare(session.id)}
+                                                    className="flex-1 md:flex-none px-4 py-2 bg-[var(--surface)] border border-[var(--border)] text-sm text-[var(--text)] rounded-md hover:bg-[var(--bg)] transition-colors flex items-center justify-center gap-2"
+                                                >
+                                                    {copiedId === session.id ? "✓ Copied" : "🔗 Share"}
+                                                </button>
 
-                                                    <button
-                                                        onClick={() => navigate(`/review/${session.id}`, { state: { session } })}
-                                                        className="flex-1 md:flex-none px-4 py-2 bg-[var(--accent)] text-white text-sm rounded-md hover:bg-[var(--accent-hover)] transition-colors"
-                                                    >
-                                                        Review
-                                                    </button>
-                                                </div>
+                                                {/* Review Button */}
+                                                <button
+                                                    onClick={() => navigate(`/review/${session.id}`, { state: { session } })}
+                                                    className="flex-1 md:flex-none px-4 py-2 bg-[var(--accent)] text-white text-sm rounded-md hover:bg-[var(--accent-hover)] transition-colors"
+                                                >
+                                                    Review
+                                                </button>
                                             </div>
                                         </div>
+
                                     </div>
                                 ))}
                             </div>
