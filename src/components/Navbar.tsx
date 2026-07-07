@@ -70,6 +70,9 @@ function Navbar() {
             >
               ATS Checker
             </Link>
+             <Link to="/learning" className={`transition-colors ${isActive('/learning') ? 'text-[var(--accent)]' : 'text-[var(--text-muted)] hover:text-[var(--text)]'}`}>
+              Learning Hub
+            </Link>
           </div>
         )}
       </div>
