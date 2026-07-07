@@ -78,6 +78,9 @@ export const saveSessionToDb = async (data: any) => {
 export const getInterviewHistory = async () => {
     return await api.get("/interview/history");
 };
+export const getPublicReport = async (id: string) => {
+    return await api.get(`/interview/report/${id}`);
+};
 
 // code run
 export const runCode = async(data: {language: string, code: string, testCases: {input: string; output: string}[]})=>{

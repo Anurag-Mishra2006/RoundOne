@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Review from './pages/Review'
+import PublicReport from './pages/PublicReport'
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
           <Route path='/ats-check' element={<AtsChecker />} />
           <Route path='/' element={<Home />} />
           <Route path='/review/:id' element={<Review />}/>
+          <Route path='/report/:id' element={<PublicReport />} />
         </Routes>
       </BrowserRouter>
     </>
