@@ -120,7 +120,6 @@ function Login() {
             <div className="flex flex-col gap-2">
               <div className="flex justify-between items-center">
                   <label className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">Password</label>
-                  {/* Removed the 'forgot password' link to keep it functional for your MVP */}
               </div>
               <input
                 value={password}
