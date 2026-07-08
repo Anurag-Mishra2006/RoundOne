@@ -1,6 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
-
 import "./App.css";
 
 import Home from "./pages/Home";
@@ -30,7 +29,6 @@ function App() {
     const checkAuthStatus = async () => {
       try {
         const response = await getMe();
-
         if (response.status === 200) {
           setUser(response.data.user);
         }
@@ -40,17 +38,9 @@ function App() {
         setIsAuthCheck(false);
       }
     };
-
     checkAuthStatus();
   }, [setUser, clearUser]);
 
-  if (isAuthCheck) {
-    return (
-      <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center text-[var(--text)]">
-        Loading...
-      </div>
-    );
-  }
 
   return (
     <BrowserRouter>
@@ -59,107 +49,30 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/report/:id" element={<PublicReport />} />
 
-        {/* Auth Routes */}
-        <Route
-          path="/register"
-          element={
-            isAuthenticate ? <Navigate to="/dashboard" replace /> : <Registration />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            isAuthenticate ? <Navigate to="/dashboard" replace /> : <Login />
-          }
-        />
-        <Route
-          path="/verify-otp"
-          element={
-            isAuthenticate ? <Navigate to="/dashboard" replace /> : <VerifyOtp />
-          }
-        />
+        {/* Auth Routes - We show a small loader if checking, otherwise bypass to dashboard! */}
+        <Route path="/register" element={
+            isAuthCheck ? <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center"><div className="w-8 h-8 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin"></div></div> 
+            : isAuthenticate ? <Navigate to="/dashboard" replace /> : <Registration />
+        }/>
+        <Route path="/login" element={
+            isAuthCheck ? <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center"><div className="w-8 h-8 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin"></div></div> 
+            : isAuthenticate ? <Navigate to="/dashboard" replace /> : <Login />
+        }/>
+        <Route path="/verify-otp" element={
+            isAuthCheck ? <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center"><div className="w-8 h-8 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin"></div></div> 
+            : isAuthenticate ? <Navigate to="/dashboard" replace /> : <VerifyOtp />
+        }/>
 
         {/* Protected Routes */}
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/resume-upload"
-          element={
-            <ProtectedRoute>
-              <ResumeUpload />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/onboarding"
-          element={
-            <ProtectedRoute>
-              <Onboarding />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/interview"
-          element={
-            <ProtectedRoute>
-              <Interview />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/feedback"
-          element={
-            <ProtectedRoute>
-              <Feedback />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/ats-check"
-          element={
-            <ProtectedRoute>
-              <AtsChecker />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/review/:id"
-          element={
-            <ProtectedRoute>
-              <Review />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/learning"
-          element={
-            <ProtectedRoute>
-              <LearningHub />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/learning/:categoryId"
-          element={
-            <ProtectedRoute>
-              <LearningSheet />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/dashboard" element={<ProtectedRoute isAuthCheck={isAuthCheck}><Dashboard /></ProtectedRoute>} />
+        <Route path="/resume-upload" element={<ProtectedRoute isAuthCheck={isAuthCheck}><ResumeUpload /></ProtectedRoute>} />
+        <Route path="/onboarding" element={<ProtectedRoute isAuthCheck={isAuthCheck}><Onboarding /></ProtectedRoute>} />
+        <Route path="/interview" element={<ProtectedRoute isAuthCheck={isAuthCheck}><Interview /></ProtectedRoute>} />
+        <Route path="/feedback" element={<ProtectedRoute isAuthCheck={isAuthCheck}><Feedback /></ProtectedRoute>} />
+        <Route path="/ats-check" element={<ProtectedRoute isAuthCheck={isAuthCheck}><AtsChecker /></ProtectedRoute>} />
+        <Route path="/review/:id" element={<ProtectedRoute isAuthCheck={isAuthCheck}><Review /></ProtectedRoute>} />
+        <Route path="/learning" element={<ProtectedRoute isAuthCheck={isAuthCheck}><LearningHub /></ProtectedRoute>} />
+        <Route path="/learning/:categoryId" element={<ProtectedRoute isAuthCheck={isAuthCheck}><LearningSheet /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );
