@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { checkAtsResume } from "../services/api.js";
+import { checkAtsResume } from "@/services/api";
 import Navbar from '@/components/Navbar.js';
 import { motion, type Variants } from 'framer-motion';
 
