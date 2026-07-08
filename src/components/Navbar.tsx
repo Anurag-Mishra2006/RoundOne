@@ -5,6 +5,7 @@ import { logout } from "@/services/api";
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
+
   const { user, clearUser } = useUserStore();
 
   const handleLogout = async () => {
@@ -18,59 +19,56 @@ function Navbar() {
     }
   };
 
-  // Returns true if the current route matches the given path
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (paths: string[]) =>
+    paths.some((path) => location.pathname.startsWith(path));
 
-  // Routes that belong to the Mock Interview flow
-  const interviewRoutes = [
-    "/resume-upload",
-    "/onboarding",
-    "/interview",
-  ];
-
-  const isInterviewPage = interviewRoutes.includes(location.pathname);
-
-  const navLinkClasses = (active: boolean) =>
+  const navClass = (paths: string[]) =>
     `transition-colors ${
-      active
+      isActive(paths)
         ? "text-[var(--accent)]"
         : "text-[var(--text-muted)] hover:text-[var(--text)]"
     }`;
 
   return (
-    <nav className="w-full border-b border-[var(--border)] bg-[var(--surface)] px-6 py-3 flex items-center justify-between">
+    <nav className="relative z-50 flex w-full items-center justify-between border-b border-[var(--border)] bg-[var(--surface)] px-6 py-3">
       {/* Left */}
       <div className="flex items-center gap-8">
-        <Link
-          to="/dashboard"
-          className="text-lg font-bold text-[var(--accent)]"
+        <button
+          type="button"
+          onClick={() => navigate("/dashboard")}
+          className="flex items-center gap-2"
         >
-          RoundOne
-        </Link>
+          <div className="flex h-6 w-6 items-center justify-center rounded bg-gradient-to-br from-[var(--accent)] to-purple-800 text-xs font-bold text-white">
+            R
+          </div>
+
+          <span className="hidden text-lg font-bold text-[var(--accent)] sm:block">
+            RoundOne
+          </span>
+        </button>
 
         {user && (
-          <div className="hidden md:flex items-center gap-6 text-sm font-medium">
-            <Link
-              to="/dashboard"
-              className={navLinkClasses(isActive("/dashboard"))}
-            >
+          <div className="hidden items-center gap-6 text-sm font-medium md:flex">
+            <Link to="/dashboard" className={navClass(["/dashboard"])}>
               Dashboard
             </Link>
 
             <Link
               to="/resume-upload"
-              className={navLinkClasses(isInterviewPage)}
+              className={navClass([
+                "/resume-upload",
+                "/onboarding",
+                "/interview",
+              ])}
             >
               Mock Interview
             </Link>
 
-            <Link
-              to="/ats-check"
-              className={navLinkClasses(isActive("/ats-check"))}
-            >
+            <Link to="/ats-check" className={navClass(["/ats-check"])}>
               ATS Checker
             </Link>
-             <Link to="/learning" className={`transition-colors ${isActive('/learning') ? 'text-[var(--accent)]' : 'text-[var(--text-muted)] hover:text-[var(--text)]'}`}>
+
+            <Link to="/learning" className={navClass(["/learning"])}>
               Learning Hub
             </Link>
           </div>
@@ -81,11 +79,22 @@ function Navbar() {
       <div className="flex items-center gap-4">
         {user && (
           <>
+            <a
+              href="https://buymeachai.ezee.li/supreme_1"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Buy me a Chai ☕"
+              className="hidden h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--bg)] text-lg transition-colors hover:border-orange-500 hover:bg-orange-500/10 sm:flex"
+            >
+              ☕
+            </a>
+
             <span className="rounded-full border border-[var(--border)] bg-[var(--bg)] px-3 py-1 text-sm font-medium text-[var(--text)]">
-              {user.name?.trim().split(" ")[0] ?? "User"}
+              {user.name.split(" ")[0]}
             </span>
 
             <button
+              type="button"
               onClick={handleLogout}
               className="text-sm font-medium text-[var(--danger)] transition-colors hover:text-[var(--danger)]/80"
             >
