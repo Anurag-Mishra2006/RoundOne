@@ -1,9 +1,10 @@
 import { Navigate } from "react-router-dom";
+import type { ReactNode } from "react";
 import useUserStore from "@/store/authStore";
 
 interface ProtectedRouteProps {
-  children: JSX.Element;
-  isAuthCheck: boolean; // We add this!
+  children: ReactNode;
+  isAuthCheck: boolean;  
 }
 
 const ProtectedRoute = ({ children, isAuthCheck }: ProtectedRouteProps) => {

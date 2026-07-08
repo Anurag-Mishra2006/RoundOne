@@ -307,7 +307,7 @@ function AtsChecker() {
                                 <motion.div variants={itemVariants}>
                                     <h3 className="text-sm font-bold text-[var(--text)] uppercase tracking-wider mb-4 pl-1">Category Breakdown</h3>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        {Object.entries(result.sectionScores).map(([key, data]: [string, any], index) => {
+                                        {Object.entries(result.sectionScores).map(([key, data]: [string, any])  => {
                                             const score = typeof data === 'number' ? data : data?.score || 0;
                                             const feedback = typeof data === 'number' ? "Score assigned based on overall ATS parsability." : data?.feedback;
 
