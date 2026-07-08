@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
-import { learningData } from "../data/learningSheet";
+import { learningData } from "../data/learningSheet"; // Make sure path is correct!
 import { getProgress, toggleProgress } from "@/services/api";
 
 function LearningSheet() {
@@ -10,14 +10,14 @@ function LearningSheet() {
 
   const data = categoryId ? learningData[categoryId] : null;
 
-  // Track which sheet in the category is currently active (e.g., Striver vs Blind 75)
+  // Track which sheet in the category is currently active  
   const [activeSheetId, setActiveSheetId] = useState<string>("");
   const [sheetData, setSheetData] = useState<any>(null);
 
   const [completedTasks, setCompletedTasks] = useState<string[]>([]);
   const [loadingProgress, setLoadingProgress] = useState(true);
   const [loadingSheet, setLoadingSheet] = useState(true);
-  
+
   const [expandedLectures, setExpandedLectures] = useState<Record<string, boolean>>({});
 
   // 1. Set the initial active sheet when the page loads
@@ -36,16 +36,16 @@ function LearningSheet() {
     const fetchSheetAndProgress = async () => {
       setLoadingSheet(true);
       setLoadingProgress(true);
-      
+
       try {
         // Fetch the massive JSON file from our public folder!
         const sheetResponse = await fetch(`/data/sheets/${activeSheetId}.json`);
         if (sheetResponse.ok) {
-            const json = await sheetResponse.json();
-            setSheetData(json);
+          const json = await sheetResponse.json();
+          setSheetData(json);
         } else {
-            console.error("JSON file not found in public/data/sheets/");
-            setSheetData(null);
+          console.error("JSON file not found in public/data/sheets/");
+          setSheetData(null);
         }
 
         // Fetch user progress from PostgreSQL
@@ -78,51 +78,95 @@ function LearningSheet() {
     }
   };
 
+
+
   if (!data) return null;
 
+  const activeSheetMeta = data.sheets.find((s: any) => s.id === activeSheetId) || data.sheets[0];
   const safeCompletedTasks = completedTasks ?? [];
+
+  // --- NEW: Calculate Total Sheet Progress ---
+  let totalSheetProblems = 0;
+  let totalSheetCompleted = 0;
+
+  if (sheetData && sheetData.steps) {
+    const allSheetTaskIds = sheetData.steps.flatMap((step: any) =>
+      step.lectures.flatMap((lec: any) => lec.tasks.map((t: any) => t.id))
+    );
+    totalSheetProblems = allSheetTaskIds.length;
+    totalSheetCompleted = allSheetTaskIds.filter((id: string) => safeCompletedTasks.includes(id)).length;
+  }
+  // -----------------------------------------
 
   return (
     <>
       <Navbar />
       <div className="min-h-screen bg-[#0d0d0d] px-4 py-10 font-sans text-gray-200">
         <div className="mx-auto max-w-6xl">
-          
+
           <div className="mb-6">
             <button onClick={() => navigate("/learning")} className="text-gray-500 hover:text-gray-300 text-sm font-medium mb-4 flex items-center gap-2 transition-colors">
               ← Back to Hub
             </button>
-            <h1 className="mb-2 text-3xl font-bold text-white">{data.title}</h1>
-            <p className="text-sm text-gray-400">{data.description}</p>
           </div>
 
           {/* TAB MENU: Switch between Striver, Blind 75, etc. */}
           {data.sheets.length > 1 && (
-            <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
-                {data.sheets.map((sheet: any) => (
-                    <button 
-                        key={sheet.id}
-                        onClick={() => setActiveSheetId(sheet.id)}
-                        className={`px-5 py-2.5 rounded-lg text-sm font-bold whitespace-nowrap transition-colors border ${
-                            activeSheetId === sheet.id 
-                            ? 'bg-[#ff4a1c]/10 text-[#ff4a1c] border-[#ff4a1c]/50' 
-                            : 'bg-[#1a1a1a] text-gray-400 border-[#2a2a2a] hover:bg-[#252525]'
-                        }`}
-                    >
-                        {sheet.name}
-                    </button>
-                ))}
+            <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
+              {data.sheets.map((sheet: any) => (
+                <button
+                  key={sheet.id}
+                  onClick={() => setActiveSheetId(sheet.id)}
+                  className={`px-5 py-2.5 rounded-lg text-sm font-bold whitespace-nowrap transition-colors border ${activeSheetId === sheet.id
+                      ? 'bg-[#ff4a1c]/10 text-[#ff4a1c] border-[#ff4a1c]/50'
+                      : 'bg-[#1a1a1a] text-gray-400 border-[#2a2a2a] hover:bg-[#252525]'
+                    }`}
+                >
+                  {sheet.name}
+                </button>
+              ))}
             </div>
           )}
 
           {loadingSheet || loadingProgress ? (
-              <div className="text-center py-20 text-gray-500 animate-pulse">Loading sheet data...</div>
+            <div className="text-center py-20 text-gray-500 animate-pulse">Loading sheet data...</div>
           ) : !sheetData ? (
-              <div className="text-center py-20 text-red-500 bg-red-500/10 rounded-lg border border-red-500/20">
-                  Data file for this sheet is missing. Make sure <b>public/data/sheets/{activeSheetId}.json</b> exists!
-              </div>
+            <div className="text-center py-20 text-red-500 bg-red-500/10 rounded-lg border border-red-500/20">
+              Data file for this sheet is missing. Make sure <b>public/data/sheets/{activeSheetId}.json</b> exists!
+            </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-6">
+
+              {/*  CODOLIO STYLE HERO CARD */}
+              <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl p-8 relative overflow-hidden flex flex-col md:flex-row justify-between items-center gap-8">
+                <div className="flex-1">
+                  <h1 className="text-3xl font-extrabold text-white mb-3">{activeSheetMeta.name}</h1>
+                  <p className="text-sm text-gray-400 leading-relaxed max-w-2xl">
+                    {data.description} Follow this structured roadmap from top to bottom. Click the checkboxes to track your progress, which automatically syncs to your global Heatmap!
+                  </p>
+                </div>
+                
+                {/* The Giant Score Circle */}
+                <div className="shrink-0 flex flex-col items-center justify-center w-32 h-32 rounded-full border-4 border-[#2a2a2a] bg-[#0d0d0d] shadow-[0_0_20px_rgba(255,74,28,0.15)] relative">
+                  {/* Subtle glowing ring based on progress */}
+                  <svg className="absolute inset-0 w-full h-full transform -rotate-90 pointer-events-none">
+                    <circle cx="60" cy="60" r="58" stroke="transparent" strokeWidth="4" fill="none" />
+                    <circle 
+                      cx="60" cy="60" r="58" 
+                      stroke="#ff4a1c" 
+                      strokeWidth="4" fill="none" 
+                      strokeDasharray="364" 
+                      strokeDashoffset={364 - (364 * (totalSheetProblems === 0 ? 0 : totalSheetCompleted / totalSheetProblems))}
+                      className="transition-all duration-1000 ease-out opacity-50"
+                    />
+                  </svg>
+                  <span className="text-3xl font-extrabold text-white">{totalSheetCompleted}</span>
+                  <div className="w-12 h-px bg-gray-700 my-1"></div>
+                  <span className="text-sm font-bold text-gray-500">{totalSheetProblems}</span>
+                </div>
+              </div>
+
+              {/* The Steps Accordion */}
               {sheetData.steps.map((step: any) => {
                 const allTaskIds = step.lectures.flatMap((lecture: any) => lecture.tasks.map((task: any) => task.id));
                 const completedCount = allTaskIds.filter((id: string) => safeCompletedTasks.includes(id)).length;
