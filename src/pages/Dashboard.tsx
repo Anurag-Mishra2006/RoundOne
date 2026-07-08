@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import useUserStore from "@/store/authStore";
 import { getInterviewHistory } from "@/services/api";
 import ActivityHeatmap from "@/components/ActivityHeatmap";
-import { motion } from "framer-motion"; // <-- Added Framer Motion
+import { motion, type Variants } from "framer-motion"; // <-- Added Framer Motion
 
 interface Session {
     id: string;
@@ -58,11 +58,11 @@ function Dashboard() {
     };
 
     // --- Animation Variants ---
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
     };
-    const itemVariants = {
+    const itemVariants: Variants = {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
     };
