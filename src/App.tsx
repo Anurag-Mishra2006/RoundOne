@@ -16,11 +16,14 @@ import Review from "./pages/Review";
 import PublicReport from "./pages/PublicReport";
 import LearningHub from "./pages/LearningHub";
 import LearningSheet from "./pages/LearningSheet";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 import { getMe } from "./services/api";
 import useUserStore from "./store/authStore";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Privacy from "./pages/Privacy";
+import VerifyResetOtp from "./pages/VerifyResetPassword";
 
 function App() {
   const { isAuthenticate, setUser, clearUser } = useUserStore();
@@ -42,6 +45,20 @@ function App() {
     checkAuthStatus();
   }, [setUser, clearUser]);
 
+  // Shared loader/redirect logic for public-only auth routes (login, register, otp, reset flow)
+  const renderAuthRoute = (element: React.ReactNode) => {
+    if (isAuthCheck) {
+      return (
+        <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center">
+          <div className="w-8 h-8 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      );
+    }
+    if (isAuthenticate) {
+      return <Navigate to="/dashboard" replace />;
+    }
+    return element;
+  };
 
   return (
     <BrowserRouter>
@@ -49,20 +66,15 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/report/:id" element={<PublicReport />} />
-        <Route path="/privacy"  element={<Privacy />}/>
+        <Route path="/privacy" element={<Privacy />} />
+
         {/* Auth Routes - We show a small loader if checking, otherwise bypass to dashboard! */}
-        <Route path="/register" element={
-            isAuthCheck ? <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center"><div className="w-8 h-8 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin"></div></div> 
-            : isAuthenticate ? <Navigate to="/dashboard" replace /> : <Registration />
-        }/>
-        <Route path="/login" element={
-            isAuthCheck ? <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center"><div className="w-8 h-8 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin"></div></div> 
-            : isAuthenticate ? <Navigate to="/dashboard" replace /> : <Login />
-        }/>
-        <Route path="/verify-otp" element={
-            isAuthCheck ? <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center"><div className="w-8 h-8 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin"></div></div> 
-            : isAuthenticate ? <Navigate to="/dashboard" replace /> : <VerifyOtp />
-        }/>
+        <Route path="/register" element={renderAuthRoute(<Registration />)} />
+        <Route path="/login" element={renderAuthRoute(<Login />)} />
+        <Route path="/verify-otp" element={renderAuthRoute(<VerifyOtp />)} />
+        <Route path="/forgot-password" element={renderAuthRoute(<ForgotPassword />)} />
+        <Route path="/verify-reset-otp" element={renderAuthRoute(<VerifyResetOtp />)} />
+        <Route path="/reset-password" element={renderAuthRoute(<ResetPassword />)} />
 
         {/* Protected Routes */}
         <Route path="/dashboard" element={<ProtectedRoute isAuthCheck={isAuthCheck}><Dashboard /></ProtectedRoute>} />

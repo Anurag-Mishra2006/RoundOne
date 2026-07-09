@@ -28,7 +28,15 @@ export const resendOtp = async(data: {email: string})=>{
 export const logout = async()=>{
     return await api.post("/user/logout");
 };
-
+export const forgotPassword = async (data: { email: string }) => {
+    return await api.post("/user/forgot-password", data);
+};
+export const verifyResetOtp = async (data: { email: string; otp: string }) => {
+    return await api.post("/user/verify-reset-otp", data);  
+};
+export const resetPassword = async (data: { resetToken: string; password: string; confirmPassword: string }) => {
+    return await api.post("/user/update-password", data);
+};
 // resume time
 export const uploadResume = async(file : File)=>{
     const formData = new FormData();
