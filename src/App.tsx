@@ -20,6 +20,7 @@ import LearningSheet from "./pages/LearningSheet";
 import { getMe } from "./services/api";
 import useUserStore from "./store/authStore";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Privacy from "./pages/Privacy";
 
 function App() {
   const { isAuthenticate, setUser, clearUser } = useUserStore();
@@ -48,7 +49,7 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/report/:id" element={<PublicReport />} />
-
+        <Route path="/privacy"  element={<Privacy />}/>
         {/* Auth Routes - We show a small loader if checking, otherwise bypass to dashboard! */}
         <Route path="/register" element={
             isAuthCheck ? <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center"><div className="w-8 h-8 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin"></div></div> 
