@@ -52,7 +52,7 @@ function Interview() {
   const { startRecording, stopRecording, isRecording, isProcessing } = useSTT();
 
   // zustand se data le lete h jo db me save karna h
-  const { hr, technical, dsa, company, addEvaluation, evaluations, role, level } = useSessionStore()
+  const { hr, technical, dsa, company, addEvaluation} = useSessionStore()
 
   const language = dsa?.language || "";
 
@@ -203,6 +203,7 @@ function Interview() {
         question: getCurrentQuestion(),
         answer: currentSession,
         company,
+        
         // <-- NEW: We send spokenApproach if it's the DSA round!
         ...(currentRound === "dsa" && { spokenApproach: spokenApproach })
       })
