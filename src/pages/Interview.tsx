@@ -52,7 +52,7 @@ function Interview() {
   const { startRecording, stopRecording, isRecording, isProcessing } = useSTT();
 
   // zustand se data le lete h jo db me save karna h
-  const { hr, technical, dsa, company, addEvaluation} = useSessionStore()
+  const { hr, technical, dsa, company, addEvaluation } = useSessionStore()
 
   const language = dsa?.language || "";
 
@@ -169,8 +169,12 @@ function Interview() {
         const { status, result, error: pollError } = pollResponse.data;
 
         if (status === "completed") {
-          // The job is done! Save the array of TestCaseResults to state
-          setTestResult(result.results);
+          // The job is done! Save the array of TestCaseResults to state.
+          // NOTE: the worker's return value is itself { status, result: { results } },
+          // and getCodeResult wraps that again as { status, result: <job return value> },
+          // so the array actually lives one level deeper: result.result.results
+          const results = Array.isArray(result?.result?.results) ? result.result.results : [];
+          setTestResult(results);
           isComplete = true;
         } else if (status === "failed") {
           // The worker crashed or failed to process the job
@@ -203,7 +207,7 @@ function Interview() {
         question: getCurrentQuestion(),
         answer: currentSession,
         company,
-        
+
         // <-- NEW: We send spokenApproach if it's the DSA round!
         ...(currentRound === "dsa" && { spokenApproach: spokenApproach })
       })
@@ -226,7 +230,7 @@ function Interview() {
   const handleNext = async () => {
     setEvaluation(null)
     setAnswer("")
-    setSpokenApproach("")  
+    setSpokenApproach("")
     setError("")
     setTestResult([])
 
@@ -419,7 +423,7 @@ function Interview() {
               </div>
 
               {/* Test Results UI */}
-              {testResult.length > 0 && (
+              {Array.isArray(testResult) && testResult.length > 0 && (
                 <div className="mt-4 space-y-2">
                   <h3 className="text-sm font-medium text-[var(--text)]">Test Results:</h3>
 

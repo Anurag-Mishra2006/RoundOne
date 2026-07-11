@@ -24,6 +24,8 @@ import useUserStore from "./store/authStore";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Privacy from "./pages/Privacy";
 import VerifyResetOtp from "./pages/VerifyResetPassword";
+import PracticeDashboard from "./pages/PractiseDashboard";
+import PracticeArena from "./pages/PracticeArena";
 
 function App() {
   const { isAuthenticate, setUser, clearUser } = useUserStore();
@@ -67,7 +69,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/report/:id" element={<PublicReport />} />
         <Route path="/privacy" element={<Privacy />} />
-
         {/* Auth Routes - We show a small loader if checking, otherwise bypass to dashboard! */}
         <Route path="/register" element={renderAuthRoute(<Registration />)} />
         <Route path="/login" element={renderAuthRoute(<Login />)} />
@@ -77,6 +78,9 @@ function App() {
         <Route path="/reset-password" element={renderAuthRoute(<ResetPassword />)} />
 
         {/* Protected Routes */}
+        <Route path="/practice" element={<ProtectedRoute isAuthCheck={isAuthCheck}><PracticeDashboard /></ProtectedRoute>} />
+        <Route path="/practice/:slug" element={<ProtectedRoute isAuthCheck={isAuthCheck}><PracticeArena /></ProtectedRoute>} />
+
         <Route path="/dashboard" element={<ProtectedRoute isAuthCheck={isAuthCheck}><Dashboard /></ProtectedRoute>} />
         <Route path="/resume-upload" element={<ProtectedRoute isAuthCheck={isAuthCheck}><ResumeUpload /></ProtectedRoute>} />
         <Route path="/onboarding" element={<ProtectedRoute isAuthCheck={isAuthCheck}><Onboarding /></ProtectedRoute>} />

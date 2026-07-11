@@ -3,23 +3,57 @@ import { Tooltip } from "react-tooltip";
 import "react-calendar-heatmap/dist/styles.css";
 import "react-tooltip/dist/react-tooltip.css";
 
-interface ActivityHeatmapProps {
-  sessions: {
-    createdAt: string | Date;
-  }[];
+interface Activity {
+  createdAt: string | Date;
+  type: "interview" | "dsa";
 }
 
-function ActivityHeatmap({ sessions }: ActivityHeatmapProps) {
-  const activityMap = new Map<string, number>();
+interface ActivityHeatmapProps {
+  activities: Activity[];
+}
 
-  sessions.forEach((session) => {
-    const dateStr = new Date(session.createdAt).toISOString().split("T")[0];
-    activityMap.set(dateStr, (activityMap.get(dateStr) || 0) + 1);
+interface HeatmapValue {
+  date: string;
+  interviews: number;
+  dsa: number;
+  count: number;
+}
+
+function ActivityHeatmap({ activities }: ActivityHeatmapProps) {
+  const activityMap = new Map<
+    string,
+    {
+      interviews: number;
+      dsa: number;
+    }
+  >();
+
+  activities.forEach((activity) => {
+    const date = new Date(activity.createdAt)
+      .toISOString()
+      .split("T")[0];
+
+    if (!activityMap.has(date)) {
+      activityMap.set(date, {
+        interviews: 0,
+        dsa: 0,
+      });
+    }
+
+    const current = activityMap.get(date)!;
+
+    if (activity.type === "interview") {
+      current.interviews++;
+    } else {
+      current.dsa++;
+    }
   });
 
-  const values = Array.from(activityMap, ([date, count]) => ({
+  const values: HeatmapValue[] = Array.from(activityMap, ([date, value]) => ({
     date,
-    count,
+    interviews: value.interviews,
+    dsa: value.dsa,
+    count: value.interviews + value.dsa,
   }));
 
   const endDate = new Date();
@@ -29,7 +63,7 @@ function ActivityHeatmap({ sessions }: ActivityHeatmapProps) {
   return (
     <div className="bg-[var(--surface)] border border-[var(--border)] p-6 rounded-xl overflow-hidden">
       <h3 className="text-lg font-bold text-[var(--text)] mb-4">
-        Interview Consistency
+        Activity Consistency
       </h3>
 
       <div className="custom-heatmap text-sm relative">
@@ -37,26 +71,65 @@ function ActivityHeatmap({ sessions }: ActivityHeatmapProps) {
           startDate={startDate}
           endDate={endDate}
           values={values}
-          classForValue={(value: any) => {
+          classForValue={(value: HeatmapValue | undefined) => {
             if (!value) return "color-empty";
-            return `color-scale-${Math.min(value.count, 4)}`;
+
+            if (value.interviews > 0 && value.dsa > 0) {
+              return "color-mixed";
+            }
+
+            if (value.interviews > 0) {
+              return `color-interview-${Math.min(
+                value.interviews,
+                4
+              )}`;
+            }
+
+            return `color-dsa-${Math.min(value.dsa, 4)}`;
           }}
-          tooltipDataAttrs={
-            ((value: any) => ({
+          tooltipDataAttrs={(value: HeatmapValue | undefined) => {
+            if (!value) {
+              return {
+                "data-tooltip-id": "heatmap-tooltip",
+                "data-tooltip-content": "No activity",
+              };
+            }
+
+            const date = new Date(value.date).toLocaleDateString(
+              "en-US",
+              {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              }
+            );
+
+            const interviewText =
+              value.interviews > 0
+                ? `${value.interviews} Interview${
+                    value.interviews > 1 ? "s" : ""
+                  }`
+                : "";
+
+            const dsaText =
+              value.dsa > 0
+                ? `${value.dsa} DSA Solved`
+                : "";
+
+            const content = [date, interviewText, dsaText]
+              .filter(Boolean)
+              .join("\n");
+
+            return {
               "data-tooltip-id": "heatmap-tooltip",
-              "data-tooltip-content":
-                value && value.date
-                  ? `${value.count} interview${
-                      value.count > 1 ? "s" : ""
-                    } on ${value.date}`
-                  : "No interviews on this day",
-            })) as any
-          }
+              "data-tooltip-content": content,
+            };
+          }}
         />
 
         <Tooltip
           id="heatmap-tooltip"
-          className="z-50 !bg-[var(--bg)] !border !border-[var(--border)] !text-[var(--text)] !text-xs shadow-lg"
+          className="z-50 !bg-[var(--bg)] !border !border-[var(--border)] !text-[var(--text)] !text-xs whitespace-pre-line shadow-lg"
         />
       </div>
     </div>

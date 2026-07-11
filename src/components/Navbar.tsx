@@ -23,10 +23,9 @@ function Navbar() {
     paths.some((path) => location.pathname.startsWith(path));
 
   const navClass = (paths: string[]) =>
-    `transition-colors ${
-      isActive(paths)
-        ? "text-[var(--accent)]"
-        : "text-[var(--text-muted)] hover:text-[var(--text)]"
+    `transition-colors ${isActive(paths)
+      ? "text-[var(--accent)]"
+      : "text-[var(--text-muted)] hover:text-[var(--text)]"
     }`;
 
   return (
@@ -70,6 +69,9 @@ function Navbar() {
 
             <Link to="/learning" className={navClass(["/learning"])}>
               Learning Hub
+            </Link>
+            <Link to="/practice" className={navClass(["/practice"])}>
+              Practice
             </Link>
           </div>
         )}

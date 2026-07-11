@@ -67,3 +67,45 @@ body {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
 }
+.color-empty {
+  fill: #2a2d3a;
+}
+
+/* Interview (Blue) */
+.color-interview-1 {
+  fill: #93c5fd;
+}
+
+.color-interview-2 {
+  fill: #60a5fa;
+}
+
+.color-interview-3 {
+  fill: #3b82f6;
+}
+
+.color-interview-4 {
+  fill: #2563eb;
+}
+
+/* DSA (Green) */
+.color-dsa-1 {
+  fill: #bbf7d0;
+}
+
+.color-dsa-2 {
+  fill: #86efac;
+}
+
+.color-dsa-3 {
+  fill: #4ade80;
+}
+
+.color-dsa-4 {
+  fill: #22c55e;
+}
+
+/* Both Interview + DSA */
+.color-mixed {
+  fill: #06b6d4;
+}

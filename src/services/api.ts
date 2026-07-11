@@ -1,11 +1,9 @@
 //  Axios instance + all API call 
 import axios from "axios";
 
-const isDevelopment = import.meta.env.MODE === 'development'
-
 const api = axios.create({
     // If local, use localhost:3000. If on Vercel, use the magic /api proxy!
-    baseURL: isDevelopment ? "http://localhost:3000" : "/api",
+    baseURL: import.meta.env.VITE_BACKEND_URL,
     withCredentials : true
 });
 
@@ -108,3 +106,19 @@ export const getProgress = async (sheetId: string) => {
 export const toggleProgress = async(data: {sheetId: string, taskId: string})=>{
     return await api.post("/progress/toggle", data)
 }
+// practice
+export const getPracticeQuestions = async (params: any) => {
+    return await api.get("/practice/questions", { params });
+};
+export const getPracticeQuestionBySlug = async (slug: string) => {
+    return await api.get(`/practice/questions/${slug}`);
+};
+export const submitPracticeCode = async (data: { questionId: string, language: string, code: string, userApproach?: string }) => {
+    return await api.post("/practice/submit", data);
+};
+export const getDsaSubmissions = async () => {
+    return await api.get("/practice/submissions");
+};
+export const getQuestionSubmissions = async (questionId: string) => {
+    return await api.get(`/practice/${questionId}/submissions`);
+};

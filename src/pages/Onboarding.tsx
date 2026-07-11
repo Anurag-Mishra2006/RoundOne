@@ -12,7 +12,7 @@ function Onboarding() {
   const [language, setLanguage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  
+
   const navigate = useNavigate();
   const setSession = useSessionStore((state) => state.setSession);
 
@@ -24,19 +24,29 @@ function Onboarding() {
     }
     try {
       setLoading(true)
-      const response = await interviewStart({ company, role, level, language });
+      const response = await interviewStart({
+        company,
+        role,
+        level,
+        language,
+      });
+
       if (response.status !== 200) {
         setError("Something went wrong");
         return;
       }
+
+      const { hr, technical, dsa } = response.data;
+
       setSession({
         company,
         role,
         level,
-        hr: response.data.hr,
-        technical: response.data.technical,
-        dsa: response.data.dsa
-      })
+        language,
+        hr,
+        technical,
+        dsa,
+      });
       navigate("/interview");
     } catch (error: any) {
       setError(error?.response?.data?.error || "Something went wrong");
@@ -50,7 +60,7 @@ function Onboarding() {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
   };
-  
+
   const itemVariants = {
     hidden: { opacity: 0, x: -20 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
@@ -60,82 +70,82 @@ function Onboarding() {
     <>
       <Navbar />
       <div className="min-h-[calc(100vh-70px)] flex items-center justify-center bg-[var(--bg)] px-6 py-12 relative overflow-hidden font-sans">
-        
+
         {/* Ambient Background Glows */}
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-900/10 rounded-full blur-[120px] pointer-events-none"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px] pointer-events-none"></div>
 
         <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center z-10">
-          
+
           {/* LEFT SIDE: Animated Timeline (STEP 2 ACTIVE) */}
-          <motion.div 
+          <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
             className="hidden lg:flex flex-col space-y-10 pr-8"
           >
             <div>
-                <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4">
-                    Personalize your <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-[var(--accent)]">interview journey.</span>
-                </motion.h2>
-                <motion.p variants={itemVariants} className="text-[var(--text-muted)] text-lg leading-relaxed max-w-md">
-                    Our AI doesn't ask generic questions. We analyze your unique background to conduct a highly realistic, tailored mock interview.
-                </motion.p>
+              <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4">
+                Personalize your <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-[var(--accent)]">interview journey.</span>
+              </motion.h2>
+              <motion.p variants={itemVariants} className="text-[var(--text-muted)] text-lg leading-relaxed max-w-md">
+                Our AI doesn't ask generic questions. We analyze your unique background to conduct a highly realistic, tailored mock interview.
+              </motion.p>
             </div>
 
             <div className="space-y-8 relative before:absolute before:inset-0 before:ml-[1.1rem] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[var(--success)] before:via-[var(--accent)] before:to-[var(--surface)] before:opacity-50">
-                
-                {/* Step 1: COMPLETED */}
-                <motion.div variants={itemVariants} className="relative flex items-start gap-6 opacity-70">
-                    <div className="w-10 h-10 rounded-full bg-[var(--success)]/20 border-2 border-[var(--success)] flex items-center justify-center text-[var(--success)] font-bold z-10 shrink-0">
-                        ✓
-                    </div>
-                    <div className="pt-1">
-                        <h3 className="text-white font-bold text-xl mb-1">Upload Resume</h3>
-                        <p className="text-[var(--text-muted)] text-sm">Resume successfully parsed and secured.</p>
-                    </div>
-                </motion.div>
 
-                {/* Step 2: ACTIVE NOW */}
-                <motion.div variants={itemVariants} className="relative flex items-start gap-6">
-                    <div className="w-10 h-10 rounded-full bg-[var(--accent)] flex items-center justify-center text-white font-bold shadow-[0_0_20px_rgba(170,59,255,0.4)] z-10 shrink-0 border-4 border-[var(--bg)]">
-                        2
-                    </div>
-                    <div className="pt-1">
-                        <h3 className="text-white font-bold text-xl mb-1">Configure Target</h3>
-                        <p className="text-[var(--text-muted)] text-sm">Select your dream company, role, and difficulty level.</p>
-                    </div>
-                </motion.div>
+              {/* Step 1: COMPLETED */}
+              <motion.div variants={itemVariants} className="relative flex items-start gap-6 opacity-70">
+                <div className="w-10 h-10 rounded-full bg-[var(--success)]/20 border-2 border-[var(--success)] flex items-center justify-center text-[var(--success)] font-bold z-10 shrink-0">
+                  ✓
+                </div>
+                <div className="pt-1">
+                  <h3 className="text-white font-bold text-xl mb-1">Upload Resume</h3>
+                  <p className="text-[var(--text-muted)] text-sm">Resume successfully parsed and secured.</p>
+                </div>
+              </motion.div>
 
-                {/* Step 3: UPCOMING */}
-                <motion.div variants={itemVariants} className="relative flex items-start gap-6 opacity-40">
-                    <div className="w-10 h-10 rounded-full bg-[var(--surface)] border-2 border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] font-bold z-10 shrink-0">
-                        3
-                    </div>
-                    <div className="pt-1">
-                        <h3 className="text-white font-bold text-xl mb-1">Face the AI</h3>
-                        <p className="text-[var(--text-muted)] text-sm">Speak your answers and write real code in our Docker sandbox.</p>
-                    </div>
-                </motion.div>
+              {/* Step 2: ACTIVE NOW */}
+              <motion.div variants={itemVariants} className="relative flex items-start gap-6">
+                <div className="w-10 h-10 rounded-full bg-[var(--accent)] flex items-center justify-center text-white font-bold shadow-[0_0_20px_rgba(170,59,255,0.4)] z-10 shrink-0 border-4 border-[var(--bg)]">
+                  2
+                </div>
+                <div className="pt-1">
+                  <h3 className="text-white font-bold text-xl mb-1">Configure Target</h3>
+                  <p className="text-[var(--text-muted)] text-sm">Select your dream company, role, and difficulty level.</p>
+                </div>
+              </motion.div>
+
+              {/* Step 3: UPCOMING */}
+              <motion.div variants={itemVariants} className="relative flex items-start gap-6 opacity-40">
+                <div className="w-10 h-10 rounded-full bg-[var(--surface)] border-2 border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] font-bold z-10 shrink-0">
+                  3
+                </div>
+                <div className="pt-1">
+                  <h3 className="text-white font-bold text-xl mb-1">Face the AI</h3>
+                  <p className="text-[var(--text-muted)] text-sm">Speak your answers and write real code in our Docker sandbox.</p>
+                </div>
+              </motion.div>
 
             </div>
           </motion.div>
 
           {/* RIGHT SIDE: The Setup Card */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="w-full max-w-lg mx-auto"
           >
-            
+
             {/* Mobile-only back button */}
             <Link to="/resume-upload" className="lg:hidden text-sm font-medium text-[var(--text-muted)] hover:text-white transition-colors flex items-center gap-2 mb-6">
-                ← Back to Upload
+              ← Back to Upload
             </Link>
 
             <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-8 sm:p-10 shadow-2xl shadow-black/50 relative overflow-hidden group">
-              
+
               {/* Card internal subtle glow */}
               <div className="absolute -top-24 -right-24 w-48 h-48 bg-purple-600/10 rounded-full blur-[80px] group-hover:bg-purple-600/20 transition-colors duration-500"></div>
 
@@ -216,7 +226,7 @@ function Onboarding() {
 
                 {error && (
                   <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="p-3 mt-2 rounded-md bg-[var(--danger)]/10 border border-[var(--danger)]/20 text-center">
-                      <p className="text-sm font-medium text-[var(--danger)]">{error}</p>
+                    <p className="text-sm font-medium text-[var(--danger)]">{error}</p>
                   </motion.div>
                 )}
 
