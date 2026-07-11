@@ -6,8 +6,11 @@ import {
   LayoutDashboard,
   Share2,
   Coffee,
+  MessageSquare,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import { ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const TECH_STACK = [
   "React 19", "TypeScript", "Tailwind CSS", "Zustand",
@@ -17,6 +20,12 @@ const TECH_STACK = [
 ];
 
 const FEATURES = [
+  {
+    icon: MessageSquare,
+    title: "AI Mock Interviews",
+    description:
+      "Experience a realistic interview with AI-driven voice and text conversations. The platform displays and speaks each question (TTS), while you answer by voice or typing. Complete 5 HR questions, 5 technical questions, and 1 DSA coding round with your preferred onboarding language's boilerplate already loaded in the editor.",
+  },
   {
     icon: BookOpen,
     title: "Learning Hub",
@@ -100,7 +109,15 @@ function AboutUs() {
         className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full opacity-30 blur-3xl"
         style={{ background: "radial-gradient(circle, #8b5cf6 0%, #3b82f6 45%, transparent 70%)" }}
       />
-      <Navbar />
+      <div className="relative z-10 mx-auto max-w-3xl px-6 pt-8">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to Home
+        </Link>
+      </div>
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.15]"
         style={{
@@ -125,11 +142,20 @@ function AboutUs() {
             </span>
           </h1>
 
-          <p className="mx-auto mt-5 max-w-xl text-[var(--text-muted)]">
-            RoundOne isn't built by a company with a hiring-prep budget. It's
-            built by a student who got tired of mock interviews that felt
-            nothing like the real thing.
-          </p>
+          <div className="mx-auto mt-6 max-w-2xl space-y-5 text-center">
+            <p className="text-base leading-8 text-[var(--text-muted)]">
+              RoundOne wasn't created by a large company—it was started by a student
+              learning software development while preparing for technical interviews.
+              Like many others, he found himself constantly switching between websites
+              for DSA, mock interviews, resume reviews, and interview preparation.
+            </p>
+
+            <p className="text-base leading-8 text-[var(--text-muted)]">
+              RoundOne is an attempt to bring those essential resources together into
+              one platform, making interview preparation simpler, more realistic, and
+              more accessible for everyone who is on the same journey.
+            </p>
+          </div>
         </div>
 
         {/* Why RoundOne exists */}

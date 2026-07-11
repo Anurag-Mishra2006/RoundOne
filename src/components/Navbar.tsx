@@ -71,8 +71,8 @@ function Navbar() {
             <Link to="/practice" className={navClass(["/practice"])}>
               Practice
             </Link>
-            <Link to="/contact" className={navClass(["/contact"])}>Contact Us</Link>
-            <Link to="/about" className={navClass(["/about"])}>About</Link> 
+            {/* <Link to="/contact" className={navClass(["/contact"])}>Contact Us</Link> */}
+            {/* <Link to="/about" className={navClass(["/about"])}>About</Link>  */}
           </div>
         )}
       </div>

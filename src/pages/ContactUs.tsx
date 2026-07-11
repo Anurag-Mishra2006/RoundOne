@@ -1,6 +1,8 @@
 import { useState, type FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 import Navbar from "@/components/Navbar";
+import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
@@ -65,7 +67,15 @@ function ContactUs() {
 
     return (
         <div className="relative min-h-screen w-full overflow-hidden bg-[var(--bg)]">
-            <Navbar />
+            <div className="relative z-10 mx-auto max-w-3xl px-6 pt-8">
+                <Link
+                    to="/"
+                    className="inline-flex items-center gap-2 text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]"
+                >
+                    <ArrowLeft className="h-4 w-4" />
+                    Back to Home
+                </Link>
+            </div>
             <div
                 className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full opacity-30 blur-3xl"
                 style={{
@@ -153,8 +163,8 @@ function ContactUs() {
                                     type="button"
                                     onClick={() => setType(opt.value)}
                                     className={`rounded-full border px-3.5 py-1.5 text-sm transition-colors ${type === opt.value
-                                            ? "border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)]"
-                                            : "border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)]"
+                                        ? "border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)]"
+                                        : "border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)]"
                                         }`}
                                 >
                                     {opt.label}
