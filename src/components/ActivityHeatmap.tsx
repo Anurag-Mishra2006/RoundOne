@@ -1,3 +1,4 @@
+import React from "react";
 import CalendarHeatmap from "react-calendar-heatmap";
 import { Tooltip } from "react-tooltip";
 import "react-calendar-heatmap/dist/styles.css";
@@ -19,6 +20,17 @@ interface HeatmapValue {
   count: number;
 }
 
+// Fix incorrect typings in react-calendar-heatmap v1.10.0
+const TypedCalendarHeatmap = CalendarHeatmap as unknown as React.ComponentType<{
+  startDate: Date;
+  endDate: Date;
+  values: HeatmapValue[];
+  classForValue?: (value: HeatmapValue | undefined) => string;
+  tooltipDataAttrs?: (
+    value: HeatmapValue | undefined
+  ) => Record<string, string>;
+}>;
+
 function ActivityHeatmap({ activities }: ActivityHeatmapProps) {
   const activityMap = new Map<
     string,
@@ -29,9 +41,7 @@ function ActivityHeatmap({ activities }: ActivityHeatmapProps) {
   >();
 
   activities.forEach((activity) => {
-    const date = new Date(activity.createdAt)
-      .toISOString()
-      .split("T")[0];
+    const date = new Date(activity.createdAt).toISOString().split("T")[0];
 
     if (!activityMap.has(date)) {
       activityMap.set(date, {
@@ -49,12 +59,14 @@ function ActivityHeatmap({ activities }: ActivityHeatmapProps) {
     }
   });
 
-  const values: HeatmapValue[] = Array.from(activityMap, ([date, value]) => ({
-    date,
-    interviews: value.interviews,
-    dsa: value.dsa,
-    count: value.interviews + value.dsa,
-  }));
+  const values: HeatmapValue[] = Array.from(activityMap.entries()).map(
+    ([date, value]) => ({
+      date,
+      interviews: value.interviews,
+      dsa: value.dsa,
+      count: value.interviews + value.dsa,
+    })
+  );
 
   const endDate = new Date();
   const startDate = new Date();
@@ -67,11 +79,11 @@ function ActivityHeatmap({ activities }: ActivityHeatmapProps) {
       </h3>
 
       <div className="custom-heatmap text-sm relative">
-        <CalendarHeatmap
+        <TypedCalendarHeatmap
           startDate={startDate}
           endDate={endDate}
           values={values}
-          classForValue={(value: HeatmapValue | undefined) => {
+          classForValue={(value) => {
             if (!value) return "color-empty";
 
             if (value.interviews > 0 && value.dsa > 0) {
@@ -79,15 +91,12 @@ function ActivityHeatmap({ activities }: ActivityHeatmapProps) {
             }
 
             if (value.interviews > 0) {
-              return `color-interview-${Math.min(
-                value.interviews,
-                4
-              )}`;
+              return `color-interview-${Math.min(value.interviews, 4)}`;
             }
 
             return `color-dsa-${Math.min(value.dsa, 4)}`;
           }}
-          tooltipDataAttrs={(value: HeatmapValue | undefined) => {
+          tooltipDataAttrs={(value) => {
             if (!value) {
               return {
                 "data-tooltip-id": "heatmap-tooltip",
@@ -95,14 +104,11 @@ function ActivityHeatmap({ activities }: ActivityHeatmapProps) {
               };
             }
 
-            const date = new Date(value.date).toLocaleDateString(
-              "en-US",
-              {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              }
-            );
+            const date = new Date(value.date).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            });
 
             const interviewText =
               value.interviews > 0
@@ -112,17 +118,13 @@ function ActivityHeatmap({ activities }: ActivityHeatmapProps) {
                 : "";
 
             const dsaText =
-              value.dsa > 0
-                ? `${value.dsa} DSA Solved`
-                : "";
-
-            const content = [date, interviewText, dsaText]
-              .filter(Boolean)
-              .join("\n");
+              value.dsa > 0 ? `${value.dsa} DSA Solved` : "";
 
             return {
               "data-tooltip-id": "heatmap-tooltip",
-              "data-tooltip-content": content,
+              "data-tooltip-content": [date, interviewText, dsaText]
+                .filter(Boolean)
+                .join("\n"),
             };
           }}
         />
