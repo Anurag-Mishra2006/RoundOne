@@ -8,7 +8,6 @@ import {
   Coffee,
   MessageSquare,
 } from "lucide-react";
-import Navbar from "@/components/Navbar";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 

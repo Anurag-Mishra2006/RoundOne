@@ -1,6 +1,5 @@
 import { useState, type FormEvent } from "react";
 import emailjs from "@emailjs/browser";
-import Navbar from "@/components/Navbar";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
