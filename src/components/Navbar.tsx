@@ -37,9 +37,7 @@ function Navbar() {
           onClick={() => navigate("/dashboard")}
           className="flex items-center gap-2"
         >
-          <div className="flex h-6 w-6 items-center justify-center rounded bg-gradient-to-br from-[var(--accent)] to-purple-800 text-xs font-bold text-white">
-            R
-          </div>
+          <img src="/logo.svg?v=2" alt="RoundOne" className="w-8 h-8 rounded-lg" />
 
           <span className="hidden text-lg font-bold text-[var(--accent)] sm:block">
             RoundOne
@@ -73,6 +71,8 @@ function Navbar() {
             <Link to="/practice" className={navClass(["/practice"])}>
               Practice
             </Link>
+            <Link to="/contact" className={navClass(["/contact"])}>Contact Us</Link>
+            <Link to="/about" className={navClass(["/about"])}>About</Link> 
           </div>
         )}
       </div>

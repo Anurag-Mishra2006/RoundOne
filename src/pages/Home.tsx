@@ -85,11 +85,14 @@ function Home() {
             {/* Navbar */}
             <nav className="flex justify-between items-center px-6 py-4 md:px-12 border-b border-white/5 bg-[#050505]/40 backdrop-blur-xl sticky top-0 z-50">
                 <div className="flex items-center gap-3 cursor-pointer group">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white font-bold shadow-[0_0_20px_rgba(168,85,247,0.4)] group-hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] transition-all">R</div>
+                    <img src="/logo.svg?v=2" alt="RoundOne" className="w-8 h-8 rounded-lg" />
                     <div className="text-xl font-extrabold tracking-tight text-white">RoundOne</div>
                 </div>
                 <div className="flex gap-6 items-center">
                     <Link to="/privacy" className="hidden md:block text-sm font-medium text-gray-400 hover:text-white transition-colors">Privacy</Link>
+                    <Link to="/contact" className="hidden md:block text-sm font-medium text-gray-400 hover:text-white transition-colors">Contact Us</Link>
+                    <Link to="/about" className="hidden md:block text-sm font-medium text-gray-400 hover:text-white transition-colors">About Us</Link>
+
                     {isAuthenticate ? (
                         <Link to="/dashboard" className="px-5 py-2 bg-white/5 border border-white/10 text-white rounded-lg text-sm font-bold hover:bg-white/10 transition-all">Dashboard →</Link>
                     ) : (

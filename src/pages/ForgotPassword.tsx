@@ -35,40 +35,39 @@ function ForgotPassword() {
 
         {/* Top: Logo & Back Link */}
         <div className="relative z-10">
-            <Link to="/login" className="text-sm font-medium text-[var(--text-muted)] hover:text-white transition-colors flex items-center gap-2 mb-8 w-fit">
-                ← Back to Login
-            </Link>
-            <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent)] to-purple-800 flex items-center justify-center text-white font-bold text-xl shadow-[0_0_20px_rgba(170,59,255,0.4)]">
-                    R
-                </div>
-                <span className="text-2xl font-extrabold text-white tracking-tight">RoundOne</span>
-            </div>
+          <Link to="/login" className="text-sm font-medium text-[var(--text-muted)] hover:text-white transition-colors flex items-center gap-2 mb-8 w-fit">
+            ← Back to Login
+          </Link>
+          <div className="flex items-center gap-3">
+            <img src="/logo.svg?v=2" alt="RoundOne" className="w-8 h-8 rounded-lg" />
+
+            <span className="text-2xl font-extrabold text-white tracking-tight">RoundOne</span>
+          </div>
         </div>
 
         {/* Middle: Feature Highlight / Quote */}
         <div className="relative z-10 max-w-md">
-            <h2 className="text-4xl font-bold text-white leading-tight mb-6">
-                Locked out?<br/> <span className="text-[var(--accent)]">Let's get you back in.</span>
-            </h2>
-            <div className="space-y-4 text-[var(--text-muted)] text-lg leading-relaxed">
-                <p>
-                    We'll send a one-time code to your email so you can securely reset your password and pick up right where you left off.
-                </p>
-                <div className="flex items-center gap-4 mt-8 pt-8 border-t border-[var(--border)]">
-                    <div className="flex -space-x-2">
-                        <div className="w-8 h-8 rounded-full bg-blue-500 border-2 border-[var(--surface)]"></div>
-                        <div className="w-8 h-8 rounded-full bg-green-500 border-2 border-[var(--surface)]"></div>
-                        <div className="w-8 h-8 rounded-full bg-purple-500 border-2 border-[var(--surface)]"></div>
-                    </div>
-                    <p className="text-sm font-medium text-[var(--text)]">Your account, secured in seconds.</p>
-                </div>
+          <h2 className="text-4xl font-bold text-white leading-tight mb-6">
+            Locked out?<br /> <span className="text-[var(--accent)]">Let's get you back in.</span>
+          </h2>
+          <div className="space-y-4 text-[var(--text-muted)] text-lg leading-relaxed">
+            <p>
+              We'll send a one-time code to your email so you can securely reset your password and pick up right where you left off.
+            </p>
+            <div className="flex items-center gap-4 mt-8 pt-8 border-t border-[var(--border)]">
+              <div className="flex -space-x-2">
+                <div className="w-8 h-8 rounded-full bg-blue-500 border-2 border-[var(--surface)]"></div>
+                <div className="w-8 h-8 rounded-full bg-green-500 border-2 border-[var(--surface)]"></div>
+                <div className="w-8 h-8 rounded-full bg-purple-500 border-2 border-[var(--surface)]"></div>
+              </div>
+              <p className="text-sm font-medium text-[var(--text)]">Your account, secured in seconds.</p>
             </div>
+          </div>
         </div>
 
         {/* Bottom: Footer link */}
         <div className="relative z-10 text-sm text-[var(--text-muted)]">
-            © {new Date().getFullYear()} RoundOne Platform.
+          © {new Date().getFullYear()} RoundOne Platform.
         </div>
       </div>
 
@@ -77,7 +76,7 @@ function ForgotPassword() {
 
         {/* Mobile-only back button */}
         <Link to="/login" className="lg:hidden absolute top-8 left-8 text-sm font-medium text-[var(--text-muted)] hover:text-white transition-colors flex items-center gap-2">
-            ← Login
+          ← Login
         </Link>
 
         <motion.div
@@ -106,7 +105,7 @@ function ForgotPassword() {
 
             {error && (
               <div className="p-3 rounded-md bg-[var(--danger)]/10 border border-[var(--danger)]/20 text-center">
-                  <p className="text-sm font-medium text-[var(--danger)]">{error}</p>
+                <p className="text-sm font-medium text-[var(--danger)]">{error}</p>
               </div>
             )}
 

@@ -55,9 +55,8 @@ function ResetPassword() {
                 ← Back to Login
             </Link>
             <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent)] to-purple-800 flex items-center justify-center text-white font-bold text-xl shadow-[0_0_20px_rgba(170,59,255,0.4)]">
-                    R
-                </div>
+                 <img src="/logo.svg?v=2" alt="RoundOne" className="w-8 h-8 rounded-lg" />
+         
                 <span className="text-2xl font-extrabold text-white tracking-tight">RoundOne</span>
             </div>
         </div>
