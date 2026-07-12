@@ -5,8 +5,6 @@ import Editor from '@monaco-editor/react';
 import ReactMarkdown from 'react-markdown';
 import { motion } from 'framer-motion';
 import { getPracticeQuestionBySlug, submitCode, submitPracticeCode, getCodeResult, getQuestionSubmissions } from '@/services/api';
-
-// IMPORT YOUR CUSTOM WHISPER STT HOOK HERE (Adjust path if needed)
 import { useSTT } from '@/hooks/useSTT';
 
 // --- BOILERPLATE CODE TEMPLATES ---
@@ -111,8 +109,8 @@ export default function PracticeArena() {
                             isRunOnly: false,
                             verdict: jobData.result.verdict,
                             aiFeedback: "AI is generating your code review in the background. Check your Submissions tab in a few seconds!",
-                            timeComplexity: "O(N)",
-                            spaceComplexity: "O(N)"
+                            timeComplexity: "",
+                            spaceComplexity: ""
                         });
 
                         // Automatically fetch the latest submissions so it shows up in the tab!
@@ -120,21 +118,31 @@ export default function PracticeArena() {
 
                     } else {
 
-                        const dockerResult = jobData.result.result || jobData.result;
-                        const actualOutput = (dockerResult.stdout || dockerResult.stderr || "").trim();
-                        const expectedOutput = question.testCases[0]?.expectedOutput.trim();
+                        const executionResult = jobData.result.result;
 
-                        let verdict = "Runtime Error";
-                        if (dockerResult.exitCode === 0) {
-                            verdict = actualOutput === expectedOutput ? "Accepted" : "Wrong Answer";
-                        }
+                        const dockerResult = Array.isArray(executionResult.results)
+                            ? executionResult.results[0]
+                            : executionResult;
+
+                        const actualOutput = (dockerResult.stdout || dockerResult.stderr || "").trim();
+                        const expectedOutput =
+                            (dockerResult.expectedOutput ||
+                                question.testCases[0]?.expectedOutput ||
+                                "").trim();
+
+                        const verdict =
+                            dockerResult.verdict === "AC"
+                                ? "Accepted"
+                                : dockerResult.verdict === "WA"
+                                    ? "Wrong Answer"
+                                    : dockerResult.verdict;
 
                         setResult({
                             isRunOnly: true,
-                            verdict: verdict,
+                            verdict,
                             stdout: actualOutput,
                             input: question.testCases[0]?.input,
-                            expectedOutput: expectedOutput
+                            expectedOutput,
                         });
                     }
 
@@ -154,7 +162,7 @@ export default function PracticeArena() {
         }, 1000);
     };
 
-    // 5. Handle Run Code
+    //  Handle Run Code
     const handleRunCode = async () => {
         if (!code.trim()) return;
         setIsRunning(true);
@@ -230,8 +238,8 @@ export default function PracticeArena() {
                                 <>
                                     <div className="flex items-center gap-3 mb-4">
                                         <span className={`text-xs font-bold px-3 py-1 rounded-md border ${question.difficulty === 'EASY' ? 'text-green-400 bg-green-400/10 border-green-400/20' :
-                                                question.difficulty === 'MEDIUM' ? 'text-yellow-400 bg-yellow-400/10 border-yellow-400/20' :
-                                                    'text-red-400 bg-red-400/10 border-red-400/20'
+                                            question.difficulty === 'MEDIUM' ? 'text-yellow-400 bg-yellow-400/10 border-yellow-400/20' :
+                                                'text-red-400 bg-red-400/10 border-red-400/20'
                                             }`}>
                                             {question.difficulty}
                                         </span>
@@ -286,10 +294,10 @@ export default function PracticeArena() {
                                                 onClick={toggleListening}
                                                 disabled={isProcessing}
                                                 className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all border ${isRecording
-                                                        ? 'bg-red-500/20 text-red-400 border-red-500/50 animate-pulse'
-                                                        : isProcessing
-                                                            ? 'bg-[var(--warning)]/20 text-[var(--warning)] border-[var(--warning)]/50'
-                                                            : 'bg-[var(--bg)] text-[var(--text-muted)] border-[var(--border)] hover:text-white hover:border-[var(--accent)]/50'
+                                                    ? 'bg-red-500/20 text-red-400 border-red-500/50 animate-pulse'
+                                                    : isProcessing
+                                                        ? 'bg-[var(--warning)]/20 text-[var(--warning)] border-[var(--warning)]/50'
+                                                        : 'bg-[var(--bg)] text-[var(--text-muted)] border-[var(--border)] hover:text-white hover:border-[var(--accent)]/50'
                                                     } disabled:opacity-50`}
                                             >
                                                 <span className="text-sm">
