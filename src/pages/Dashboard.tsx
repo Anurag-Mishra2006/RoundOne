@@ -16,6 +16,13 @@ interface Session {
     evaluations: any[];
 }
 
+// Helper: is this a usable date (not null/undefined/epoch/invalid)?
+function isValidDate(value: unknown): value is string | Date {
+    if (!value) return false; // catches null, undefined, "", 0
+    const d = new Date(value as string | Date);
+    return !isNaN(d.getTime()) && d.getTime() !== 0;
+}
+
 function Dashboard() {
     const { user } = useUserStore();
     const navigate = useNavigate();
@@ -37,7 +44,20 @@ function Dashboard() {
                 try {
                     // Fetch DSA Submissions safely
                     const dsaResponse = await getDsaSubmissions();
-                    setDsaSubmissions(dsaResponse.data.data || []);
+                    const subs = dsaResponse.data.data || [];
+
+                    // Debug aid: flag submissions with a missing/bad createdAt
+                    // so you can see the real field name in devtools and fix
+                    // it at the source (e.g. it might be `submittedAt`).
+                    const badOnes = subs.filter((s: any) => !isValidDate(s.createdAt));
+                    if (badOnes.length > 0) {
+                        console.warn(
+                            `[Dashboard] ${badOnes.length} DSA submission(s) missing a valid 'createdAt'. Sample:`,
+                            badOnes[0]
+                        );
+                    }
+
+                    setDsaSubmissions(subs);
                 } catch (dsaErr) {
                     console.error("No DSA submissions found or route missing", dsaErr);
                     setDsaSubmissions([]);
@@ -84,10 +104,16 @@ function Dashboard() {
     };
 
     // Combine Data for Heatmap
-    // Only DSA submissions with verdict === "AC" count as activity, alongside all interviews
-    const acSubmissions = dsaSubmissions.filter(sub => sub.verdict === "AC");
+    // Only DSA submissions with verdict === "AC" count as activity, alongside all interviews.
+    // Filter out anything without a valid createdAt so bad/missing dates never
+    // reach the heatmap as fake "Jan 1 1970" entries.
+    const acSubmissions = dsaSubmissions.filter(
+        sub => sub.verdict === "AC" && isValidDate(sub.createdAt)
+    );
+    const validSessions = sessions.filter(session => isValidDate(session.createdAt));
+
     const heatmapData = [
-        ...sessions.map(session => ({
+        ...validSessions.map(session => ({
             createdAt: session.createdAt,
             type: "interview" as const,
         })),

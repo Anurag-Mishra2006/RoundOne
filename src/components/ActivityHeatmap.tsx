@@ -20,7 +20,7 @@ interface HeatmapValue {
   count: number;
 }
 
-// Fix incorrect typings in react-calendar-heatmap v1.10.0
+//  incorrect typings in react-calendar-heatmap 
 const TypedCalendarHeatmap = CalendarHeatmap as unknown as React.ComponentType<{
   startDate: Date;
   endDate: Date;
@@ -31,17 +31,41 @@ const TypedCalendarHeatmap = CalendarHeatmap as unknown as React.ComponentType<{
   ) => Record<string, string>;
 }>;
 
+// Is this a genuinely usable date (not null/undefined/epoch/invalid)?
+function isValidDate(value: unknown): value is string | Date {
+  if (!value) return false; // catches null, undefined, "", 0
+  const d = new Date(value as string | Date);
+  return !isNaN(d.getTime()) && d.getTime() !== 0;
+}
+
+// yyyy-mm-dd in LOCAL time (not UTC), so a day's activity lands on the
+// day the user actually experienced it, not shifted by timezone.
+function toLocalDateKey(d: Date): string {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+// Shape used internally while aggregating activity counts per day
+type DayCounts = {
+  interviews: number;
+  dsa: number;
+};
+
 function ActivityHeatmap({ activities }: ActivityHeatmapProps) {
-  const activityMap = new Map<
-    string,
-    {
-      interviews: number;
-      dsa: number;
-    }
-  >();
+  const endDate = new Date();
+  const startDate = new Date();
+  startDate.setMonth(endDate.getMonth() - 6);
+
+  // Step 1: aggregate real activity into a map, skipping any bad/missing dates
+  const activityMap = new Map<string, DayCounts>();
 
   activities.forEach((activity) => {
-    const date = new Date(activity.createdAt).toISOString().split("T")[0];
+    if (!isValidDate(activity.createdAt)) return; // skip null/invalid dates
+
+    const parsed = new Date(activity.createdAt);
+    const date = toLocalDateKey(parsed);
 
     if (!activityMap.has(date)) {
       activityMap.set(date, {
@@ -59,18 +83,31 @@ function ActivityHeatmap({ activities }: ActivityHeatmapProps) {
     }
   });
 
-  const values: HeatmapValue[] = Array.from(activityMap.entries()).map(
-    ([date, value]) => ({
-      date,
-      interviews: value.interviews,
-      dsa: value.dsa,
-      count: value.interviews + value.dsa,
-    })
-  );
+  //  pre-fill EVERY day in the visible range, not just days with
+  // activity. This is the key fix — react-calendar-heatmap passes `null`
+  // (no date info at all) to classForValue/tooltipDataAttrs for any day
+  // missing from `values`, which is what causes "wrong"/epoch dates to
+  // show up on hover for empty days. Giving every day a real entry means
+  // the library always has a correct date to report, even for 0-activity days.
+  const values: HeatmapValue[] = [];
+  const cursor = new Date(startDate);
+  cursor.setHours(0, 0, 0, 0);
+  const end = new Date(endDate);
+  end.setHours(0, 0, 0, 0);
 
-  const endDate = new Date();
-  const startDate = new Date();
-  startDate.setMonth(endDate.getMonth() - 6);
+  while (cursor <= end) {
+    const dateKey = toLocalDateKey(cursor);
+    const entry = activityMap.get(dateKey);
+
+    values.push({
+      date: dateKey,
+      interviews: entry?.interviews ?? 0,
+      dsa: entry?.dsa ?? 0,
+      count: (entry?.interviews ?? 0) + (entry?.dsa ?? 0),
+    });
+
+    cursor.setDate(cursor.getDate() + 1);
+  }
 
   return (
     <div className="bg-[var(--surface)] border border-[var(--border)] p-6 rounded-xl overflow-hidden">
@@ -84,7 +121,7 @@ function ActivityHeatmap({ activities }: ActivityHeatmapProps) {
           endDate={endDate}
           values={values}
           classForValue={(value) => {
-            if (!value) return "color-empty";
+            if (!value || value.count === 0) return "color-empty";
 
             if (value.interviews > 0 && value.dsa > 0) {
               return "color-mixed";
@@ -97,6 +134,8 @@ function ActivityHeatmap({ activities }: ActivityHeatmapProps) {
             return `color-dsa-${Math.min(value.dsa, 4)}`;
           }}
           tooltipDataAttrs={(value) => {
+            // value is now guaranteed to exist for every visible day,
+            // so we can always show the correct date.
             if (!value) {
               return {
                 "data-tooltip-id": "heatmap-tooltip",
@@ -104,11 +143,14 @@ function ActivityHeatmap({ activities }: ActivityHeatmapProps) {
               };
             }
 
-            const date = new Date(value.date).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            });
+            const date = new Date(`${value.date}T00:00:00`).toLocaleDateString(
+              "en-US",
+              {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              }
+            );
 
             const interviewText =
               value.interviews > 0
@@ -120,11 +162,15 @@ function ActivityHeatmap({ activities }: ActivityHeatmapProps) {
             const dsaText =
               value.dsa > 0 ? `${value.dsa} DSA Solved` : "";
 
+            const activityText = [interviewText, dsaText]
+              .filter(Boolean)
+              .join("\n");
+
             return {
               "data-tooltip-id": "heatmap-tooltip",
-              "data-tooltip-content": [date, interviewText, dsaText]
-                .filter(Boolean)
-                .join("\n"),
+              "data-tooltip-content": activityText
+                ? `${date}\n${activityText}`
+                : `${date}\nNo activity`,
             };
           }}
         />
