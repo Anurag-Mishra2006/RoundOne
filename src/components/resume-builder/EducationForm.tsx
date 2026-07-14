@@ -19,7 +19,7 @@ export default function EducationForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5 md:col-span-2">
               <label className="text-xs font-bold uppercase text-[var(--text-muted)]">Institution Name</label>
-              <input value={edu.institution} onChange={(e) => updateEducation(edu.id, "institution", e.target.value)} placeholder="e.g. Stanford University" className="rounded-lg border border-[var(--border)] bg-[var(--bg)] px-3 py-2 text-sm text-[var(--text)] outline-none focus:border-[var(--accent)]" />
+              <input value={edu.institution} onChange={(e) => updateEducation(edu.id, "institution", e.target.value)} placeholder="e.g. Madan Mohan Malaviya University of Technology" className="rounded-lg border border-[var(--border)] bg-[var(--bg)] px-3 py-2 text-sm text-[var(--text)] outline-none focus:border-[var(--accent)]" />
             </div>
             
             <div className="flex flex-col gap-1.5">
@@ -32,7 +32,7 @@ export default function EducationForm() {
 
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-bold uppercase text-[var(--text-muted)]">Degree / Board</label>
-              <input value={edu.degree} onChange={(e) => updateEducation(edu.id, "degree", e.target.value)} placeholder={edu.type === "University" ? "e.g. B.Tech in IT" : "e.g. XII (ISC)"} className="rounded-lg border border-[var(--border)] bg-[var(--bg)] px-3 py-2 text-sm text-[var(--text)] outline-none focus:border-[var(--accent)]" />
+              <input value={edu.degree} onChange={(e) => updateEducation(edu.id, "degree", e.target.value)} placeholder={edu.type === "University" ? "e.g. B.Tech in IT" : "e.g. XII (CBSE)"} className="rounded-lg border border-[var(--border)] bg-[var(--bg)] px-3 py-2 text-sm text-[var(--text)] outline-none focus:border-[var(--accent)]" />
             </div>
 
             {/* If it's a university, show Start Date. If School, hide it. */}
@@ -58,11 +58,11 @@ export default function EducationForm() {
                 </div>
                 <div className="flex flex-col gap-1.5 w-1/3">
                 <label className="text-xs font-bold uppercase text-[var(--text-muted)]">Score</label>
-                <input value={edu.score} onChange={(e) => updateEducation(edu.id, "score", e.target.value)} placeholder={edu.scoreType === "CGPA" ? "e.g. 9.5" : "e.g. 92"} className="rounded-lg border border-[var(--border)] bg-[var(--bg)] px-3 py-2 text-sm text-[var(--text)] outline-none focus:border-[var(--accent)]" />
+                <input value={edu.score} onChange={(e) => updateEducation(edu.id, "score", e.target.value)} placeholder={edu.scoreType === "CGPA" ? "e.g. 9.38" : "e.g. 92"} className="rounded-lg border border-[var(--border)] bg-[var(--bg)] px-3 py-2 text-sm text-[var(--text)] outline-none focus:border-[var(--accent)]" />
                 </div>
                 <div className="flex flex-col gap-1.5 w-1/3">
                 <label className="text-xs font-bold uppercase text-[var(--text-muted)]">Max Score</label>
-                <input value={edu.maxScore} onChange={(e) => updateEducation(edu.id, "maxScore", e.target.value)} placeholder={edu.scoreType === "CGPA" ? "e.g. 10.0" : "e.g. 100"} className="rounded-lg border border-[var(--border)] bg-[var(--bg)] px-3 py-2 text-sm text-[var(--text)] outline-none focus:border-[var(--accent)]" />
+                <input value={edu.maxScore} onChange={(e) => updateEducation(edu.id, "maxScore", e.target.value)} placeholder={edu.scoreType === "CGPA" ? "e.g. 10.00" : "e.g. 100"} className="rounded-lg border border-[var(--border)] bg-[var(--bg)] px-3 py-2 text-sm text-[var(--text)] outline-none focus:border-[var(--accent)]" />
                 </div>
             </div>
 

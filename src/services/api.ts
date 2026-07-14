@@ -59,6 +59,10 @@ export const checkAtsResume = async (file: File, targetRole: string, experienceL
 export const enhanceBullets = async (data: { techStack: string, brainDump: string, userFeedback?: string }) => {
     return await api.post("/resume/enhance-bullets", data);
 };
+// track kitne resume bane h
+export const trackResumeDownload = async()=>{
+    return await api.post("/resume/track-download");
+}
 // interview 
 export const interviewStart = async (data: { company: string, role: string, level: string, language: string }) => {
     return await api.post("/interview/start", data);

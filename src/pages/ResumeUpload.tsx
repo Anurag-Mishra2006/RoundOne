@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { uploadResume } from "../services/api.js";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar.js";
@@ -9,6 +9,13 @@ function ResumeUpload() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  // --- NEW: Reset state when the user visits this page ---
+  useEffect(() => {
+    setUploadFile(null);
+    setError("");
+    setLoading(false);
+  }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

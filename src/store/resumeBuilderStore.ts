@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export interface Experience {
   id: string;
@@ -20,17 +21,19 @@ export interface Project {
   endDate: string;
   brainDump: string;
   bullets: string[];
+  followUpQuestion?: string;
+  userFeedback?: string;
 }
 
 export interface Education {
   id: string;
-  institution: string; 
+  institution: string;
   type: "University" | "School"; // Simplified
   degree: string; // e.g., B.Tech or XII (ISC)
   board?: string; // Optional for university
   startDate?: string; // Optional for schools
   endDate: string; // Acts as "Passing Year" for schools
-  scoreType: "CGPA" | "Percentage"; // <-- NEW
+  scoreType: "CGPA" | "Percentage";
   score: string;
   maxScore: string;
 }
@@ -45,7 +48,7 @@ export interface Achievement {
   id: string;
   title: string;       // e.g., "Codeforces"
   subtitle: string;    // e.g., "Pupil | Max-Rating 1368"
-  link: string;        // <-- NEW
+  link: string;
   bullets: string[];   // Changed to array so they can have multiple lines if needed
 }
 
@@ -56,7 +59,7 @@ interface ResumeBuilderState {
     phone: string;
     linkedin: string;
     github: string;
-    portfolio: string;
+    portfolio?: string;
     location: string;
   };
   coursework: string; // Global coursework field
@@ -67,12 +70,12 @@ interface ResumeBuilderState {
   skills: SkillCategory[]; // Dynamic array instead of fixed object!
   sectionOrder: string[];
   targetRole: string,
-  targetCompany : string,
   // Global Actions
   updateGlobalField: (field: "targetRole" | "targetCompany" | "coursework", value: string) => void;
   updatePersonalInfo: (field: string, value: string) => void;
   updateCoursework: (value: string) => void;
   updateSectionOrder: (newOrder: string[]) => void;
+  updateProjectBulk: (id: string, updates: Partial<Project>) => void;
 
   // Education Actions
   addEducation: () => void;
@@ -102,7 +105,7 @@ interface ResumeBuilderState {
   resetBuilder: () => void;
 };
 
-const useResumeBuilderStore = create<ResumeBuilderState>((set) => ({
+const useResumeBuilderStore = create<ResumeBuilderState>()(persist((set) => ({
   personalInfo: { fullName: "", email: "", phone: "", linkedin: "", github: "", portfolio: "", location: "" },
   coursework: "",
   education: [],
@@ -115,13 +118,17 @@ const useResumeBuilderStore = create<ResumeBuilderState>((set) => ({
     { id: crypto.randomUUID(), category: "Backend", items: "" }
   ],
   targetRole: "",
-  targetCompany : "",
   sectionOrder: ["education", "coursework", "experience", "projects", "skills", "achievements"],
   updateGlobalField: (field, value) => set({ [field]: value }),
   updatePersonalInfo: (field, value) => set((state) => ({ personalInfo: { ...state.personalInfo, [field]: value } })),
   updateCoursework: (value) => set({ coursework: value }),
   updateSectionOrder: (newOrder) => set({ sectionOrder: newOrder }),
-
+  updateProjectBulk: (id, updates) =>
+    set((state) => ({
+      projects: state.projects.map((item) =>
+        item.id === id ? { ...item, ...updates } : item
+      )
+    })),
   addEducation: () => set((state) => ({ education: [...state.education, { id: crypto.randomUUID(), institution: "", type: "University", degree: "", board: "", startDate: "", endDate: "", scoreType: "CGPA", score: "", maxScore: "" }] })),
   updateEducation: (id, field, value) => set((state) => ({ education: state.education.map((item) => item.id === id ? { ...item, [field]: value } : item) })),
   removeEducation: (id) => set((state) => ({ education: state.education.filter((item) => item.id !== id) })),
@@ -148,6 +155,6 @@ const useResumeBuilderStore = create<ResumeBuilderState>((set) => ({
     skills: [{ id: crypto.randomUUID(), category: "Languages", items: "" }, { id: crypto.randomUUID(), category: "Frontend", items: "" }, { id: crypto.randomUUID(), category: "Backend", items: "" }],
     sectionOrder: ["education", "coursework", "experience", "projects", "skills", "achievements"],
   })
-}));
+}), { name: "roundone-resume-store" }));
 
 export default useResumeBuilderStore;

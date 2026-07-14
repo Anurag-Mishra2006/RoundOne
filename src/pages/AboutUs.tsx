@@ -7,15 +7,17 @@ import {
   Share2,
   Coffee,
   MessageSquare,
+  FileEdit,
 } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import useUserStore from "@/store/authStore";
 
 const TECH_STACK = [
-  "React 19", "TypeScript", "Tailwind CSS", "Zustand",
+  "React 19", "TypeScript", "Tailwind CSS", "Framer Motion", "Zustand", // <-- Added Framer Motion
   "Node.js", "Express", "PostgreSQL", "Prisma",
-  "Monaco Editor", "Google Gemini", "OpenAI", "Docker",
-  "Azure", "Redis", "BullMQ", "Cloudinary",
+  "Monaco Editor", "React-PDF", "Google Gemini", "Groq (Whisper)", // <-- Added React-PDF and Groq
+  "Docker", "Redis", "BullMQ", "Cloudinary",
 ];
 
 const FEATURES = [
@@ -23,7 +25,25 @@ const FEATURES = [
     icon: MessageSquare,
     title: "AI Mock Interviews",
     description:
-      "Experience a realistic interview with AI-driven voice and text conversations. The platform displays and speaks each question (TTS), while you answer by voice or typing. Complete 5 HR questions, 5 technical questions, and 1 DSA coding round with your preferred onboarding language's boilerplate already loaded in the editor.",
+      "Experience a realistic interview with AI-driven voice and text conversations. The platform displays and speaks each question (TTS), while you answer by voice or typing. Complete 5 HR questions, 5 technical questions, and 1 DSA coding round.",
+  },
+  {
+    icon: Code2,
+    title: "Practice Arena & Online Judge",
+    description:
+      "Company-tagged DSA questions filterable by difficulty, company, topic, and solved status. Write real code, run it securely in isolated Docker containers, and get instant LeetCode-style verdicts (AC, WA, TLE, MLE).",
+  },
+  {
+    icon: FileEdit,
+    title: "AI Resume Builder",
+    description:
+      "Don't have an ATS-friendly resume? Build one from scratch. Use the 'Interrogative AI' to transform vague project descriptions into FAANG-standard, data-driven bullet points, and instantly generate a perfect single-column PDF.",
+  },
+  {
+    icon: FileSearch,
+    title: "FAANG ATS Checker",
+    description:
+      "An honest resume score, not a flattering one. Get your top 5 target role matches, missing keywords to add, and line-by-line rewrite suggestions before you actually apply.",
   },
   {
     icon: BookOpen,
@@ -32,26 +52,14 @@ const FEATURES = [
       "Striver's A2Z DSA and Blind 75, rating-tiered Codeforces sheets, Core CS (DBMS, OOPS, OS) with lectures and docs, and a system design blueprint with real-world case studies.",
   },
   {
-    icon: Code2,
-    title: "Practice Arena",
-    description:
-      "Company-tagged DSA questions filterable by difficulty, company, topic, and solved status. Write real code, run it securely, and get instant AI feedback with time and space complexity.",
-  },
-  {
-    icon: FileSearch,
-    title: "ATS Checker",
-    description:
-      "An honest resume score, not a flattering one. Get your top 5 target role matches, missing keywords to add, and line-by-line rewrite suggestions before you actually apply.",
-  },
-  {
     icon: LayoutDashboard,
-    title: "Dashboard & history",
+    title: "Dashboard & History",
     description:
       "A consistency heatmap tracking daily DSA practice and mock interviews, plus a full history of every interview you've taken with scores you can look back on.",
   },
   {
     icon: Share2,
-    title: "Shareable report cards",
+    title: "Shareable Report Cards",
     description:
       "Every mock interview generates a report card you can share with a single click — a public link, no login required for whoever you send it to.",
   },
@@ -60,9 +68,10 @@ const FEATURES = [
 const PAGE_URL = "https://roundoneprep.me/about";
 const PAGE_TITLE = "About RoundOne — Built by a student, for students preparing for FAANG interviews";
 const PAGE_DESCRIPTION =
-  "RoundOne is an AI-powered mock interview platform built by Anurag Mishra to help students prepare for technical interviews with real code execution, an honest ATS resume checker, a structured DSA/CP/CS/system design learning hub, and shareable interview report cards.";
+  "RoundOne is an AI-powered mock interview platform built by Anurag Mishra to help students prepare for technical interviews with real code execution, an honest ATS resume checker, a smart AI resume builder, and structured learning roadmaps.";
 
 function AboutUs() {
+  const { user } = useUserStore()
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-[var(--bg)]">
       <Helmet>
@@ -110,11 +119,11 @@ function AboutUs() {
       />
       <div className="relative z-10 mx-auto max-w-3xl px-6 pt-8">
         <Link
-          to="/"
+          to={user ? "/dashboard" : "/"}
           className="inline-flex items-center gap-2 text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Home
+          Back to {user ? "Dashboard" : "Home"}
         </Link>
       </div>
       <div
@@ -128,8 +137,8 @@ function AboutUs() {
       <div className="relative z-10 mx-auto max-w-3xl px-6 pb-24 pt-20">
         {/* Hero */}
         <div className="text-center">
-          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-1.5 text-xs font-medium text-[var(--accent)]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-1.5 text-xs font-medium text-[var(--accent)] shadow-lg shadow-[var(--accent)]/10">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
             BUILT BY ONE DEVELOPER
           </span>
 
@@ -160,20 +169,22 @@ function AboutUs() {
         {/* Why RoundOne exists */}
         <section className="mt-16">
           <h2 className="text-lg font-bold text-[var(--text)]">Why RoundOne exists</h2>
-          <p className="mt-3 text-[var(--text-muted)]">
-            Most mock interview tools either ask generic DSA questions with no
-            context on your background, or they're just a chat window
-            pretending to be an interviewer. Neither prepares you for what
-            actually happens in a FAANG loop — a recruiter who's read your
-            resume, a live coding round with real execution, and pressure
-            that a text box can't simulate.
-          </p>
-          <p className="mt-3 text-[var(--text-muted)]">
-            RoundOne closes that gap: upload your resume, get interview
-            questions tailored to it, write and run real code in an actual
-            editor, and eventually — talk through your answers out loud, the
-            way a real interview works.
-          </p>
+          <div className="mt-3 space-y-4 text-[var(--text-muted)] leading-relaxed">
+            <p>
+              Most mock interview tools either ask generic DSA questions with no
+              context on your background, or they're just a chat window
+              pretending to be an interviewer. Neither prepares you for what
+              actually happens in a FAANG loop — a recruiter who's read your
+              resume, a live coding round with real execution, and pressure
+              that a text box can't simulate.
+            </p>
+            <p>
+              RoundOne closes that gap: upload (or build) your resume, get interview
+              questions tailored to it, write and run real code against hidden test cases in an actual
+              editor, and eventually — talk through your answers out loud, the
+              way a real interview works.
+            </p>
+          </div>
         </section>
 
         {/* What's inside */}
@@ -187,11 +198,11 @@ function AboutUs() {
             {FEATURES.map((feature) => (
               <div
                 key={feature.title}
-                className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4"
+                className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5 hover:border-[var(--accent)]/50 transition-colors"
               >
                 <feature.icon className="h-5 w-5 text-[var(--accent)]" strokeWidth={1.75} />
-                <p className="mt-3 text-sm font-semibold text-[var(--text)]">{feature.title}</p>
-                <p className="mt-1.5 text-sm text-[var(--text-muted)]">{feature.description}</p>
+                <p className="mt-3 text-sm font-bold text-[var(--text)]">{feature.title}</p>
+                <p className="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -201,34 +212,33 @@ function AboutUs() {
         <section className="mt-16 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-8">
           <h2 className="text-lg font-bold text-[var(--text)]">Who's building this</h2>
           <div className="mt-4 flex items-start gap-4">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-pink-500 via-violet-500 to-blue-500 text-lg font-bold text-white">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-pink-500 via-violet-500 to-blue-500 text-lg font-bold text-white shadow-lg shadow-purple-500/20">
               AM
             </div>
             <div>
               <p className="font-semibold text-[var(--text)]">Anurag Mishra</p>
-              <p className="mt-1 text-sm text-[var(--text-muted)]">
+              <p className="mt-1 text-sm text-[var(--text-muted)] leading-relaxed">
                 3rd-year IT student @MMMUT, open-source learner, and
                 competitive programmer. Building RoundOne solo — from the
-                interview logic to the UI you're looking at right now —
-                while prepping for the same interviews it's designed to help
-                with.
+                custom Docker execution engine to the UI you're looking at right now —
+                while prepping for the same interviews it's designed to help with.
               </p>
-              <div className="mt-3 flex gap-4 text-sm">
+              <div className="mt-4 flex gap-4 text-sm font-medium">
                 <a
                   href="https://github.com/Anurag-Mishra2006"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[var(--accent)] hover:underline"
+                  className="text-[var(--accent)] hover:underline flex items-center gap-1"
                 >
-                  GitHub
+                  GitHub ↗
                 </a>
                 <a
                   href="https://www.linkedin.com/in/anurag-mishra-256101318/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[var(--accent)] hover:underline"
+                  className="text-[var(--accent)] hover:underline flex items-center gap-1"
                 >
-                  LinkedIn
+                  LinkedIn ↗
                 </a>
               </div>
             </div>
@@ -242,7 +252,7 @@ function AboutUs() {
             {TECH_STACK.map((tech) => (
               <span
                 key={tech}
-                className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3.5 py-1.5 text-sm text-[var(--text-muted)]"
+                className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3.5 py-1.5 text-sm text-[var(--text-muted)] hover:text-white hover:border-[var(--text-muted)] transition-colors cursor-default"
               >
                 {tech}
               </span>
@@ -251,25 +261,28 @@ function AboutUs() {
         </section>
 
         {/* Support / Buy me a chai */}
-        <section className="mt-16 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8 text-center">
-          <Coffee className="mx-auto h-6 w-6 text-orange-400" strokeWidth={1.75} />
-          <h2 className="mt-3 text-lg font-bold text-[var(--text)]">
-            If RoundOne helped you, consider buying me a chai
-          </h2>
-          <p className="mx-auto mt-2 max-w-md text-sm text-[var(--text-muted)]">
-            No subscriptions, no upsells — just a solo student building this
-            in between classes and interview prep of my own. If it's been
-            useful, a chai goes a long way.
-          </p>
-          <a
-            href="https://buymeachai.ezee.li/supreme_1"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-black transition-opacity hover:opacity-90"
-          >
-            <Coffee className="h-4 w-4" strokeWidth={2} />
-            Buy me a chai
-          </a>
+        <section className="mt-16 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8 text-center relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="relative z-10">
+            <Coffee className="mx-auto h-8 w-8 text-orange-400 mb-4" strokeWidth={1.75} />
+            <h2 className="text-xl font-bold text-[var(--text)]">
+              If RoundOne helped you, consider buying me a chai
+            </h2>
+            <p className="mx-auto mt-3 max-w-md text-sm text-[var(--text-muted)] leading-relaxed">
+              No subscriptions, no upsells, no paywalls — just a solo student building this
+              in between classes and interview prep of my own. If it's been
+              useful to you, a chai goes a long way.
+            </p>
+            <a
+              href="https://buymeachai.ezee.li/supreme_1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 px-6 py-3 text-sm font-bold text-white shadow-lg hover:shadow-orange-500/30 hover:-translate-y-0.5 transition-all"
+            >
+              <Coffee className="h-4 w-4" strokeWidth={2.5} />
+              Buy me a chai
+            </a>
+          </div>
         </section>
       </div>
     </div>
