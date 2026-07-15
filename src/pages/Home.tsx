@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import useUserStore from "@/store/authStore";
 import { motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
 
@@ -7,16 +7,28 @@ import { motion, useMotionValue, useSpring, useScroll, useTransform } from "fram
 const features = [
     { icon: "🧠", title: "Multi-Modal AI Interviews", desc: "Face 3 dynamic rounds (HR, Tech, DSA). Questions are generated in real-time based strictly on your resume." },
     { icon: "🎙️", title: "Native Voice Layer", desc: "Stop typing. The AI reads questions out loud, and you answer using your microphone with Groq/Whisper transcription." },
-    { icon: "🔗", title: "Shareable Report Cards", desc: "Flex your skills. Generate a public link for your interview results to share with friends, challenge peers, or post on LinkedIn for recruiters." },
+    { icon: "🛠️", title: "AI Resume Builder", desc: "Build a FAANG-standard, single-column PDF from scratch. Our 'Interrogative AI' extracts your experience and writes perfect bullet points." },
     { icon: "📄", title: "FAANG ATS Checker", desc: "Upload any resume and get a ruthless score out of 100. Get missing keywords, role predictions, and AI rewrites." },
     { icon: "📚", title: "The Learning Hub", desc: "Structured roadmaps (Striver A2Z, CP, Sys-Design). Your progress is saved persistently so you never lose track of what to learn next." },
     { icon: "📈", title: "Analytics Dashboard", desc: "Save your interview history forever. Track your consistency with a GitHub-style heatmap and share public report cards." },
 ];
 
 const testimonials = [
-    { name: "Sarah J.", role: "SDE II at Amazon", text: "The AI interviewer was brutally honest. It caught the exact flaw in my sliding window approach that a real Amazon interviewer did a year ago." },
-    { name: "David C.", role: "Frontend Engineer at Vercel", text: "The native voice layer is insane. It genuinely felt like I was talking to an engineer. I stopped looking at the screen and just coded." },
-    { name: "Priya R.", role: "New Grad", text: "Striver's A2Z integrated directly into my dashboard? Plus the ATS checker? This got me my first 3 interview calls." }
+    { 
+        name: "Priya R.", 
+        role: "Recent CS Grad", 
+        text: "I was using a fancy two-column resume and getting auto-rejected. The builder forced me into a clean ATS format, and the AI literally interrogated me to extract the actual business impact of my projects." 
+    },
+    { 
+        name: "Sneha K.", 
+        role: "Backend Engineer", 
+        text: "Was skeptical at first, expecting just another ChatGPT wrapper. But the fact that it actually spins up a secure sandbox and compiles my Java code against hidden test cases is seriously impressive." 
+    },
+    { 
+        name: "Rahul Sharma", 
+        role: "SDE-1 Candidate", 
+        text: "I always freeze up in live interviews. Practicing with the voice AI forced me to explain my logic out loud instead of just coding in silence. It’s brutal, but it’s exactly what I needed to gain confidence." 
+    }
 ];
 
 // Focus ticker on the Mock Interview tech stack
@@ -24,9 +36,9 @@ const liveActivity = [
     "🎙️ Groq Whisper Voice Engine Active",
     "📄 Edge-TTS Text Engine Active",
     "🧠 Dynamic AI Question Generation Live",
+    "🛠️ Interrogative AI Resume Builder Online",
     "🎯 FAANG ATS Scoring Updated",
     "📈 Track Your Learning Sheet Progress",
-    // "⚡ Docker Sandbox Execution Active"
 ];
 
 function Home() {
@@ -123,7 +135,7 @@ function Home() {
                     </h1>
 
                     <p className="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl leading-relaxed font-medium">
-                        Your personal prep arena. Upload your resume, write real code, and face voice-enabled AI recruiters tailored exactly to your background.
+                        Your personal prep arena. Upload or build your resume, write real code, and face voice-enabled AI recruiters tailored exactly to your background.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -155,8 +167,8 @@ function Home() {
                             <div className="flex-1 w-full bg-white/5 border border-white/10 rounded-2xl p-6 text-center relative overflow-hidden group">
                                 <div className="absolute top-0 left-0 w-full h-1 bg-purple-500/50"></div>
                                 <div className="w-14 h-14 mx-auto bg-purple-500/20 rounded-xl flex items-center justify-center text-2xl mb-4 border border-purple-500/30">📄</div>
-                                <div className="font-bold text-white mb-2 text-lg">1. Upload Resume</div>
-                                <div className="text-sm text-gray-400">PDF parsed & skills extracted securely.</div>
+                                <div className="font-bold text-white mb-2 text-lg">1. Build or Upload</div>
+                                <div className="text-sm text-gray-400">Generate a FAANG resume or upload your own.</div>
                             </div>
 
                             {/* Arrow */}
@@ -262,7 +274,7 @@ function Home() {
                             </span>
                         </h2>
                         <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-                            Upload your resume, track your learning sheets persistently, and ace your next technical screen.
+                            Build your resume, track your learning sheets persistently, and ace your next technical screen.
                         </p>
 
                         <Link
