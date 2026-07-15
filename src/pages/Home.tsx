@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useUserStore from "@/store/authStore";
 import { motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
 
