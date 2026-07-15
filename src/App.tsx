@@ -28,6 +28,7 @@ import PracticeDashboard from "./pages/PractiseDashboard";
 import PracticeArena from "./pages/PracticeArena";
 import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
+import ResumeBuilder from "./pages/ResumeBuilder";
 
 function App() {
   const { isAuthenticate, setUser, clearUser } = useUserStore();
@@ -95,6 +96,7 @@ function App() {
         <Route path="/review/:id" element={<ProtectedRoute isAuthCheck={isAuthCheck}><Review /></ProtectedRoute>} />
         <Route path="/learning" element={<ProtectedRoute isAuthCheck={isAuthCheck}><LearningHub /></ProtectedRoute>} />
         <Route path="/learning/:categoryId" element={<ProtectedRoute isAuthCheck={isAuthCheck}><LearningSheet /></ProtectedRoute>} />
+        <Route path='/resume-builder' element={<ProtectedRoute isAuthCheck={isAuthCheck}><ResumeBuilder /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );

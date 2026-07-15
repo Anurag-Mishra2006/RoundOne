@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import useUserStore from "@/store/authStore";
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
@@ -63,16 +64,16 @@ function ContactUs() {
             setStatus("error");
         }
     };
-
+    const {user}  = useUserStore()
     return (
         <div className="relative min-h-screen w-full overflow-hidden bg-[var(--bg)]">
             <div className="relative z-10 mx-auto max-w-3xl px-6 pt-8">
                 <Link
-                    to="/"
+                    to={user? "/dashboard": "/"}
                     className="inline-flex items-center gap-2 text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]"
                 >
                     <ArrowLeft className="h-4 w-4" />
-                    Back to Home
+                    Back to {user ? "Dashboard" : "Home"}
                 </Link>
             </div>
             <div

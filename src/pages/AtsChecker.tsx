@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { checkAtsResume } from "@/services/api";
 import Navbar from '@/components/Navbar.js';
 import { motion, type Variants } from 'framer-motion';
+import { useLocation } from "react-router-dom";
 
 interface AtsResult {
     overallScore: number,
@@ -92,16 +93,26 @@ function AtsChecker() {
         hidden: { opacity: 0 },
         visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
     };
-    
+
     const itemVariants: Variants = {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
     };
+    const location = useLocation();
+    useEffect(() => {
+        // If the user came from the Resume Builder, grab the generated file!
+        if (location.state?.autoUploadFile) {
+            setFile(location.state.autoUploadFile);
+            
+            // Clean up the location state so it doesn't auto-trigger if they refresh the page
+            window.history.replaceState({}, document.title);
+        }
+    }, [location])
 
     return (
         <div className="min-h-screen bg-[var(--bg)] font-sans flex flex-col">
             <Navbar />
-            
+
             {!result ? (
                 // --- THE PREMIUM UPLOAD FORM (SPLIT SCREEN) ---
                 <div className="flex-grow flex items-center justify-center px-6 py-12 relative overflow-hidden">
@@ -109,12 +120,12 @@ function AtsChecker() {
                     <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-purple-900/20 rounded-full blur-[120px] pointer-events-none"></div>
 
                     <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center z-10">
-                        
+
                         {/* LEFT SIDE: Marketing & Features */}
                         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="hidden lg:flex flex-col space-y-10 pr-8">
                             <div>
                                 <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4">
-                                    Beat the <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-[var(--accent)]">ATS algorithm.</span>
+                                    Beat the <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-[var(--accent)]">ATS algorithm.</span>
                                 </motion.h2>
                                 <motion.p variants={itemVariants} className="text-[var(--text-muted)] text-lg leading-relaxed max-w-md">
                                     Don't guess what recruiters want. Upload your resume to see exactly how FAANG systems score your profile.
@@ -202,7 +213,7 @@ function AtsChecker() {
 
                                     <button type="submit" disabled={loading || !file} className="w-full rounded-xl bg-[var(--accent)] py-4 text-sm font-bold text-white transition-all hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(170,59,255,0.2)] hover:shadow-[0_0_25px_rgba(170,59,255,0.4)] flex justify-center items-center gap-2 hover:-translate-y-0.5 active:translate-y-0 overflow-hidden relative">
                                         {loading ? (
-                                            <motion.div 
+                                            <motion.div
                                                 key={loadingTextIdx} // Key change forces re-animation
                                                 initial={{ opacity: 0, y: 10 }}
                                                 animate={{ opacity: 1, y: 0 }}
@@ -223,10 +234,10 @@ function AtsChecker() {
                 // --- THE RESULTS DASHBOARD (BENTO BOX LAYOUT) ---
                 <div className="flex-grow px-4 py-12">
                     <motion.div variants={containerVariants} initial="hidden" animate="visible" className="max-w-5xl mx-auto">
-                        
+
                         {/* Top Area: Bento Box Grid */}
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-                            
+
                             {/* Left Column: Score & Roles */}
                             <div className="lg:col-span-1 space-y-6">
                                 {/* Score Card */}
@@ -237,11 +248,11 @@ function AtsChecker() {
                                         {/* Animated SVG Ring */}
                                         <svg className="w-32 h-32 transform -rotate-90">
                                             <circle cx="64" cy="64" r="60" stroke="var(--border)" strokeWidth="8" fill="none" />
-                                            <motion.circle 
-                                                cx="64" cy="64" r="60" 
-                                                stroke={result.overallScore >= 80 ? 'var(--success)' : result.overallScore >= 50 ? 'var(--warning)' : 'var(--danger)'} 
-                                                strokeWidth="8" fill="none" 
-                                                strokeDasharray="377" 
+                                            <motion.circle
+                                                cx="64" cy="64" r="60"
+                                                stroke={result.overallScore >= 80 ? 'var(--success)' : result.overallScore >= 50 ? 'var(--warning)' : 'var(--danger)'}
+                                                strokeWidth="8" fill="none"
+                                                strokeDasharray="377"
                                                 initial={{ strokeDashoffset: 377 }}
                                                 animate={{ strokeDashoffset: 377 - (377 * result.overallScore) / 100 }}
                                                 transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
@@ -287,7 +298,7 @@ function AtsChecker() {
 
                             {/* Right Column: Breakdown & Issues */}
                             <div className="lg:col-span-2 space-y-6">
-                                
+
                                 {/* Critical Issues */}
                                 {result.criticalIssues && result.criticalIssues.length > 0 && (
                                     <motion.div variants={itemVariants} className="p-6 bg-[var(--danger)]/5 border border-[var(--danger)]/30 rounded-2xl">
@@ -307,7 +318,7 @@ function AtsChecker() {
                                 <motion.div variants={itemVariants}>
                                     <h3 className="text-sm font-bold text-[var(--text)] uppercase tracking-wider mb-4 pl-1">Category Breakdown</h3>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        {Object.entries(result.sectionScores).map(([key, data]: [string, any])  => {
+                                        {Object.entries(result.sectionScores).map(([key, data]: [string, any]) => {
                                             const score = typeof data === 'number' ? data : data?.score || 0;
                                             const feedback = typeof data === 'number' ? "Score assigned based on overall ATS parsability." : data?.feedback;
 
@@ -331,7 +342,7 @@ function AtsChecker() {
 
                         {/* Bottom Area: Line-by-Line & Keywords */}
                         <motion.div variants={itemVariants} className="space-y-6">
-                            
+
                             {/* Missing Keywords */}
                             {result.missingKeywords && result.missingKeywords.length > 0 && (
                                 <div className="p-6 bg-[var(--surface)] border border-[var(--border)] rounded-2xl">
@@ -379,7 +390,7 @@ function AtsChecker() {
                         {/* Reset Button */}
                         <motion.div variants={itemVariants} className="pt-8">
                             <button
-                                onClick={() => { setResult(null); setFile(null); window.scrollTo(0,0); }}
+                                onClick={() => { setResult(null); setFile(null); window.scrollTo(0, 0); }}
                                 className="w-full max-w-md mx-auto block rounded-xl bg-[var(--accent)] px-4 py-4 text-sm font-bold text-white hover:bg-[var(--accent-hover)] transition-all shadow-[0_0_15px_rgba(170,59,255,0.2)] hover:shadow-[0_0_25px_rgba(170,59,255,0.4)] hover:-translate-y-1"
                             >
                                 Scan Another Resume ➔

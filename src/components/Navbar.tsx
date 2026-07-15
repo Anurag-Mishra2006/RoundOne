@@ -64,6 +64,7 @@ function Navbar() {
             <Link to="/ats-check" className={navClass(["/ats-check"])}>
               ATS Checker
             </Link>
+            <Link to="/resume-builder" className={navClass(["/resume-builder"])}>Resume Builder</Link> 
 
             <Link to="/learning" className={navClass(["/learning"])}>
               Learning Hub
