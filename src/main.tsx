@@ -5,6 +5,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { Analytics } from "@vercel/analytics/react"
 createRoot(document.getElementById('root')!).render(
     <HelmetProvider>
+        <Analytics/>
         <App />
     </HelmetProvider>
 )
