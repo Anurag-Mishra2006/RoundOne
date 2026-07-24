@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
 import ResumePDF from "@/components/resume-builder/ResumePDF";
 import PersonalInfoForm from "@/components/resume-builder/PersonalInfoForm";
