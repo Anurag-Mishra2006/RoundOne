@@ -5,7 +5,9 @@ const styles = StyleSheet.create({
   page: { padding: '24px 32px', fontFamily: 'Times-Roman', fontSize: 10, color: '#000', lineHeight: 1.3 },
   
   headerContainer: { textAlign: 'center', marginBottom: 10 },
-  name: { fontSize: 20, fontWeight: 'bold', textTransform: 'uppercase', marginBottom: 3, letterSpacing: 1 },
+  
+  name: { fontSize: 20, fontWeight: 'bold', textTransform: 'uppercase', marginBottom: 8, letterSpacing: 1 },
+  
   contactRow: { display: 'flex', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap', fontSize: 9 },
   contactItem: { marginHorizontal: 4 },
   link: { color: 'blue', textDecoration: 'none' },
@@ -34,9 +36,7 @@ export default function ResumePDF() {
     switch (sectionName) {
       
       case "education":
-        // Don't render if array is empty
         if (!state.education || state.education.length === 0) return null;
-        // Don't render if the user added a block but left it completely blank
         if (!state.education[0].institution) return null;
         
         return (
@@ -130,7 +130,6 @@ export default function ResumePDF() {
         );
 
       case "skills":
-        // Check if there is at least one skill category with actual text in it
         const hasSkills = state.skills.some(skill => skill.category.trim() !== "" && skill.items.trim() !== "");
         if (!hasSkills) return null;
 
@@ -156,7 +155,6 @@ export default function ResumePDF() {
 
         return (
           <View key="ach" wrap={false}>
-            {/* Answering your question: Yes, it is perfectly OK to combine them into one header! */}
             <Text style={styles.sectionHeader}>Achievements and Competitive Programming</Text>
             {state.achievements.map((ach) => (
               <View key={ach.id} style={{ marginBottom: 4 }}>
@@ -192,7 +190,9 @@ export default function ResumePDF() {
         {/* Header */}
         <View style={styles.headerContainer}>
           <Text style={styles.name}>{p.fullName || "YOUR NAME"}</Text>
-          {p.location && <Text style={{ marginBottom: 2 }}>{p.location}</Text>}
+          
+          {/* 2. Added marginTop and increased marginBottom to isolate the address from the name and the contact links */}
+          {p.location && <Text style={{ marginTop: 2, marginBottom: 6 }}>{p.location}</Text>}
           
           <View style={styles.contactRow}>
             {p.phone && <Text style={styles.contactItem}>{p.phone}</Text>}
