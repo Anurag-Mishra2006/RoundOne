@@ -2,7 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Editor from '@monaco-editor/react';
 import ReactMarkdown from 'react-markdown';
-import { getDSARoundSession, submitDSARoundSession } from "@/services/api.js";
+import { motion } from 'framer-motion';
+// ADDED: submitCode and getCodeResult for the "Run Code" feature
+import { getDSARoundSession, submitDSARoundSession, submitCode, getCodeResult } from "@/services/api";
 
 const BOILERPLATES: Record<string, string> = {
     python: "import sys\n\ndef solve():\n    # Read all standard input\n    input_data = sys.stdin.read().split()\n    if not input_data: return\n    \n    # Write your logic here\n    \n\nif __name__ == '__main__':\n    solve()",
@@ -16,20 +18,22 @@ export default function DsaMockArena() {
     const navigate = useNavigate();
 
     const [questions, setQuestions] = useState<any[]>([]);
-    const [activeQIndex, setActiveQIndex] = useState(0);
+    const [activeQIndex, setActiveQIndex] = useState(0); 
     const [loading, setLoading] = useState(true);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     //  MULTI-QUESTION EDITOR STATE  
     const [language, setLanguage] = useState("cpp");
     const [codes, setCodes] = useState<string[]>([
-        BOILERPLATES["cpp"],
-        BOILERPLATES["cpp"],
-        BOILERPLATES["cpp"]
+        BOILERPLATES["cpp"], BOILERPLATES["cpp"], BOILERPLATES["cpp"]
     ]);
 
+    // --- RUN CODE (CONSOLE) STATE ---
+    const [isRunning, setIsRunning] = useState(false);
+    const [runResult, setRunResult] = useState<any>(null); // Stores result of visible test cases
+
     // ---  TIMER & EXAM STATE ---
-    const [timeLeft, setTimeLeft] = useState(90 * 60);
+    const [timeLeft, setTimeLeft] = useState(90 * 60); 
     const [warnings, setWarnings] = useState(0);
     const hasSubmitted = useRef(false);
 
@@ -38,11 +42,8 @@ export default function DsaMockArena() {
         const fetchSession = async () => {
             try {
                 if (!sessionId) return;
-
-                // FIXED: Fetch the session details using the ID from the URL!
                 const res = await getDSARoundSession(sessionId);
                 setQuestions(res.data.questions);
-
             } catch (error) {
                 console.error("Failed to load session:", error);
                 alert("Failed to load Assessment. Returning to Dashboard.");
@@ -57,7 +58,7 @@ export default function DsaMockArena() {
     // --- TIMER LOGIC ---
     useEffect(() => {
         if (timeLeft <= 0 && !hasSubmitted.current) {
-            handleFinalSubmit();
+            handleFinalSubmit(); 
             return;
         }
         const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
@@ -107,18 +108,69 @@ export default function DsaMockArena() {
 
         if (isCustomCode) {
             const confirmChange = window.confirm("Warning: Changing the language will reset your code for THIS question. Are you sure?");
-            if (!confirmChange) return;
+            if (!confirmChange) return; 
         }
 
         setLanguage(newLang);
         const newCodes = [...codes];
-        newCodes[activeQIndex] = BOILERPLATES[newLang];
+        newCodes[activeQIndex] = BOILERPLATES[newLang]; 
         setCodes(newCodes);
+        setRunResult(null); // Clear console when switching languages
     };
 
+    // --- RUN CODE LOGIC (Contest Mode) ---
+    const pollResult = (jobId: string) => {
+        const interval = setInterval(async () => {
+            try {
+                const res = await getCodeResult(jobId);
+                const jobData = res.data;
+
+                if (jobData.status === "completed") {
+                    clearInterval(interval);
+                    const executionResult = jobData.result.result;
+                    const dockerResult = Array.isArray(executionResult.results) ? executionResult.results[0] : executionResult;
+                    
+                    const actualOutput = (dockerResult.stdout || dockerResult.stderr || "").trim();
+                    const expectedOutput = (dockerResult.expectedOutput || questions[activeQIndex].testCases[0]?.expectedOutput || "").trim();
+                    const verdict = dockerResult.verdict === "AC" ? "Accepted" : dockerResult.verdict === "WA" ? "Wrong Answer" : dockerResult.verdict;
+
+                    setRunResult({ verdict, stdout: actualOutput, input: questions[activeQIndex].testCases[0]?.input, expectedOutput });
+                    setIsRunning(false);
+                } else if (jobData.status === "failed") {
+                    clearInterval(interval);
+                    setRunResult({ verdict: "System Error", stdout: "Execution failed." });
+                    setIsRunning(false);
+                }
+            } catch (err) {
+                clearInterval(interval);
+                setIsRunning(false);
+            }
+        }, 1000);
+    };
+
+    const handleRunCode = async () => {
+        if (!codes[activeQIndex].trim()) return;
+        setIsRunning(true);
+        setRunResult(null);
+
+        try {
+            // We only send the visible test cases we fetched earlier
+            const response = await submitCode({
+                language,
+                code: codes[activeQIndex],
+                testCases: questions[activeQIndex].testCases 
+            });
+            pollResult(response.data.submissionId);
+        } catch (error) {
+            console.error(error);
+            setRunResult({ verdict: "Error", stdout: "Failed to connect to execution server." });
+            setIsRunning(false);
+        }
+    };
+
+    // --- FINAL SUBMIT ---
     const handleFinalSubmit = async () => {
         if (hasSubmitted.current) return;
-
         if (timeLeft > 0) {
             const confirmSubmit = window.confirm("Are you sure you want to finish and submit the assessment?");
             if (!confirmSubmit) return;
@@ -137,11 +189,7 @@ export default function DsaMockArena() {
         };
 
         try {
-            console.log("Submitting payload to backend:", payload);
-            // FIXED: Actually calls your API!
             await submitDSARoundSession(payload);
-
-            // Redirect to dashboard where they can review the Post-Match Report
             navigate('/dashboard');
         } catch (error) {
             console.error("Failed to submit:", error);
@@ -158,23 +206,27 @@ export default function DsaMockArena() {
 
     return (
         <div className="min-h-screen bg-[#050505] font-sans flex flex-col h-screen overflow-hidden selection:bg-red-500/30">
-
-            {/* --- TOP BAR (Strict Exam Header - No Navbar) --- */}
+            
+            {/* --- TOP BAR --- */}
             <div className="h-14 bg-red-900/10 border-b border-red-500/20 flex justify-between items-center px-6 shrink-0 backdrop-blur-md">
                 <div className="flex items-center gap-3">
                     <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.8)]"></div>
-                    <div className="text-red-400 font-bold text-sm tracking-widest uppercase">
-                        Live Assessment
+                    <div className="text-red-400 font-bold text-sm tracking-widest uppercase">Live Assessment</div>
+                </div>
+                
+                <div className="flex items-center gap-6">
+                    {warnings > 0 && (
+                        <div className="bg-red-500/20 text-red-500 border border-red-500/50 px-3 py-1 rounded-full text-xs font-bold animate-pulse">
+                            ⚠️ Warnings: {warnings}/3
+                        </div>
+                    )}
+                    <div className={`text-2xl font-mono font-black tracking-wider ${timeLeft < 300 ? 'text-red-500 animate-pulse' : 'text-white'}`}>
+                        {formatTime(timeLeft)}
                     </div>
                 </div>
 
-                {/* TIMER */}
-                <div className={`text-2xl font-mono font-black tracking-wider ${timeLeft < 300 ? 'text-red-500 animate-pulse' : 'text-white'}`}>
-                    {formatTime(timeLeft)}
-                </div>
-
-                <button
-                    onClick={handleFinalSubmit}
+                <button 
+                    onClick={handleFinalSubmit} 
                     disabled={isSubmitting}
                     className="bg-red-600/80 hover:bg-red-500 text-white border border-red-400/50 px-5 py-1.5 rounded-lg text-sm font-bold transition-all disabled:opacity-50 shadow-[0_0_15px_rgba(239,68,68,0.2)] flex items-center gap-2"
                 >
@@ -184,61 +236,64 @@ export default function DsaMockArena() {
             </div>
 
             <div className="flex-grow flex flex-col lg:flex-row w-full h-[calc(100vh-56px)] p-4 gap-4">
-
+                
                 {/* --- LEFT PANEL --- */}
                 <div className="w-full lg:w-1/2 flex flex-col gap-4 h-full overflow-hidden">
                     <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl flex flex-col overflow-hidden h-full shadow-lg">
-
-                        {/* QUESTION TABS */}
+                        
                         <div className="flex border-b border-[var(--border)] bg-[var(--bg)]/50 shrink-0">
                             {questions.map((q, idx) => (
                                 <button
                                     key={q.id}
-                                    onClick={() => setActiveQIndex(idx)}
-                                    className={`flex-1 py-4 text-sm font-bold border-b-2 transition-all ${activeQIndex === idx
-                                            ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5'
-                                            : 'border-transparent text-[var(--text-muted)] hover:text-white hover:bg-white/5'
-                                        }`}
+                                    onClick={() => {
+                                        setActiveQIndex(idx);
+                                        setRunResult(null); // Clear console on tab switch
+                                    }}
+                                    className={`flex-1 py-4 text-sm font-bold border-b-2 transition-all ${
+                                        activeQIndex === idx ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/5' : 'border-transparent text-[var(--text-muted)] hover:text-white hover:bg-white/5'
+                                    }`}
                                 >
                                     Q{idx + 1}. {q.difficulty === 'EASY' ? 'Easy' : q.difficulty === 'MEDIUM' ? 'Medium' : 'Hard'}
                                 </button>
                             ))}
                         </div>
 
-                        {/* QUESTION DESCRIPTION */}
                         <div className="p-6 overflow-y-auto flex-grow flex flex-col relative custom-scrollbar">
                             <div className="flex items-center gap-3 mb-4">
-                                <span className={`text-xs font-bold px-3 py-1 rounded-md border ${currentQ.difficulty === 'EASY' ? 'text-green-400 bg-green-400/10 border-green-400/20' :
-                                        currentQ.difficulty === 'MEDIUM' ? 'text-yellow-400 bg-yellow-400/10 border-yellow-400/20' :
-                                            'text-red-400 bg-red-400/10 border-red-400/20'
-                                    }`}>
-                                    {currentQ.difficulty}
-                                </span>
+                                <span className={`text-xs font-bold px-3 py-1 rounded-md border ${
+                                    currentQ.difficulty === 'EASY' ? 'text-green-400 bg-green-400/10 border-green-400/20' :
+                                    currentQ.difficulty === 'MEDIUM' ? 'text-yellow-400 bg-yellow-400/10 border-yellow-400/20' :
+                                    'text-red-400 bg-red-400/10 border-red-400/20'
+                                }`}>{currentQ.difficulty}</span>
                             </div>
-
                             <h1 className="text-3xl font-bold text-white mb-6">{currentQ.title}</h1>
-
-                            <div className="prose prose-invert prose-p:text-[var(--text-muted)] prose-pre:bg-[var(--bg)] prose-pre:border prose-pre:border-[var(--border)] max-w-none">
+                            <div className="prose prose-invert max-w-none text-sm text-[var(--text-muted)]">
                                 <ReactMarkdown>{currentQ.description}</ReactMarkdown>
                             </div>
-
-                            {/* Constraints & Notice */}
-                            <div className="mt-8 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl">
-                                <p className="text-xs font-bold text-yellow-500 uppercase tracking-wider mb-1">⚠️ Assessment Notice</p>
-                                <p className="text-sm text-yellow-500/80">You cannot run code against custom test cases in this mock environment. Your code will be evaluated against hidden test cases upon final submission.</p>
+                            
+                            <div className="mt-8 space-y-4">
+                                <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-3">Visible Examples</h3>
+                                {currentQ.testCases.map((tc: any, idx: number) => (
+                                    <div key={idx} className="bg-[var(--bg)] border border-[var(--border)] rounded-xl p-4">
+                                        <p className="text-xs font-bold text-[var(--text-muted)] mb-3">Example {idx + 1}</p>
+                                        <div className="space-y-2 font-mono text-sm">
+                                            <div><span className="text-[var(--text-muted)]">Input: </span><span className="text-white whitespace-pre-wrap">{tc.input}</span></div>
+                                            <div><span className="text-[var(--text-muted)]">Output: </span><span className="text-white whitespace-pre-wrap">{tc.expectedOutput}</span></div>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* --- RIGHT PANEL (Editor) --- */}
+                {/* --- RIGHT PANEL (Editor & Console) --- */}
                 <div className="w-full lg:w-1/2 flex flex-col gap-4 h-full">
-                    <div className="bg-[var(--surface)] border border-[var(--border)] rounded-t-2xl p-3 flex justify-between items-center shrink-0">
-
-                        <select
+                     <div className="bg-[var(--surface)] border border-[var(--border)] rounded-t-2xl p-3 flex justify-between items-center shrink-0">
+                         <select
                             value={language}
                             onChange={handleLanguageChange}
-                            className="bg-[var(--bg)] border border-[var(--border)] text-white text-sm rounded-lg px-3 py-1.5 outline-none cursor-pointer focus:border-[var(--accent)] transition-colors"
+                            className="bg-[var(--bg)] border border-[var(--border)] text-white text-sm rounded-lg px-3 py-1.5 outline-none cursor-pointer"
                         >
                             <option value="cpp">C++</option>
                             <option value="python">Python</option>
@@ -246,29 +301,54 @@ export default function DsaMockArena() {
                             <option value="javascript">JavaScript</option>
                         </select>
 
-                        <span className="text-[var(--text-muted)] text-xs font-bold animate-pulse px-2">
-                            Secure Environment Active
-                        </span>
-                    </div>
+                         <button 
+                             onClick={handleRunCode}
+                             disabled={isRunning || isSubmitting}
+                             className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-4 py-1.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2"
+                         >
+                             {isRunning ? "Running..." : "▶ Run Code"}
+                         </button>
+                     </div>
 
-                    <div className="flex-grow border border-[var(--border)] overflow-hidden rounded-b-2xl shadow-lg relative">
+                     <div className="flex-grow border-x border-[var(--border)] overflow-hidden">
                         <Editor
                             height="100%"
                             language={language === "cpp" ? "cpp" : language}
                             theme="vs-dark"
-                            value={codes[activeQIndex]}
+                            value={codes[activeQIndex]} 
                             onChange={handleCodeChange}
-                            options={{
-                                minimap: { enabled: false },
-                                fontSize: 14,
-                                padding: { top: 16 },
-                                fontFamily: "'Fira Code', 'JetBrains Mono', monospace",
-                                contextmenu: false,
-                            }}
+                            options={{ minimap: { enabled: false }, fontSize: 14, padding: { top: 16 }, contextmenu: false }}
                         />
                     </div>
-                </div>
 
+                    {/* --- CONSOLE WINDOW --- */}
+                    <div className="h-64 bg-[var(--surface)] border border-[var(--border)] rounded-b-2xl p-4 overflow-y-auto shrink-0 relative custom-scrollbar">
+                        {!runResult ? (
+                            <div className="h-full flex items-center justify-center text-[var(--text-muted)] text-sm">
+                                Run your code to test against visible examples.
+                            </div>
+                        ) : (
+                            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+                                <h3 className={`text-xl font-extrabold ${runResult.verdict === 'Accepted' || runResult.verdict === 'AC' ? 'text-green-400' : 'text-red-400'}`}>
+                                    {runResult.verdict}
+                                </h3>
+
+                                <div className="flex flex-col gap-3 mt-4">
+                                    <div className="bg-[var(--bg)] border border-[var(--border)] rounded-xl overflow-hidden">
+                                        <div className="bg-white/5 px-4 py-2 border-b border-[var(--border)] text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Input</div>
+                                        <pre className="p-4 text-sm text-white font-mono whitespace-pre-wrap">{runResult.input}</pre>
+                                    </div>
+                                    <div className="bg-[var(--bg)] border border-[var(--border)] rounded-xl overflow-hidden">
+                                        <div className="bg-white/5 px-4 py-2 border-b border-[var(--border)] text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Your Output</div>
+                                        <pre className={`p-4 text-sm font-mono whitespace-pre-wrap ${runResult.verdict === 'Accepted' ? 'text-green-400' : 'text-red-400'}`}>
+                                            {runResult.stdout || "No output generated."}
+                                        </pre>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
     );

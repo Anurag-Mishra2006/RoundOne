@@ -133,16 +133,19 @@ export const getQuestionSubmissions = async (questionId: string) => {
 
 // dsa mock interview session
 export const getDSARoundQuestions = async(data: {company: string})=>{
-    return await api.post("/dsa-mock-interview", data);
+    return await api.post("/practice/dsa-mock-interview", data);
 }
 export const getAvailableCompanies = async()=>{
-    return await api.get("/get-available-companies");
+    return await api.get("/practice/get-available-companies");
 }
 export const getDSARoundSession = async (sessionId: string) => {
-    return await api.get(`/dsa-mock-interview/session/${sessionId}`);
+    return await api.get(`/practice/dsa-mock-interview/session/${sessionId}`);
 };
 
 export const submitDSARoundSession = async (data: { sessionId: string, submissions: { questionId: string, code: string, language: string }[] }) => {
-    return await api.post("/dsa-mock-interview/submit", data);
+    return await api.post("/practice/dsa-mock-interview/submit", data);
 };
 
+export const getDSARoundReview = async (sessionId: string) => {
+    return await api.get(`/practice/dsa-mock-interview/review/${sessionId}`);  
+};
