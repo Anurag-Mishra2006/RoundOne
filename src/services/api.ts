@@ -147,5 +147,8 @@ export const submitDSARoundSession = async (data: { sessionId: string, submissio
 };
 
 export const getDSARoundReview = async (sessionId: string) => {
-    return await api.get(`/practice/dsa-mock-interview/review/${sessionId}`);  
+    return await api.get(`/practice/review/${sessionId}`);  
+};
+export const getDSARoundHistory = async () => {
+    return await api.get("/practice/dsa-mock-interview/history");
 };
