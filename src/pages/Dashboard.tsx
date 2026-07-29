@@ -23,33 +23,49 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [copiedId, setCopiedId] = useState<string | null>(null);
+    
+    // NEW: State to toggle "View All History"
+    const [showAllHistory, setShowAllHistory] = useState(false);
 
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                // 1. Fetch Voice Interviews
-                const voiceRes = await getInterviewHistory();
-                const voiceSessions = voiceRes.data.sessions || [];
+                // 1. Fetch Voice Interviews (Ultra-Bulletproof)
+                let voiceSessions = [];
+                try {
+                    const voiceRes = await getInterviewHistory();
+                    // Catch it whether backend sends { sessions: [] }, { history: [] }, or { data: [] }
+                    voiceSessions = voiceRes.data.sessions || voiceRes.data.history || voiceRes.data.data || voiceRes.data || [];
+                    if (!Array.isArray(voiceSessions)) voiceSessions = [];
+                    console.log("Fetched Voice Sessions:", voiceSessions.length);
+                } catch (e) {
+                    console.error("Voice History API failed:", e);
+                }
 
                 // 2. Fetch DSA Mock OAs
                 let dsaSessions = [];
                 try {
                     const dsaMockRes = await getDSARoundHistory();
-                    dsaSessions = dsaMockRes.data.history || [];
-                } catch (e) { console.error("DSA History failed", e); }
+                    dsaSessions = dsaMockRes.data.history || dsaMockRes.data.sessions || dsaMockRes.data.data || [];
+                    console.log("Fetched DSA Sessions:", dsaSessions.length);
+                } catch (e) { 
+                    console.error("DSA History API failed:", e); 
+                }
 
                 // 3. Fetch Practice Submissions
                 let practiceSubs = [];
                 try {
                     const dsaRes = await getDsaSubmissions();
                     practiceSubs = dsaRes.data.data || [];
-                } catch (e) { console.error("Practice Subs failed", e); }
+                } catch (e) { 
+                    console.error("Practice Subs API failed:", e); 
+                }
 
                 // --- PROCESS DATA ---
                 
                 // Calculate Stats
                 const totalVoice = voiceSessions.length;
-                const voiceScore = totalVoice > 0 ? Math.round(voiceSessions.reduce((acc: number, curr: any) => acc + curr.totalScore, 0) / totalVoice) : 0;
+                const voiceScore = totalVoice > 0 ? Math.round(voiceSessions.reduce((acc: number, curr: any) => acc + (curr.totalScore || 0), 0) / totalVoice) : 0;
                 const dsaSolved = practiceSubs.filter((sub: any) => sub.verdict === "AC").length || 0;
                 setStats({ voiceScore, totalVoice, dsaSolved });
                 setDsaSubmissions(practiceSubs);
@@ -57,12 +73,12 @@ export default function Dashboard() {
                 // Combine & Sort History for the List
                 const combined = [
                     ...voiceSessions.map((s: any) => ({
-                        ...s, type: 'voice', date: s.createdAt, displayScore: s.totalScore, maxScore: 110,
-                        title: s.company, subtitle: s.role
+                        ...s, type: 'voice', date: s.createdAt, displayScore: s.totalScore || 0, maxScore: 110,
+                        title: s.company || "Mock Interview", subtitle: s.role || "General"
                     })),
                     ...dsaSessions.map((s: any) => ({
-                        ...s, type: 'dsa', date: s.completedAt || s.startedAt, displayScore: s.score, maxScore: 3,
-                        title: s.company, subtitle: "90-Min Mock OA"
+                        ...s, type: 'dsa', date: s.completedAt || s.startedAt, displayScore: s.score || 0, maxScore: 3,
+                        title: s.company || "Company", subtitle: "90-Min Mock OA"
                     }))
                 ].filter(item => isValidDate(item.date));
 
@@ -71,7 +87,7 @@ export default function Dashboard() {
                 setUnifiedHistory(combined);
 
             } catch (err) {
-                console.error(err);
+                console.error("Critical Dashboard Error:", err);
                 setError("Failed to load dashboard data.");
             } finally {
                 setLoading(false);
@@ -97,18 +113,18 @@ export default function Dashboard() {
 
     // Heatmap Data (Voice Interviews + DSA Practice + DSA Mock OAs)
     const heatmapData = [
-    // 1. Unified History includes BOTH Voice Interviews AND DSA Mock OAs
-    ...unifiedHistory.map(item => ({ 
-        createdAt: item.date, 
-        type: "interview" as const 
-    })),
-    
-    // 2. Practice Submissions (Only the ones you got Accepted / AC)
-    ...dsaSubmissions.filter(sub => sub.verdict === "AC" && isValidDate(sub.createdAt)).map(sub => ({ 
-        createdAt: sub.createdAt, 
-        type: "dsa" as const 
-    })),
-];
+        ...unifiedHistory.map(item => ({ 
+            createdAt: item.date, 
+            type: "interview" as const 
+        })),
+        ...dsaSubmissions.filter(sub => sub.verdict === "AC" && isValidDate(sub.createdAt)).map(sub => ({ 
+            createdAt: sub.createdAt, 
+            type: "dsa" as const 
+        })),
+    ];
+
+    // NEW: Logic to slice array based on "View All" state
+    const displayedHistory = showAllHistory ? unifiedHistory : unifiedHistory.slice(0, 4);
 
     return (
         <div className="min-h-screen bg-[#050505] font-sans relative overflow-hidden flex flex-col selection:bg-purple-500/30">
@@ -205,12 +221,12 @@ export default function Dashboard() {
                             </motion.div>
 
                             {/* Unified Recent Interviews List */}
-                            <motion.div variants={itemVariants} className="bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-lg overflow-hidden">
-                                <div className="p-6 border-b border-white/10 bg-white/5">
+                            <motion.div variants={itemVariants} className="bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-lg overflow-hidden flex flex-col max-h-[600px]">
+                                <div className="p-6 border-b border-white/10 bg-white/5 shrink-0">
                                     <h2 className="text-lg font-bold text-white">Recent Assessments</h2>
                                 </div>
 
-                                <div className="p-6">
+                                <div className="p-6 overflow-y-auto custom-scrollbar flex-grow">
                                     {loading ? (
                                         <div className="space-y-4">
                                             {[1, 2].map(i => <div key={i} className="h-20 bg-white/5 rounded-xl animate-pulse"></div>)}
@@ -223,12 +239,13 @@ export default function Dashboard() {
                                         </div>
                                     ) : (
                                         <div className="space-y-4">
-                                            {unifiedHistory.slice(0, 4).map((session) => (
+                                            {/* We now map over displayedHistory (which is sliced if showAll is false) */}
+                                            {displayedHistory.map((session) => (
                                                 <div key={session.id} className="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between hover:bg-white/10 transition-all group">
 
                                                     <div className="flex items-center gap-4">
                                                         {/* Icon Badge */}
-                                                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-lg border ${session.type === 'voice' ? 'bg-purple-500/10 border-purple-500/30 text-purple-400' : 'bg-red-500/10 border-red-500/30 text-red-400'}`}>
+                                                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-lg border shrink-0 ${session.type === 'voice' ? 'bg-purple-500/10 border-purple-500/30 text-purple-400' : 'bg-red-500/10 border-red-500/30 text-red-400'}`}>
                                                             {session.type === 'voice' ? '🎙️' : '💻'}
                                                         </div>
                                                         <div>
@@ -239,7 +256,7 @@ export default function Dashboard() {
                                                         </div>
                                                     </div>
 
-                                                    <div className="mt-4 sm:mt-0 flex items-center gap-4">
+                                                    <div className="mt-4 sm:mt-0 flex items-center gap-4 shrink-0">
                                                         <div className="text-right">
                                                             <p className={`font-bold text-xl font-mono ${session.type === 'voice' ? (session.displayScore >= 80 ? 'text-green-400' : session.displayScore >= 50 ? 'text-yellow-400' : 'text-red-400') : (session.displayScore === 3 ? 'text-green-400' : session.displayScore > 0 ? 'text-yellow-400' : 'text-red-400')}`}>
                                                                 {session.displayScore} <span className="text-xs font-sans text-gray-500">/ {session.maxScore}</span>
@@ -261,9 +278,14 @@ export default function Dashboard() {
                                                     </div>
                                                 </div>
                                             ))}
+                                            
+                                            {/* NEW: The View All / Show Less Button */}
                                             {unifiedHistory.length > 4 && (
-                                                <button className="w-full py-3 text-sm text-gray-500 font-bold hover:text-white transition-colors bg-white/5 rounded-xl border border-white/10 border-dashed hover:border-solid hover:border-white/30">
-                                                    View All History ➔
+                                                <button 
+                                                    onClick={() => setShowAllHistory(!showAllHistory)}
+                                                    className="w-full py-3 text-sm text-gray-400 font-bold hover:text-white transition-colors bg-white/5 rounded-xl border border-white/10 border-dashed hover:border-solid hover:border-white/30"
+                                                >
+                                                    {showAllHistory ? "Show Less ↑" : "View All History ↓"}
                                                 </button>
                                             )}
                                         </div>
