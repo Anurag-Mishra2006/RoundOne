@@ -2,7 +2,6 @@
 import axios from "axios";
 
 const api = axios.create({
-    // If local, use localhost:3000. If on Vercel, use the magic /api proxy!
     baseURL: import.meta.env.VITE_BACKEND_URL,
     withCredentials: true
 });
@@ -130,4 +129,23 @@ export const getDsaSubmissions = async () => {
 };
 export const getQuestionSubmissions = async (questionId: string) => {
     return await api.get(`/practice/${questionId}/submissions`);
+};
+
+// dsa mock interview session
+export const getDSARoundQuestions = async(data: {company: string})=>{
+    return await api.post("/practice/dsa-mock-interview", data);
+}
+export const getAvailableCompanies = async()=>{
+    return await api.get("/practice/get-available-companies");
+}
+export const getDSARoundSession = async (sessionId: string) => {
+    return await api.get(`/practice/dsa-mock-interview/session/${sessionId}`);
+};
+
+export const submitDSARoundSession = async (data: { sessionId: string, submissions: { questionId: string, code: string, language: string }[] }) => {
+    return await api.post("/practice/dsa-mock-interview/submit", data);
+};
+
+export const getDSARoundReview = async (sessionId: string) => {
+    return await api.get(`/practice/dsa-mock-interview/review/${sessionId}`);  
 };

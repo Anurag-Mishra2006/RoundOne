@@ -29,6 +29,9 @@ import PracticeArena from "./pages/PracticeArena";
 import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
 import ResumeBuilder from "./pages/ResumeBuilder";
+import MockSetup from "./pages/DsaMockSetup";
+import DsaMockArena from "./pages/DsaMockArena";
+import DsaMockReview from "./pages/DsaMockReview";
 
 function App() {
   const { isAuthenticate, setUser, clearUser } = useUserStore();
@@ -86,7 +89,9 @@ function App() {
         <Route path="/practice" element={<ProtectedRoute isAuthCheck={isAuthCheck}><PracticeDashboard /></ProtectedRoute>} />
         <Route path="/practice/:slug" element={<ProtectedRoute isAuthCheck={isAuthCheck}><PracticeArena /></ProtectedRoute>} />
         {/* <Route path="/contact" element={<ProtectedRoute isAuthCheck={isAuthCheck}><ContactUs /></ProtectedRoute>} /> */}
-
+        <Route path="/dsa-mock/setup" element={<ProtectedRoute isAuthCheck={isAuthCheck}><MockSetup /></ProtectedRoute>} />
+        <Route path="/arena/:sessionId" element={<ProtectedRoute isAuthCheck={isAuthCheck}><DsaMockArena /></ProtectedRoute>} />
+        <Route path="/dsa-mock/review/:sessionId" element={<ProtectedRoute isAuthCheck={isAuthCheck}><DsaMockReview /></ProtectedRoute>} />
         <Route path="/dashboard" element={<ProtectedRoute isAuthCheck={isAuthCheck}><Dashboard /></ProtectedRoute>} />
         <Route path="/resume-upload" element={<ProtectedRoute isAuthCheck={isAuthCheck}><ResumeUpload /></ProtectedRoute>} />
         <Route path="/onboarding" element={<ProtectedRoute isAuthCheck={isAuthCheck}><Onboarding /></ProtectedRoute>} />
