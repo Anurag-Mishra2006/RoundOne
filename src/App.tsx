@@ -1,6 +1,5 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "./App.css";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -32,6 +31,27 @@ import ResumeBuilder from "./pages/ResumeBuilder";
 import MockSetup from "./pages/DsaMockSetup";
 import DsaMockArena from "./pages/DsaMockArena";
 import DsaMockReview from "./pages/DsaMockReview";
+
+import ReactGA from 'react-ga4';
+
+const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
+if (measurementId) {
+  ReactGA.initialize(measurementId);
+};
+
+function AnalyticsTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    // This runs every time the route (location) changes
+
+    if (measurementId) {
+      ReactGA.send({ hitType: "pageview", page: location.pathname + location.search });
+    }
+  }, [location]);
+
+  return null; // This component doesn't render anything UI-wise
+}
 
 function App() {
   const { isAuthenticate, setUser, clearUser } = useUserStore();
@@ -70,6 +90,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <AnalyticsTracker />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
