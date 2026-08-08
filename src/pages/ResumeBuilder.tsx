@@ -21,7 +21,7 @@ function ResumeBuilder() {
     const state = useResumeBuilderStore(); 
 
     // Premium SVGs for Tabs
-    const tabs: { id: Tab; label: string; icon: JSX.Element }[] = [
+    const tabs: { id: Tab; label: string; icon: any }[] = [
         { 
             id: "personal", 
             label: "Personal", 

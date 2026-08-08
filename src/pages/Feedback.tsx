@@ -48,7 +48,7 @@ function Feedback() {
   }
 
   // Helper to return text + matching SVG icon
-  const getOverallMessage = (): { text: string, icon: JSX.Element } => {
+  const getOverallMessage = (): { text: string, icon: any } => {
     if (percentage >= 80) return { 
         text: "Excellent performance — you're interview ready!", 
         icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-green-400 shrink-0"><path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.438 4.438 0 002.798 2.839m9.022-6.234a4.492 4.492 0 003.15 3.152 4.442 4.442 0 002.876-2.04" /></svg> 
