@@ -56,11 +56,17 @@ export default function DsaMockReview() {
                             Evaluation Complete
                         </div>
                         <h1 className="text-3xl font-extrabold mb-2 text-white">Post-Match Report</h1>
-                        <p className="text-[var(--text-muted)] flex items-center gap-2 text-sm font-medium">
-                            <span className="bg-white/5 px-2 py-1 rounded border border-white/10">🏢 {sessionData.company} Mock OA</span>
+                        <div className="text-[var(--text-muted)] flex items-center gap-2 text-sm font-medium">
+                            <span className="bg-white/5 px-2 py-1 rounded border border-white/10 flex items-center gap-1.5">
+                                {/* Building/Company SVG */}
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+                                </svg>
+                                {sessionData.company} Mock OA
+                            </span>
                             <span>•</span>
                             <span>{new Date(sessionData.completedAt || sessionData.startedAt).toLocaleDateString()}</span>
-                        </p>
+                        </div>
                     </div>
 
                     <div className="flex items-center gap-8">
@@ -73,8 +79,11 @@ export default function DsaMockReview() {
                                 <span className="text-gray-600 text-3xl">/3</span>
                             </div>
                         </div>
-                        <Link to="/dashboard" className="px-6 py-3 bg-white/10 border border-white/20 text-white font-bold rounded-xl hover:bg-white hover:text-black transition-all shadow-lg">
+                        <Link to="/dashboard" className="px-6 py-3 bg-white/10 border border-white/20 text-white font-bold rounded-xl hover:bg-white hover:text-black transition-all shadow-lg flex items-center gap-2 group">
                             Back to Dashboard
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                            </svg>
                         </Link>
                     </div>
                 </motion.div>
@@ -113,7 +122,11 @@ export default function DsaMockReview() {
                         {/* AI FEEDBACK BOX */}
                         <div className="bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-2xl flex-grow overflow-y-auto custom-scrollbar p-6 flex flex-col relative">
                             <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest mb-6 flex items-center gap-2 border-b border-white/10 pb-4 shrink-0">
-                                🧠 AI Code Review
+                                {/* Sparkles SVG */}
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+                                </svg>
+                                AI Code Review
                             </h3>
                             
                             {currentSubmission ? (
@@ -141,8 +154,12 @@ export default function DsaMockReview() {
                     {/* --- RIGHT PANEL: READ-ONLY EDITOR --- */}
                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="w-full lg:w-2/3 bg-[#0d0d0d] border border-white/10 rounded-2xl overflow-hidden flex flex-col relative shadow-2xl">
                         <div className="bg-white/5 border-b border-white/10 p-4 flex justify-between items-center shrink-0 backdrop-blur-md">
-                            <div className="font-bold text-sm text-white flex items-center gap-2">
-                                <span className="text-gray-500">📄</span> {currentQ.title}
+                            <div className="font-bold text-sm text-white flex items-center gap-2.5">
+                                {/* Document/Code SVG */}
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-gray-400">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                </svg>
+                                {currentQ.title}
                             </div>
                             <div className="text-xs font-mono bg-black/50 px-3 py-1 border border-white/10 rounded-md text-[var(--text-muted)] uppercase tracking-wider">
                                 {currentSubmission?.language || 'N/A'}

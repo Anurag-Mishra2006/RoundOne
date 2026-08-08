@@ -108,21 +108,37 @@ export default function DsaMockSetup() {
                             {/* Assessment Rules */}
                             <div className="space-y-4 mb-8">
                                 <div className="flex items-start gap-3">
-                                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0">⏱️</div>
+                                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-gray-300">
+                                        {/* Clock SVG */}
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
                                     <div>
                                         <h3 className="text-sm font-bold text-white">90-Minute Timer</h3>
                                         <p className="text-xs text-gray-500 mt-1">The assessment auto-submits when time expires.</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0">👁️</div>
+                                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-red-400">
+                                        {/* Eye / Anti-Cheat SVG */}
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                    </div>
                                     <div>
                                         <h3 className="text-sm font-bold text-white">Anti-Cheat Active</h3>
                                         <p className="text-xs text-gray-500 mt-1">Tab-switching is heavily monitored and flagged.</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0">🧠</div>
+                                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-purple-400">
+                                        {/* Hidden Edge Cases / AI Sparkles SVG */}
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+                                        </svg>
+                                    </div>
                                     <div>
                                         <h3 className="text-sm font-bold text-white">Hidden Edge Cases</h3>
                                         <p className="text-xs text-gray-500 mt-1">Your code is graded in Docker against hidden test cases.</p>
@@ -134,7 +150,10 @@ export default function DsaMockSetup() {
                         {/* Error Message */}
                         {error && (
                             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="mb-4 p-4 bg-red-500/10 border border-red-500/30 rounded-xl flex items-center gap-3 shrink-0">
-                                <span className="text-red-500 text-xl">⚠️</span>
+                                {/* Warning Triangle SVG */}
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-red-500 shrink-0">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
                                 <span className="text-red-400 text-sm font-medium">{error}</span>
                             </motion.div>
                         )}
@@ -156,7 +175,12 @@ export default function DsaMockSetup() {
                                 </>
                             ) : (
                                 <>
-                                    Enter the Arena ➔
+                                    Enter the Arena
+                                    {/* Arrow Right SVG replacing ➔ */}
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:translate-x-1 transition-transform">
+                                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                                    </svg>
+                                    
                                     {selectedCompany && (
                                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[pulse_1.5s_infinite]"></div>
                                     )}
@@ -177,7 +201,12 @@ export default function DsaMockSetup() {
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 pl-12 text-sm outline-none focus:border-red-500/50 focus:bg-white/10 transition-all text-white placeholder-gray-500 shadow-inner"
                             />
-                            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-red-400 transition-colors">🔍</span>
+                            {/* Magnifying Glass SVG */}
+                            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-red-400 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                </svg>
+                            </span>
                         </div>
 
                         {/* Company Grid (Scrollable) */}
@@ -189,7 +218,12 @@ export default function DsaMockSetup() {
                                 </div>
                             ) : filteredCompanies.length === 0 ? (
                                 <div className="flex flex-col items-center justify-center h-full text-[var(--text-muted)] text-sm bg-white/5 border border-white/10 rounded-2xl border-dashed p-8 text-center">
-                                    <span className="text-4xl mb-4 opacity-30 filter grayscale">🏢</span>
+                                    {/* Empty Building SVG */}
+                                    <span className="mb-4 text-gray-600 opacity-50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-16 h-16">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+                                        </svg>
+                                    </span>
                                     <p>No companies found matching "<span className="text-white font-bold">{searchQuery}</span>"</p>
                                     <p className="text-xs mt-2 opacity-50">Please clear your search or check your database.</p>
                                 </div>

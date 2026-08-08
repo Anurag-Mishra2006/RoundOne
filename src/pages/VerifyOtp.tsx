@@ -117,7 +117,11 @@ function VerifyOtp() {
         {/* Top: Logo & Back Link */}
         <div className="relative z-10">
             <Link to="/register" className="text-sm font-medium text-[var(--text-muted)] hover:text-white transition-colors flex items-center gap-2 mb-8 w-fit">
-                ← Back to Registration
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m12 19-7-7 7-7"/>
+                  <path d="M19 12H5"/>
+                </svg>
+                Back to Registration
             </Link>
             <div className="flex items-center gap-3">
                  <img src="/logo.svg?v=2" alt="RoundOne" className="w-8 h-8 rounded-lg" />
@@ -136,8 +140,11 @@ function VerifyOtp() {
                     We've sent a secure 6-digit verification code to your email. Enter it to activate your account and start your mock interviews.
                 </p>
                 <div className="flex items-center gap-4 mt-8 pt-8 border-t border-[var(--border)]">
-                    <div className="w-10 h-10 rounded-full bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-[var(--accent)]">
-                        🔒
+                    <div className="w-10 h-10 rounded-full bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-[var(--accent)] shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
                     </div>
                     <p className="text-sm font-medium text-[var(--text)]">Bank-grade JWT security to protect your resume and data.</p>
                 </div>
@@ -155,7 +162,11 @@ function VerifyOtp() {
         
         {/* Mobile-only back button */}
         <Link to="/register" className="lg:hidden absolute top-8 left-8 text-sm font-medium text-[var(--text-muted)] hover:text-white transition-colors flex items-center gap-2">
-            ← Back
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m12 19-7-7 7-7"/>
+              <path d="M19 12H5"/>
+            </svg>
+            Back
         </Link>
 
         <motion.div 

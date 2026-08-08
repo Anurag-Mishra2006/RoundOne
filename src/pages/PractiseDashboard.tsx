@@ -84,15 +84,24 @@ export default function PracticeDashboard() {
                             className="inline-flex items-center gap-3 px-8 py-4 bg-red-500/10 border border-red-500/30 text-red-400 rounded-2xl font-bold hover:bg-red-500/20 hover:border-red-500/50 hover:text-red-300 transition-all hover:scale-105 shadow-[0_0_30px_rgba(239,68,68,0.15)] hover:shadow-[0_0_40px_rgba(239,68,68,0.3)] group backdrop-blur-md"
                         >
                             <span className="w-3 h-3 rounded-full bg-red-500 animate-[pulse_1.5s_infinite] shadow-[0_0_10px_rgba(239,68,68,1)]"></span>
-                            Take Mock OA (90 Min) ➔
+                            Take Mock OA (90 Min)
+                            {/* Arrow Right SVG replacing ➔ */}
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                            </svg>
                         </Link>
                     </div>
                 </motion.div>
 
                 {/* Filters Section */}
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-4 md:p-6 mb-8 flex flex-col md:flex-row gap-4 shadow-lg">
-                    <div className="flex-grow relative">
-                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">🔍</span>
+                    <div className="flex-grow relative group">
+                        {/* Magnifying Glass SVG replacing 🔍 */}
+                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-purple-400 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                            </svg>
+                        </span>
                         <input
                             type="text"
                             placeholder="Search questions (e.g., Two Sum)..."
@@ -163,14 +172,20 @@ export default function PracticeDashboard() {
 
                                                     if (isSolved) {
                                                         return (
-                                                            <div className="w-7 h-7 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center shadow-[0_0_10px_rgba(34,197,94,0.2)]">
-                                                                <span className="text-green-400 text-sm font-bold">✓</span>
+                                                            <div className="w-7 h-7 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center shadow-[0_0_10px_rgba(34,197,94,0.2)] text-green-400">
+                                                                {/* Check SVG replacing text ✓ */}
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-4 h-4">
+                                                                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                                                </svg>
                                                             </div>
                                                         );
                                                     } else if (isAttempted) {
                                                         return (
-                                                            <div className="w-7 h-7 rounded-full bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center">
-                                                                <span className="text-yellow-400 text-xl font-bold leading-none mb-1">-</span>
+                                                            <div className="w-7 h-7 rounded-full bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400">
+                                                                {/* Minus SVG replacing text - */}
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-4 h-4">
+                                                                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15" />
+                                                                </svg>
                                                             </div>
                                                         );
                                                     } else {
@@ -214,9 +229,13 @@ export default function PracticeDashboard() {
                                             <td className="p-5 text-right">
                                                 <Link
                                                     to={`/practice/${q.slug}`}
-                                                    className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-purple-500/10 text-purple-400 text-sm font-bold border border-purple-500/30 hover:bg-purple-500 hover:text-white transition-all hover:shadow-[0_0_15px_rgba(168,85,247,0.4)]"
+                                                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-purple-500/10 text-purple-400 text-sm font-bold border border-purple-500/30 hover:bg-purple-500 hover:text-white transition-all hover:shadow-[0_0_15px_rgba(168,85,247,0.4)] group/btn"
                                                 >
-                                                    Solve ➔
+                                                    Solve
+                                                    {/* Arrow Right SVG replacing ➔ */}
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform">
+                                                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                                                    </svg>
                                                 </Link>
                                             </td>
                                         </motion.tr>
@@ -235,16 +254,24 @@ export default function PracticeDashboard() {
                             <button
                                 disabled={page === 1}
                                 onClick={() => setPage(p => p - 1)}
-                                className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm font-bold text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 transition-colors"
+                                className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm font-bold text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 transition-colors flex items-center gap-2 group"
                             >
-                                ← Prev
+                                {/* Chevron Left SVG replacing ← */}
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                </svg>
+                                Prev
                             </button>
                             <button
                                 disabled={page === totalPages || questions.length === 0}
                                 onClick={() => setPage(p => p + 1)}
-                                className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm font-bold text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 transition-colors"
+                                className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm font-bold text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 transition-colors flex items-center gap-2 group"
                             >
-                                Next →
+                                Next
+                                {/* Chevron Right SVG replacing → */}
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 group-hover:translate-x-0.5 transition-transform">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                </svg>
                             </button>
                         </div>
                     </div>

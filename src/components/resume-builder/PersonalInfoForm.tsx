@@ -12,7 +12,15 @@ export default function PersonalInfoForm() {
       
       {/* Target Role Config */}
       <div className="p-6 bg-[var(--surface)] border border-[var(--border)] rounded-2xl relative group transition-all hover:border-[var(--accent)]/50 shadow-lg">
-        <h2 className="text-lg font-bold text-white mb-1 flex items-center gap-2"><span>🎯</span> Target Role</h2>
+        <h2 className="text-lg font-bold text-white mb-1 flex items-center gap-2.5">
+          {/* Target/Crosshair SVG */}
+          <div className="text-[var(--accent)]">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 3.75H6A2.25 2.25 0 003.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0120.25 6v1.5m0 9V18A2.25 2.25 0 0118 20.25h-1.5m-9 0H6A2.25 2.25 0 013.75 18v-1.5M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          Target Role
+        </h2>
         <p className="text-xs text-[var(--text-muted)] mb-4">We use this to guide the AI when writing your project bullet points and ATS analysis.</p>
         
         <div className="flex flex-col gap-1.5">
@@ -27,8 +35,16 @@ export default function PersonalInfoForm() {
 
       {/* Personal Details */}
       <div>
-        <h2 className="text-2xl font-bold text-white mb-1">Personal Details</h2>
-        <p className="text-sm text-[var(--text-muted)] mb-6">This is the header of your resume. Ensure your links are professional.</p>
+        <div className="flex items-center gap-3 mb-1">
+          <div className="p-2 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-lg text-[var(--accent)]">
+            {/* ID Card / User Profile SVG */}
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-bold text-white">Personal Details</h2>
+        </div>
+        <p className="text-sm text-[var(--text-muted)] mb-6 mt-2">This is the header of your resume. Ensure your links are professional.</p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="flex flex-col gap-1.5">

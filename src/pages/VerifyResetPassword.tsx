@@ -106,7 +106,11 @@ function VerifyResetOtp() {
 
         <div className="relative z-10">
             <Link to="/login" className="text-sm font-medium text-[var(--text-muted)] hover:text-white transition-colors flex items-center gap-2 mb-8 w-fit">
-                ← Back to Login
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m12 19-7-7 7-7"/>
+                  <path d="M19 12H5"/>
+                </svg>
+                Back to Login
             </Link>
             <div className="flex items-center gap-3">
                 <img src="/logo.svg?v=2" alt="RoundOne" className="w-8 h-8 rounded-lg" />
@@ -143,7 +147,11 @@ function VerifyResetOtp() {
 
         {/* Mobile-only back button */}
         <Link to="/login" className="lg:hidden absolute top-8 left-8 text-sm font-medium text-[var(--text-muted)] hover:text-white transition-colors flex items-center gap-2">
-            ← Login
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m12 19-7-7 7-7"/>
+              <path d="M19 12H5"/>
+            </svg>
+            Login
         </Link>
 
         <motion.div

@@ -134,7 +134,9 @@ function AtsChecker() {
 
                             <div className="space-y-6">
                                 <motion.div variants={itemVariants} className="flex items-center gap-5">
-                                    <div className="w-12 h-12 rounded-xl bg-[var(--accent)]/10 border border-[var(--accent)]/20 flex items-center justify-center text-2xl shadow-[0_0_15px_rgba(170,59,255,0.2)]">🎯</div>
+                                    <div className="w-12 h-12 rounded-xl bg-[var(--accent)]/10 border border-[var(--accent)]/20 flex items-center justify-center text-[var(--accent)] shadow-[0_0_15px_rgba(170,59,255,0.2)]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 3.75H6A2.25 2.25 0 003.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0120.25 6v1.5m0 9V18A2.25 2.25 0 0118 20.25h-1.5m-9 0H6A2.25 2.25 0 013.75 18v-1.5M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                    </div>
                                     <div>
                                         <h3 className="text-white font-bold text-lg">AI Role Matcher</h3>
                                         <p className="text-[var(--text-muted)] text-sm">Discover exactly which roles fit your experience best.</p>
@@ -142,7 +144,9 @@ function AtsChecker() {
                                 </motion.div>
 
                                 <motion.div variants={itemVariants} className="flex items-center gap-5">
-                                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-2xl shadow-[0_0_15px_rgba(59,130,246,0.2)]">✍️</div>
+                                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" /></svg>
+                                    </div>
                                     <div>
                                         <h3 className="text-white font-bold text-lg">Line-by-Line Rewrites</h3>
                                         <p className="text-[var(--text-muted)] text-sm">We fix your weak action verbs and add missing metrics.</p>
@@ -150,7 +154,9 @@ function AtsChecker() {
                                 </motion.div>
 
                                 <motion.div variants={itemVariants} className="flex items-center gap-5">
-                                    <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-2xl shadow-[0_0_15px_rgba(34,197,94,0.2)]">📊</div>
+                                    <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.2)]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+                                    </div>
                                     <div>
                                         <h3 className="text-white font-bold text-lg">Keyword Optimization</h3>
                                         <p className="text-[var(--text-muted)] text-sm">Find out which crucial industry keywords you are missing.</p>
@@ -165,7 +171,9 @@ function AtsChecker() {
                                 <div className="absolute -top-24 -right-24 w-48 h-48 bg-blue-600/10 rounded-full blur-[80px] group-hover:bg-blue-600/20 transition-colors duration-500"></div>
 
                                 <div className="mb-10 text-center relative z-10">
-                                    <div className="w-14 h-14 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-blue-600 to-[var(--accent)] flex items-center justify-center text-white font-bold text-2xl shadow-[0_0_20px_rgba(59,130,246,0.4)] transform group-hover:scale-105 transition-transform duration-300">📄</div>
+                                    <div className="w-14 h-14 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-blue-600 to-[var(--accent)] flex items-center justify-center text-white shadow-[0_0_20px_rgba(59,130,246,0.4)] transform group-hover:scale-105 transition-transform duration-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                                    </div>
                                     <h1 className="text-3xl font-bold text-white tracking-tight">ATS Scanner</h1>
                                     <p className="mt-2 text-sm text-[var(--text-muted)]">Get brutal, FAANG-level feedback.</p>
                                 </div>
@@ -175,13 +183,17 @@ function AtsChecker() {
                                         <input type="file" accept="application/pdf" onChange={handleFileChange} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" disabled={loading} />
                                         {!file ? (
                                             <div className="flex flex-col items-center pointer-events-none">
-                                                <span className="text-4xl mb-4 opacity-80">📁</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 mb-4 text-[var(--text-muted)] opacity-80">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                                                </svg>
                                                 <p className="text-base font-bold text-white mb-1">Click to browse</p>
                                                 <p className="text-xs text-[var(--text-muted)]">or drag and drop your file here</p>
                                             </div>
                                         ) : (
                                             <div className="flex flex-col items-center pointer-events-none">
-                                                <span className="text-4xl mb-4 drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]">✅</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 mb-4 text-[var(--success)] drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]">
+                                                    <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
+                                                </svg>
                                                 <p className="text-base font-bold text-[var(--success)] mb-1">Ready to scan</p>
                                                 <p className="text-xs text-[var(--text-muted)] break-all px-4">{file.name}</p>
                                             </div>
@@ -206,12 +218,13 @@ function AtsChecker() {
                                     </div>
 
                                     {error && (
-                                        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="p-3 rounded-md bg-[var(--danger)]/10 border border-[var(--danger)]/20 text-center">
+                                        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="p-3 rounded-md bg-[var(--danger)]/10 border border-[var(--danger)]/20 text-center flex items-center justify-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-[var(--danger)]"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                                             <p className="text-sm font-medium text-[var(--danger)]">{error}</p>
                                         </motion.div>
                                     )}
 
-                                    <button type="submit" disabled={loading || !file} className="w-full rounded-xl bg-[var(--accent)] py-4 text-sm font-bold text-white transition-all hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(170,59,255,0.2)] hover:shadow-[0_0_25px_rgba(170,59,255,0.4)] flex justify-center items-center gap-2 hover:-translate-y-0.5 active:translate-y-0 overflow-hidden relative">
+                                    <button type="submit" disabled={loading || !file} className="w-full rounded-xl bg-[var(--accent)] py-4 text-sm font-bold text-white transition-all hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(170,59,255,0.2)] hover:shadow-[0_0_25px_rgba(170,59,255,0.4)] flex justify-center items-center gap-2 hover:-translate-y-0.5 active:translate-y-0 overflow-hidden relative group">
                                         {loading ? (
                                             <motion.div
                                                 key={loadingTextIdx} // Key change forces re-animation
@@ -223,7 +236,14 @@ function AtsChecker() {
                                                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                                                 <span>{LOADING_MESSAGES[loadingTextIdx]}</span>
                                             </motion.div>
-                                        ) : "Scan Resume ➔"}
+                                        ) : (
+                                            <>
+                                                Scan Resume
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                                                </svg>
+                                            </>
+                                        )}
                                     </button>
                                 </div>
                             </form>
@@ -271,7 +291,10 @@ function AtsChecker() {
                                 {/* Role Matcher */}
                                 {result.matchedRoles && result.matchedRoles.length > 0 && (
                                     <motion.div variants={itemVariants} className="p-6 bg-[var(--surface)] border border-[var(--border)] rounded-2xl shadow-lg">
-                                        <h3 className="text-sm font-bold text-[var(--text)] mb-5 uppercase tracking-wider flex items-center gap-2"><span>🎯</span> Role Matches</h3>
+                                        <h3 className="text-sm font-bold text-[var(--text)] mb-5 uppercase tracking-wider flex items-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-[var(--accent)]"><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 3.75H6A2.25 2.25 0 003.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0120.25 6v1.5m0 9V18A2.25 2.25 0 0118 20.25h-1.5m-9 0H6A2.25 2.25 0 013.75 18v-1.5M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                            Role Matches
+                                        </h3>
                                         <div className="space-y-5">
                                             {result.matchedRoles.map((match: any, i: number) => (
                                                 <div key={i}>
@@ -302,11 +325,14 @@ function AtsChecker() {
                                 {/* Critical Issues */}
                                 {result.criticalIssues && result.criticalIssues.length > 0 && (
                                     <motion.div variants={itemVariants} className="p-6 bg-[var(--danger)]/5 border border-[var(--danger)]/30 rounded-2xl">
-                                        <h3 className="text-sm font-bold text-[var(--danger)] uppercase tracking-wider mb-4 flex items-center gap-2"><span>⚠️</span> Critical Issues Detected</h3>
+                                        <h3 className="text-sm font-bold text-[var(--danger)] uppercase tracking-wider mb-4 flex items-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 animate-pulse"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                                            Critical Issues Detected
+                                        </h3>
                                         <ul className="space-y-3">
                                             {result.criticalIssues.map((issue: string, i: number) => (
                                                 <li key={i} className="text-sm text-[var(--text)] flex items-start gap-3 bg-[var(--bg)]/50 p-3 rounded-lg border border-[var(--danger)]/10">
-                                                    <span className="text-[var(--danger)] mt-0.5">🚨</span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-[var(--danger)] shrink-0 mt-0.5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                                                     <span className="leading-relaxed">{issue}</span>
                                                 </li>
                                             ))}
@@ -346,7 +372,10 @@ function AtsChecker() {
                             {/* Missing Keywords */}
                             {result.missingKeywords && result.missingKeywords.length > 0 && (
                                 <div className="p-6 bg-[var(--surface)] border border-[var(--border)] rounded-2xl">
-                                    <h3 className="text-sm font-bold text-[var(--text)] mb-4 uppercase tracking-wider flex items-center gap-2"><span>🔑</span> Missing Keywords to Add</h3>
+                                    <h3 className="text-sm font-bold text-[var(--text)] mb-4 uppercase tracking-wider flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-yellow-500"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
+                                        Missing Keywords to Add
+                                    </h3>
                                     <div className="flex flex-wrap gap-2">
                                         {result.missingKeywords.map((kw: string, i: number) => (
                                             <span key={i} className="px-3 py-1.5 bg-[var(--bg)] border border-[var(--border)] text-xs text-[var(--text-muted)] rounded-md font-mono hover:text-[var(--accent)] hover:border-[var(--accent)] transition-colors cursor-default">
@@ -365,7 +394,7 @@ function AtsChecker() {
                                         {result.lineByLineFixes.map((fix: any, i: number) => (
                                             <div key={i} className="p-6 bg-[var(--surface)] border border-[var(--border)] rounded-2xl">
                                                 <div className="flex items-start gap-2 mb-4">
-                                                    <span className="text-xl">💡</span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-yellow-500 shrink-0"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.2m-1.5.2a6.01 6.01 0 01-1.5-.2m1.5.2V8.25m0 0c0-1.657 1.343-3 3-3h1.5M12 8.25c0-1.657-1.343-3-3-3H7.5m10.5 3a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                                                     <p className="text-sm text-[var(--text-muted)] italic leading-relaxed">"{fix.reason}"</p>
                                                 </div>
                                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -374,7 +403,9 @@ function AtsChecker() {
                                                         <p className="text-sm text-[var(--text)] line-through opacity-70">{fix.originalText}</p>
                                                     </div>
                                                     <div className="p-4 bg-[var(--success)]/5 border-l-4 border-[var(--success)] rounded-r-lg relative overflow-hidden">
-                                                        <div className="absolute top-0 right-0 p-2 opacity-10 text-4xl">✨</div>
+                                                        <div className="absolute top-0 right-0 p-2 opacity-10 text-[var(--success)]">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-12 h-12"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" /></svg>
+                                                        </div>
                                                         <p className="text-[10px] text-[var(--success)] font-bold uppercase tracking-wider mb-2">Suggested Rewrite</p>
                                                         <p className="text-sm text-[var(--text)] font-medium relative z-10">{fix.suggestedRewrite}</p>
                                                     </div>
@@ -391,9 +422,12 @@ function AtsChecker() {
                         <motion.div variants={itemVariants} className="pt-8">
                             <button
                                 onClick={() => { setResult(null); setFile(null); window.scrollTo(0, 0); }}
-                                className="w-full max-w-md mx-auto block rounded-xl bg-[var(--accent)] px-4 py-4 text-sm font-bold text-white hover:bg-[var(--accent-hover)] transition-all shadow-[0_0_15px_rgba(170,59,255,0.2)] hover:shadow-[0_0_25px_rgba(170,59,255,0.4)] hover:-translate-y-1"
+                                className="w-full max-w-md mx-auto block rounded-xl bg-[var(--accent)] px-4 py-4 text-sm font-bold text-white hover:bg-[var(--accent-hover)] transition-all shadow-[0_0_15px_rgba(170,59,255,0.2)] hover:shadow-[0_0_25px_rgba(170,59,255,0.4)] hover:-translate-y-1 flex justify-center items-center gap-2 group"
                             >
-                                Scan Another Resume ➔
+                                Scan Another Resume
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                                </svg>
                             </button>
                         </motion.div>
 
