@@ -1,5 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -32,12 +34,9 @@ import MockSetup from "./pages/DsaMockSetup";
 import DsaMockArena from "./pages/DsaMockArena";
 import DsaMockReview from "./pages/DsaMockReview";
 
-import ReactGA from 'react-ga4';
-
-const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
-if (measurementId) {
-  ReactGA.initialize(measurementId);
-};
+// Get Backend URL to send our tracking data to
+const rawUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
+const BACKEND_URL = rawUrl.replace(/\/$/, "");
 
 function AnalyticsTracker() {
   const location = useLocation();
@@ -45,9 +44,28 @@ function AnalyticsTracker() {
   useEffect(() => {
     // This runs every time the route (location) changes
 
-    if (measurementId) {
-      ReactGA.send({ hitType: "pageview", page: location.pathname + location.search });
+    // 1. Get or create a unique visitor ID so GA4 knows it's the same user clicking around
+    let clientId = localStorage.getItem("visitor_client_id");
+    if (!clientId) {
+      clientId = uuidv4();
+      localStorage.setItem("visitor_client_id", clientId);
     }
+
+    // 2. Send the pageview secretly to YOUR backend (Ad blockers ignore this!)
+    const trackPage = async () => {
+      try {
+        await axios.post(`${BACKEND_URL}/analytics/track`, {
+          // Send the full URL (e.g., https://roundoneprep.me/dashboard)
+          page: window.location.origin + location.pathname + location.search,
+          clientId: clientId
+        });
+      } catch (error) {
+        // We catch the error silently so if tracking fails, the user's website doesn't break
+        console.error("Tracking error:", error);
+      }
+    };
+
+    trackPage();
   }, [location]);
 
   return null; // This component doesn't render anything UI-wise
@@ -90,7 +108,9 @@ function App() {
 
   return (
     <BrowserRouter>
+      {/* Our Custom Server-Side Tracker */}
       <AnalyticsTracker />
+      
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
@@ -98,6 +118,7 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
+        
         {/* Auth Routes - We show a small loader if checking, otherwise bypass to dashboard! */}
         <Route path="/register" element={renderAuthRoute(<Registration />)} />
         <Route path="/login" element={renderAuthRoute(<Login />)} />
@@ -109,7 +130,6 @@ function App() {
         {/* Protected Routes */}
         <Route path="/practice" element={<ProtectedRoute isAuthCheck={isAuthCheck}><PracticeDashboard /></ProtectedRoute>} />
         <Route path="/practice/:slug" element={<ProtectedRoute isAuthCheck={isAuthCheck}><PracticeArena /></ProtectedRoute>} />
-        {/* <Route path="/contact" element={<ProtectedRoute isAuthCheck={isAuthCheck}><ContactUs /></ProtectedRoute>} /> */}
         <Route path="/dsa-mock/setup" element={<ProtectedRoute isAuthCheck={isAuthCheck}><MockSetup /></ProtectedRoute>} />
         <Route path="/arena/:sessionId" element={<ProtectedRoute isAuthCheck={isAuthCheck}><DsaMockArena /></ProtectedRoute>} />
         <Route path="/dsa-mock/review/:sessionId" element={<ProtectedRoute isAuthCheck={isAuthCheck}><DsaMockReview /></ProtectedRoute>} />
