@@ -14,9 +14,9 @@ import { Link } from "react-router-dom";
 import useUserStore from "@/store/authStore";
 
 const TECH_STACK = [
-  "React 19", "TypeScript", "Tailwind CSS", "Framer Motion", "Zustand", // <-- Added Framer Motion
+  "React 19", "TypeScript", "Tailwind CSS", "Framer Motion", "Zustand",  
   "Node.js", "Express", "PostgreSQL", "Prisma",
-  "Monaco Editor", "React-PDF", "Google Gemini", "Groq (Whisper)", // <-- Added React-PDF and Groq
+  "Monaco Editor", "React-PDF", "Google Gemini", "Groq (Whisper)",  
   "Docker", "Redis", "BullMQ", "Cloudinary",
 ];
 

@@ -105,20 +105,24 @@ function LearningSheet() {
         <div className="mx-auto max-w-6xl">
 
           <div className="mb-6">
-            <button onClick={() => navigate("/learning")} className="text-gray-500 hover:text-gray-300 text-sm font-medium mb-4 flex items-center gap-2 transition-colors">
-              ← Back to Hub
+            <button onClick={() => navigate("/learning")} className="text-gray-500 hover:text-gray-300 text-sm font-medium mb-4 flex items-center gap-2 transition-colors group">
+              {/* Arrow Left SVG */}
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 group-hover:-translate-x-1 transition-transform">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+              </svg>
+              Back to Hub
             </button>
           </div>
 
           {/* TAB MENU: Switch between Striver, Blind 75, etc. */}
           {data.sheets.length > 1 && (
-            <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
+            <div className="flex gap-2 mb-6 overflow-x-auto pb-2 custom-scrollbar">
               {data.sheets.map((sheet: any) => (
                 <button
                   key={sheet.id}
                   onClick={() => setActiveSheetId(sheet.id)}
                   className={`px-5 py-2.5 rounded-lg text-sm font-bold whitespace-nowrap transition-colors border ${activeSheetId === sheet.id
-                      ? 'bg-[#ff4a1c]/10 text-[#ff4a1c] border-[#ff4a1c]/50'
+                      ? 'bg-[#ff4a1c]/10 text-[#ff4a1c] border-[#ff4a1c]/50 shadow-[0_0_15px_rgba(255,74,28,0.15)]'
                       : 'bg-[#1a1a1a] text-gray-400 border-[#2a2a2a] hover:bg-[#252525]'
                     }`}
                 >
@@ -129,7 +133,10 @@ function LearningSheet() {
           )}
 
           {loadingSheet || loadingProgress ? (
-            <div className="text-center py-20 text-gray-500 animate-pulse">Loading sheet data...</div>
+            <div className="text-center py-20 text-gray-500 animate-pulse flex flex-col items-center justify-center gap-3">
+              <div className="w-8 h-8 border-4 border-[#ff4a1c]/30 border-t-[#ff4a1c] rounded-full animate-spin"></div>
+              Loading sheet data...
+            </div>
           ) : !sheetData ? (
             <div className="text-center py-20 text-red-500 bg-red-500/10 rounded-lg border border-red-500/20">
               Data file for this sheet is missing. Make sure <b>public/data/sheets/{activeSheetId}.json</b> exists!
@@ -173,14 +180,14 @@ function LearningSheet() {
                 const progress = allTaskIds.length === 0 ? 0 : (completedCount / allTaskIds.length) * 100;
 
                 return (
-                  <div key={step.id} className="overflow-hidden rounded-lg border border-[#2a2a2a] bg-[#1a1a1a]">
+                  <div key={step.id} className="overflow-hidden rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] shadow-lg">
                     <div className="flex items-center justify-between border-b border-[#2a2a2a] px-6 py-4">
                       <h2 className="text-lg font-bold text-white">{step.title}</h2>
                       <div className="flex items-center gap-4">
                         <div className="hidden h-1.5 w-32 overflow-hidden rounded-full bg-gray-700 md:block">
                           <div className="h-full bg-[#ff4a1c] transition-all" style={{ width: `${progress}%` }} />
                         </div>
-                        <span className="text-sm text-gray-400">{completedCount} / {allTaskIds.length}</span>
+                        <span className="text-sm text-gray-400 font-mono">{completedCount} / {allTaskIds.length}</span>
                       </div>
                     </div>
 
@@ -189,14 +196,25 @@ function LearningSheet() {
 
                       return (
                         <div key={lecture.id} className="border-b border-[#2a2a2a] last:border-0">
-                          <div onClick={() => toggleLecture(lecture.id)} className="flex cursor-pointer items-center justify-between px-6 py-3 transition-colors hover:bg-[#252525]">
-                            <span className="text-sm font-semibold text-gray-300">{lecture.title}</span>
-                            <span className="text-xs text-gray-500">{isExpanded ? "▼" : "▶"}</span>
+                          <div onClick={() => toggleLecture(lecture.id)} className="flex cursor-pointer items-center justify-between px-6 py-4 transition-colors hover:bg-[#252525] group">
+                            <span className="text-sm font-semibold text-gray-300 group-hover:text-white transition-colors">{lecture.title}</span>
+                            <span className="text-gray-500">
+                                {/* Chevron SVG */}
+                                {isExpanded ? (
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                                      <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                    </svg>
+                                )}
+                            </span>
                           </div>
 
                           {isExpanded && (
                             <div className="bg-[#141414]">
-                              <div className="grid grid-cols-[40px_1fr_80px_80px_80px] gap-4 border-y border-[#2a2a2a] px-6 py-2 text-xs font-bold uppercase tracking-wider text-gray-500">
+                              <div className="grid grid-cols-[40px_1fr_80px_100px_80px] gap-4 border-y border-[#2a2a2a] px-6 py-3 text-xs font-bold uppercase tracking-wider text-gray-500">
                                 <div className="text-center">Status</div>
                                 <div>Problem</div>
                                 <div className="text-center">YouTube</div>
@@ -207,23 +225,41 @@ function LearningSheet() {
                               {lecture.tasks.map((task: any) => {
                                 const isChecked = safeCompletedTasks.includes(task.id);
                                 return (
-                                  <div key={task.id} className="grid grid-cols-[40px_1fr_80px_80px_80px] items-center gap-4 px-6 py-3 transition-colors hover:bg-[#1a1a1a]">
+                                  <div key={task.id} className="grid grid-cols-[40px_1fr_80px_100px_80px] items-center gap-4 px-6 py-3.5 transition-colors hover:bg-[#1a1a1a] border-b border-[#2a2a2a]/50 last:border-0 group/task">
                                     <div className="flex justify-center">
                                       <button onClick={() => handleToggleTask(task.id)} className={`flex h-5 w-5 items-center justify-center rounded border transition-colors ${isChecked ? "border-[#ff4a1c] bg-[#ff4a1c]" : "border-gray-600 hover:border-gray-400"}`}>
-                                        {isChecked && <span className="text-xs text-white">✓</span>}
+                                        {isChecked && (
+                                            /* Checkmark SVG */
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-3.5 h-3.5 text-white">
+                                              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                            </svg>
+                                        )}
                                       </button>
                                     </div>
-                                    <div className={`text-sm font-medium ${isChecked ? "text-gray-500 line-through" : "text-gray-200"}`}>
+                                    <div className={`text-sm font-medium transition-colors ${isChecked ? "text-gray-500 line-through" : "text-gray-200 group-hover/task:text-white"}`}>
                                       {task.title}
                                     </div>
                                     <div className="flex justify-center">
-                                      {task.ytLink ? <a href={task.ytLink} target="_blank" rel="noopener noreferrer" className="text-lg text-red-500 transition-colors hover:text-red-400">▶</a> : <span className="text-gray-600">-</span>}
+                                      {task.ytLink ? (
+                                        <a href={task.ytLink} target="_blank" rel="noopener noreferrer" className="text-red-500 transition-colors hover:text-red-400" title="Watch Solution">
+                                            {/* YouTube Play Icon SVG */}
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                                              <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                                            </svg>
+                                        </a>
+                                      ) : <span className="text-gray-600">-</span>}
                                     </div>
                                     <div className="flex justify-center">
-                                      <a href={task.practiceLink} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-[#ff4a1c] transition-colors hover:text-orange-400">Solve</a>
+                                      <a href={task.practiceLink} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-[#ff4a1c] transition-colors hover:text-orange-400 flex items-center gap-1.5 bg-[#ff4a1c]/10 px-3 py-1 rounded-md border border-[#ff4a1c]/20 hover:bg-[#ff4a1c]/20">
+                                        {/* Code SVG */}
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+                                        </svg>
+                                        Solve
+                                      </a>
                                     </div>
                                     <div className="flex justify-center">
-                                      <span className={`rounded-md px-3 py-1 text-[10px] font-bold text-white ${task.difficulty === "Easy" || task.difficulty === "Basic" ? "bg-green-600" : task.difficulty === "Medium" ? "bg-yellow-500" : "bg-red-600"}`}>
+                                      <span className={`rounded-md px-3 py-1 text-[10px] font-bold text-white tracking-wide ${task.difficulty === "Easy" || task.difficulty === "Basic" ? "bg-green-600" : task.difficulty === "Medium" ? "bg-yellow-500" : "bg-red-600"}`}>
                                         {task.difficulty}
                                       </span>
                                     </div>

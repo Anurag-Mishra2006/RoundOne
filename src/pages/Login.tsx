@@ -54,7 +54,7 @@ function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] flex font-sans">
+    <div className="min-h-screen bg-[var(--bg)] flex font-sans selection:bg-purple-500/30">
       
       {/* LEFT SIDE: Brand / Description (Hidden on mobile) */}
       <div className="hidden lg:flex w-1/2 bg-[var(--surface)] border-r border-[var(--border)] relative flex-col justify-between p-12 overflow-hidden">
@@ -63,12 +63,15 @@ function Login() {
         <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-blue-900/20 rounded-full blur-[120px] pointer-events-none"></div>
 
         <div className="relative z-10">
-            <Link to="/" className="text-sm font-medium text-[var(--text-muted)] hover:text-white transition-colors flex items-center gap-2 mb-8 w-fit">
-                ← Back to Home
+            <Link to="/" className="text-sm font-medium text-[var(--text-muted)] hover:text-white transition-all flex items-center gap-2 mb-8 w-fit group">
+                {/* Arrow Left SVG */}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 group-hover:-translate-x-1 transition-transform">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+                </svg>
+                Back to Home
             </Link>
             <div className="flex items-center gap-3">
                 <img src="/logo.svg?v=2" alt="RoundOne" className="w-8 h-8 rounded-lg" />
-         
                 <span className="text-2xl font-extrabold text-white tracking-tight">RoundOne</span>
             </div>
         </div>
@@ -100,8 +103,11 @@ function Login() {
       {/* RIGHT SIDE: The Login Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8 relative">
         
-        <Link to="/" className="lg:hidden absolute top-8 left-8 text-sm font-medium text-[var(--text-muted)] hover:text-white transition-colors flex items-center gap-2">
-            ← Home
+        <Link to="/" className="lg:hidden absolute top-8 left-8 text-sm font-medium text-[var(--text-muted)] hover:text-white transition-all flex items-center gap-2 group">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 group-hover:-translate-x-1 transition-transform">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+            </svg>
+            Home
         </Link>
 
         <motion.div 
@@ -122,9 +128,13 @@ function Login() {
                 animate={{ opacity: 1, y: 0, height: "auto", marginBottom: 24 }}
                 exit={{ opacity: 0, y: -8, height: 0, marginBottom: 0 }}
                 transition={{ duration: 0.3 }}
-                className="p-3 rounded-md bg-green-500/10 border border-green-500/20 text-center overflow-hidden"
+                className="p-3 rounded-xl bg-[var(--success)]/10 border border-[var(--success)]/20 text-center overflow-hidden flex items-center justify-center gap-2"
               >
-                <p className="text-sm font-medium text-green-400">{successMessage}</p>
+                {/* Success Check SVG */}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-[var(--success)]">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="text-sm font-medium text-[var(--success)]">{successMessage}</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -137,7 +147,7 @@ function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 placeholder="name@example.com"
-                className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[#4b5563] outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-all"
+                className="rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3.5 text-sm text-[var(--text)] placeholder:text-[#4b5563] outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-all shadow-inner"
               />
             </div>
 
@@ -153,22 +163,39 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 placeholder="••••••••"
-                className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[#4b5563] outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-all"
+                className="rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3.5 text-sm text-[var(--text)] placeholder:text-[#4b5563] outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-all shadow-inner"
               />
             </div>
 
             {error && (
-              <div className="p-3 rounded-md bg-[var(--danger)]/10 border border-[var(--danger)]/20 text-center">
+              <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="p-3 rounded-xl bg-[var(--danger)]/10 border border-[var(--danger)]/20 text-center flex items-center justify-center gap-2">
+                  {/* Warning SVG */}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-[var(--danger)] shrink-0">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
                   <p className="text-sm font-medium text-[var(--danger)]">{error}</p>
-              </div>
+              </motion.div>
             )}
 
             <button
               type="submit"
               disabled={loading}
-              className="mt-4 w-full rounded-lg bg-[var(--accent)] py-3.5 text-sm font-bold text-white transition-all hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(170,59,255,0.2)] hover:shadow-[0_0_25px_rgba(170,59,255,0.4)]"
+              className="mt-4 w-full rounded-xl bg-[var(--accent)] py-4 text-sm font-bold text-white transition-all hover:bg-[var(--accent-hover)] hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(170,59,255,0.2)] hover:shadow-[0_0_25px_rgba(170,59,255,0.4)] flex justify-center items-center gap-2 group"
             >
-              {loading ? "Signing in..." : "Sign in to RoundOne"}
+              {loading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  <span>Signing in...</span>
+                </>
+              ) : (
+                <>
+                  <span>Sign in to RoundOne</span>
+                  {/* Arrow Right SVG */}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                  </svg>
+                </>
+              )}
             </button>
           </form>
 

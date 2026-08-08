@@ -117,6 +117,7 @@ export default function DsaMockArena() {
 
     // --- ANTI-CHEAT: TRIGGER ACTIONS BASED ON COUNT ---
     useEffect(() => {
+        // Kept emojis here because native browser alerts only support plain text/emojis, not SVGs!
         if (warnings === 1) {
             alert("⚠️ WARNING 1/3: You switched tabs. This is a strict Mock OA. Please stay on this screen.");
         } else if (warnings === 2) {
@@ -222,8 +223,12 @@ export default function DsaMockArena() {
                 
                 <div className="flex items-center gap-6">
                     {warnings > 0 && (
-                        <div className="bg-red-500/10 text-red-400 border border-red-500/30 px-3 py-1 rounded-full text-xs font-bold animate-pulse">
-                            ⚠️ Warnings: {warnings > 3 ? 3 : warnings}/3
+                        <div className="bg-red-500/10 text-red-400 border border-red-500/30 px-3 py-1 rounded-full text-xs font-bold animate-pulse flex items-center gap-1.5">
+                            {/* Warning SVG */}
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                            Warnings: {warnings > 3 ? 3 : warnings}/3
                         </div>
                     )}
                     <div className={`text-2xl font-mono font-black tracking-wider ${timeLeft < 300 ? 'text-red-500 animate-pulse' : 'text-white'}`}>
@@ -234,10 +239,18 @@ export default function DsaMockArena() {
                 <button 
                     onClick={() => handleFinalSubmit(false)} 
                     disabled={isSubmitting}
-                    className="bg-red-600/90 hover:bg-red-500 text-white border border-red-400/30 px-5 py-1.5 rounded-lg text-sm font-bold transition-all disabled:opacity-50 shadow-[0_0_15px_rgba(239,68,68,0.3)] flex items-center gap-2"
+                    className="group bg-red-600/90 hover:bg-red-500 text-white border border-red-400/30 px-5 py-1.5 rounded-lg text-sm font-bold transition-all disabled:opacity-50 shadow-[0_0_15px_rgba(239,68,68,0.3)] flex items-center gap-2"
                 >
                     {isSubmitting ? <span className="animate-spin w-4 h-4 border-2 border-white/30 border-t-white rounded-full"></span> : null}
-                    {isSubmitting ? "Evaluating..." : "Finish Exam ➔"}
+                    {isSubmitting ? "Evaluating..." : (
+                        <>
+                            Finish Exam
+                            {/* Arrow SVG replacing ➔ */}
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                            </svg>
+                        </>
+                    )}
                 </button>
             </div>
 
@@ -310,9 +323,16 @@ export default function DsaMockArena() {
                          <button 
                              onClick={handleRunCode}
                              disabled={isRunning || isSubmitting}
-                             className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-5 py-1.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2"
+                             className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-5 py-1.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 group"
                          >
-                             {isRunning ? <span className="w-3 h-3 border-2 border-white/50 border-t-white rounded-full animate-spin"></span> : "▶"} 
+                             {isRunning ? (
+                                <span className="w-4 h-4 border-2 border-white/50 border-t-white rounded-full animate-spin"></span>
+                             ) : (
+                                /* Play Button SVG replacing ▶ */
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-white group-hover:scale-110 transition-transform">
+                                  <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
+                                </svg>
+                             )} 
                              {isRunning ? "Running..." : "Run Code"}
                          </button>
                      </div>
@@ -336,7 +356,12 @@ export default function DsaMockArena() {
                             </div>
                         ) : (
                             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-                                <h3 className={`text-xl font-black tracking-tight ${runResult.verdict === 'Accepted' || runResult.verdict === 'AC' || runResult.verdict === 'Success' ? 'text-green-400' : 'text-red-400'}`}>
+                                <h3 className={`text-xl font-black tracking-tight flex items-center gap-2 ${runResult.verdict === 'Accepted' || runResult.verdict === 'AC' || runResult.verdict === 'Success' ? 'text-green-400' : 'text-red-400'}`}>
+                                    {runResult.verdict === 'Accepted' || runResult.verdict === 'AC' || runResult.verdict === 'Success' ? (
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" /></svg>
+                                    ) : (
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clipRule="evenodd" /></svg>
+                                    )}
                                     {runResult.verdict}
                                 </h3>
 

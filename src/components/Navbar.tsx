@@ -31,24 +31,22 @@ function Navbar() {
 
   // Styles for Desktop Links
   const desktopNavClass = (paths: string[]) =>
-    `transition-colors text-sm font-medium hover:text-[var(--text)] ${
-      isActive(paths)
-        ? "text-[var(--accent)] font-semibold"
-        : "text-[var(--text-muted)]"
+    `transition-colors text-sm font-medium hover:text-[var(--text)] ${isActive(paths)
+      ? "text-[var(--accent)] font-semibold"
+      : "text-[var(--text-muted)]"
     }`;
 
   // Styles for Mobile Links
   const mobileNavClass = (paths: string[]) =>
-    `block w-full rounded-md px-4 py-3 text-base font-medium transition-colors ${
-      isActive(paths)
-        ? "bg-[var(--accent)]/10 text-[var(--accent)]"
-        : "text-[var(--text-muted)] hover:bg-[var(--border)]/50 hover:text-[var(--text)]"
+    `block w-full rounded-md px-4 py-3 text-base font-medium transition-colors ${isActive(paths)
+      ? "bg-[var(--accent)]/10 text-[var(--accent)]"
+      : "text-[var(--text-muted)] hover:bg-[var(--border)]/50 hover:text-[var(--text)]"
     }`;
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-[var(--border)] bg-[var(--surface)]/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 w-full items-center justify-between px-4 sm:px-6 lg:px-8">
-        
+
         {/* LEFT: Logo & Desktop Links */}
         <div className="flex items-center gap-8">
           <button
@@ -72,7 +70,7 @@ function Navbar() {
                 Mock Interview
               </Link>
               <Link to="/ats-check" className={desktopNavClass(["/ats-check"])}>
-                ATS Checker
+                Resume Checker
               </Link>
               <Link to="/resume-builder" className={desktopNavClass(["/resume-builder"])}>
                 Resume Builder
@@ -82,6 +80,9 @@ function Navbar() {
               </Link>
               <Link to="/practice" className={desktopNavClass(["/practice"])}>
                 Practice
+              </Link>
+               <Link to="/contact" className={desktopNavClass(["/contact"])}>
+                Contact Us
               </Link>
             </div>
           )}
@@ -147,12 +148,12 @@ function Navbar() {
       {/* MOBILE MENU DROPDOWN */}
       {user && isMobileMenuOpen && (
         <div className="border-t border-[var(--border)] bg-[var(--surface)] lg:hidden shadow-2xl absolute w-full">
-          
+
           {/* Links */}
           <div className="space-y-1 px-4 pb-3 pt-3">
             <Link to="/dashboard" className={mobileNavClass(["/dashboard"])}>Dashboard</Link>
             <Link to="/resume-upload" className={mobileNavClass(["/resume-upload", "/onboarding", "/interview"])}>Mock Interview</Link>
-            <Link to="/ats-check" className={mobileNavClass(["/ats-check"])}>ATS Checker</Link>
+            <Link to="/ats-check" className={mobileNavClass(["/ats-check"])}>Resume Checker</Link>
             <Link to="/resume-builder" className={mobileNavClass(["/resume-builder"])}>Resume Builder</Link>
             <Link to="/learning" className={mobileNavClass(["/learning"])}>Learning Hub</Link>
             <Link to="/practice" className={mobileNavClass(["/practice"])}>Practice</Link>
@@ -178,7 +179,7 @@ function Navbar() {
                 </a>
               </div>
             </div>
-            
+
             <button
               onClick={handleLogout}
               className="w-full flex justify-center rounded-lg bg-[var(--danger)]/10 px-4 py-3 text-sm font-bold text-[var(--danger)] transition-colors hover:bg-[var(--danger)]/20 border border-[var(--danger)]/20"
@@ -186,7 +187,7 @@ function Navbar() {
               Log out
             </button>
           </div>
-          
+
         </div>
       )}
     </nav>
