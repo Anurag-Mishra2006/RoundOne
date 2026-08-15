@@ -88,26 +88,28 @@ function Interview() {
   }, [currentRound, currentQuestionIndex, hr, technical, dsa, evaluation]);
 
   // Speech To Text Handlers
-  const handlePointerDown = async (e: React.PointerEvent) => {
-    e.preventDefault(); 
-    setError("");
-    await startRecording();
-  };
-
-  const handlePointerUp = async (e: React.PointerEvent) => {
+  // Speech To Text Handlers (Click to Toggle)
+  const handleToggleRecording = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!isRecording) return;
 
-    try {
-      const transcript = await stopRecording();
-      if (currentRound === "dsa") {
-        setSpokenApproach(transcript);
-      } else {
-        setAnswer(prev => prev + (prev ? " " : "") + transcript);
+    if (isRecording) {
+      // User clicked to STOP recording
+      try {
+        const transcript = await stopRecording();
+        if (currentRound === "dsa") {
+          setSpokenApproach(transcript);
+        } else {
+          setAnswer(prev => prev + (prev ? " " : "") + transcript);
+        }
+      } catch (err) {
+        console.error(err);
+        setError("Failed to process audio. Please try typing.");
       }
-    } catch (err) {
-      console.error(err);
-      setError("Failed to process audio. Please try typing.");
+    } else {
+      // User clicked to START recording
+      setError("");
+      stop();
+      await startRecording();
     }
   };
 
@@ -364,11 +366,9 @@ function Interview() {
               {/* ACTION BUTTONS (Microphone + Run + Submit) */}
               <div className="flex flex-col gap-3 pt-2">
 
-                {/* Hold to Speak Button */}
+               {/* Click to Speak Toggle Button */}
                 <button
-                  onPointerDown={handlePointerDown}
-                  onPointerUp={handlePointerUp}
-                  onPointerLeave={handlePointerUp} 
+                  onClick={handleToggleRecording}
                   disabled={loading || isRunning || isProcessing}
                   className={`w-full rounded-xl px-4 py-3.5 text-sm font-bold transition-all select-none flex items-center justify-center gap-2
                     ${isRecording
@@ -387,14 +387,14 @@ function Interview() {
                   ) : isRecording ? (
                     <>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 animate-pulse"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" /></svg>
-                        Recording... Release to Stop
+                        Recording... Click to Stop
                     </>
                   ) : (
                     <>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-[var(--text-muted)]"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" /></svg>
                         {currentRound === "dsa"
-                          ? (spokenApproach ? "Hold to Re-record Approach" : "Hold to Explain Approach (Optional)")
-                          : "Hold to Speak Answer"}
+                          ? (spokenApproach ? "Click to Re-record Approach" : "Click to Explain Approach (Optional)")
+                          : "Click to Speak Answer"}
                     </>
                   )}
                 </button>

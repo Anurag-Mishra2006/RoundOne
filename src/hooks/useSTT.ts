@@ -25,14 +25,13 @@ export const useSTT = () => {
                 }
             });
 
-            // start recording
-            mediaRecoder.start();
+            // START RECORDING IN 1 SECOND (1000ms) CHUNKS (Prevents memory crash for long audio)
+            mediaRecoder.start(1000); 
             setIsRecording(true);
 
         } catch (error) {
             console.error("Microphone access denied or error", error);
             alert("Please allow microphone access to use this feature.");
-
         }
     };
     const stopRecording = (): Promise<string> => {
